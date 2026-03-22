@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Get Access - CIS Student Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be_Vietnam_Pro:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed": "#d4e3ff",
+              "surface-variant": "#e9e1d8",
+              "on-tertiary-container": "#d5e4ff",
+              "on-primary-fixed": "#410002",
+              "on-background": "#1e1b15",
+              "on-secondary-fixed-variant": "#52443b",
+              "outline": "#916f6b",
+              "on-surface-variant": "#5c403c",
+              "surface-container-highest": "#e9e1d8",
+              "on-primary": "#ffffff",
+              "tertiary-container": "#0066b8",
+              "on-primary-fixed-variant": "#930009",
+              "tertiary-fixed-dim": "#a4c9ff",
+              "primary": "#a0000a",
+              "on-tertiary-fixed": "#001c39",
+              "outline-variant": "#e5bdb8",
+              "on-secondary-fixed": "#241912",
+              "primary-container": "#c8191a",
+              "secondary": "#6a5b51",
+              "primary-fixed-dim": "#ffb4aa",
+              "on-tertiary-fixed-variant": "#004884",
+              "on-secondary": "#ffffff",
+              "inverse-primary": "#ffb4aa",
+              "on-error-container": "#93000a",
+              "secondary-fixed-dim": "#d6c3b6",
+              "error": "#ba1a1a",
+              "tertiary": "#004e8f",
+              "surface-container-lowest": "#ffffff",
+              "on-primary-container": "#ffdcd7",
+              "surface-tint": "#be0e14",
+              "secondary-fixed": "#f3dfd2",
+              "inverse-surface": "#343029",
+              "surface-container-low": "#fbf2e8",
+              "secondary-container": "#f0dccf",
+              "primary-fixed": "#ffdad5",
+              "background": "#fff8f2",
+              "surface-bright": "#fff8f2",
+              "on-secondary-container": "#6f6056",
+              "surface-container": "#f5ede3",
+              "on-tertiary": "#ffffff",
+              "on-surface": "#1e1b15",
+              "surface-dim": "#e0d9cf",
+              "on-error": "#ffffff",
+              "error-container": "#ffdad6",
+              "surface": "#fff8f2",
+              "surface-container-high": "#efe7dd",
+              "inverse-on-surface": "#f8f0e6"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Be Vietnam Pro"],
+              "label": ["Be Vietnam Pro"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .editorial-shadow {
+        box-shadow: 0 24px 48px -12px rgba(30, 27, 21, 0.06);
+      }
+      .blob-gradient {
+        background: radial-gradient(circle at 20% 30%, #ffdcd7 0%, transparent 50%),
+                    radial-gradient(circle at 80% 70%, #f0dccf 0%, transparent 50%);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-container selection:text-on-primary-container min-h-screen pb-32">
+<!-- TopAppBar Execution -->
+<header class="w-full top-0 sticky z-50 no-border bg-gradient-to-b from-[#F5EDE3] to-transparent">
+<div class="flex items-center justify-between px-6 py-4 w-full">
+<button class="text-[#C8191A] dark:text-red-500 hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg tracking-tight text-on-surface">Get Access</h1>
+<div class="w-6"></div> <!-- Visual Spacer -->
+</div>
+</header>
+<main class="px-6 max-w-lg mx-auto">
+<!-- Header Illustration Area -->
+<section class="mt-4 mb-10 relative">
+<div class="w-full aspect-[16/9] rounded-lg blob-gradient overflow-hidden flex items-center justify-center relative">
+<div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+<div class="bg-surface-container-lowest/90 backdrop-blur-md p-6 rounded-full editorial-shadow border border-white/20">
+<span class="material-symbols-outlined text-primary text-5xl" data-icon="shield" style="font-variation-settings: 'FILL' 1;">shield</span>
+</div>
+</div>
+</section>
+<!-- Instruction Text -->
+<section class="mb-10 text-center">
+<h2 class="font-headline font-bold text-3xl text-on-surface tracking-tight mb-3">Retrieve Your Credentials</h2>
+<p class="text-on-surface-variant text-base leading-relaxed">Enter your details below to receive your Student ID and Password.</p>
+</section>
+<!-- Form — Step Indicator -->
+<nav aria-label="Progress" class="flex items-center justify-center gap-12 mb-10">
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold shadow-lg shadow-primary/20">1</div>
+<span class="font-label text-xs font-semibold text-primary">Student Code</span>
+</div>
+<div class="w-16 h-px bg-surface-variant mt-[-20px]"></div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full border-2 border-outline-variant flex items-center justify-center text-on-surface-variant font-bold">2</div>
+<span class="font-label text-xs font-medium text-on-surface-variant">National ID</span>
+</div>
+</nav>
+<!-- Form Fields -->
+<div class="space-y-8">
+<div class="space-y-2">
+<label class="block font-label text-sm font-bold text-on-surface ml-4">Student Code</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors" data-icon="badge">badge</span>
+<input class="w-full pl-14 pr-6 py-4 rounded-full bg-surface-container-lowest border-none focus:ring-2 focus:ring-primary/20 editorial-shadow text-on-surface placeholder:text-on-surface-variant/50" placeholder="Enter your student code" type="text"/>
+</div>
+<p class="ml-4 text-xs text-on-surface-variant/70 font-medium">Provided by the university</p>
+</div>
+<div class="space-y-2">
+<label class="block font-label text-sm font-bold text-on-surface ml-4">National ID</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors" data-icon="fingerprint">fingerprint</span>
+<input class="w-full pl-14 pr-6 py-4 rounded-full bg-surface-container-lowest border-none focus:ring-2 focus:ring-primary/20 editorial-shadow text-on-surface placeholder:text-on-surface-variant/50" placeholder="Enter your 14-digit national ID" type="text"/>
+</div>
+</div>
+<!-- Primary Button -->
+<button class="w-full bg-primary hover:bg-primary-container text-on-primary font-headline font-bold py-4 rounded-full editorial-shadow transition-all active:scale-[0.98] shadow-lg shadow-primary/20">
+                Get My Credentials
+            </button>
+</div>
+<!-- Result Card (Preview State) -->
+</main>
+<!-- BottomNavBar Execution -->
+<!-- Suppressed based on "The Destination Rule" - this is a Task-Focused/Transactional screen -->
+</body></html>
