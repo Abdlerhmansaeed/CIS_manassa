@@ -7,6 +7,8 @@ class SharedTextFormField extends StatelessWidget {
   final bool obscureText;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
+  final void Function(String)? onChanged;
+  // final String? initialValue;
 
   const SharedTextFormField({
     super.key,
@@ -16,6 +18,8 @@ class SharedTextFormField extends StatelessWidget {
     this.obscureText = false,
     this.controller,
     this.keyboardType,
+    this.onChanged,
+    // this.initialValue,
   });
 
   @override
@@ -25,6 +29,8 @@ class SharedTextFormField extends StatelessWidget {
       obscureText: obscureText,
       keyboardType: keyboardType,
       onTapOutside: (_) => FocusScope.of(context).unfocus(),
+      onChanged: onChanged,
+      // initialValue: initialValue ?? '',
       decoration: InputDecoration(
         hintText: hintText,
         prefixIcon: Icon(prefixIcon),

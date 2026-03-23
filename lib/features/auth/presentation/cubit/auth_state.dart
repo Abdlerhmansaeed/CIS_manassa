@@ -13,6 +13,7 @@ class AuthState extends Equatable {
     this.shouldRememberMe = false,
     this.credentialsState = AppStates.initial,
     this.credentialResponse,
+    this.getAccessForCredentialsStep = 0,
   });
 
   final AppStates loginState;
@@ -21,6 +22,7 @@ class AuthState extends Equatable {
   final bool shouldRememberMe;
   final AppStates credentialsState;
   final CredentialResponse? credentialResponse;
+  final int getAccessForCredentialsStep;
 
   AuthState copyWith({
     AppStates? loginState,
@@ -29,6 +31,7 @@ class AuthState extends Equatable {
     bool? shouldRememberMe,
     AppStates? credentialsState,
     CredentialResponse? credentialResponse,
+    int? getAccessForCredentialsStep,
   }) {
     return AuthState(
       loginState: loginState ?? this.loginState,
@@ -37,16 +40,19 @@ class AuthState extends Equatable {
       shouldRememberMe: shouldRememberMe ?? this.shouldRememberMe,
       credentialsState: credentialsState ?? this.credentialsState,
       credentialResponse: credentialResponse ?? this.credentialResponse,
+      getAccessForCredentialsStep:
+          getAccessForCredentialsStep ?? this.getAccessForCredentialsStep,
     );
   }
 
   @override
   List<Object?> get props => [
-        loginState,
-        loginResponse,
-        errorMessage,
-        shouldRememberMe,
-        credentialsState,
-        credentialResponse,
-      ];
+    loginState,
+    loginResponse,
+    errorMessage,
+    shouldRememberMe,
+    credentialsState,
+    credentialResponse,
+    getAccessForCredentialsStep,
+  ];
 }

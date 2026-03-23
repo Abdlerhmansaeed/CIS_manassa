@@ -1,23 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mansaa_app/core/theme/app_colors.dart';
+import 'package:mansaa_app/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:mansaa_app/features/auth/presentation/cubit/auth_state.dart';
 
 class ForgetPasswordStepIndicator extends StatelessWidget {
-  const ForgetPasswordStepIndicator({super.key});
+  final AuthCubit authCubit;
+  const ForgetPasswordStepIndicator({super.key, required this.authCubit});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        _buildStepItem(stepNumber: "1", label: "Student Code", isActive: true),
-        Container(
-          width: 64,
-          height: 1,
-          color: AppColors.surfaceContainerHighest,
-          margin: const EdgeInsets.only(bottom: 24),
-        ),
-        _buildStepItem(stepNumber: "2", label: "National ID", isActive: false),
-      ],
+    return BlocBuilder<AuthCubit, AuthState>(
+      bloc: authCubit,
+      buildWhen: (previous, current) {
+        return previous.getAccessForCredentialsStep !=
+            current.getAccessForCredentialsStep;
+      },
+      builder: (context, state) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _buildStepItem(
+              stepNumber: "1",
+              label: "Student Code",
+              isActive: state.getAccessForCredentialsStep >= 1,
+            ),
+            AnimatedCrossFade(
+              firstChild: Container(
+                width: 64,
+                height: 1,
+                color: AppColors.surfaceContainerHighest,
+                margin: const EdgeInsets.only(bottom: 24),
+              ),
+              secondChild: Container(
+                width: 64,
+                height: 1,
+                color: AppColors.primary,
+                margin: const EdgeInsets.only(bottom: 24),
+              ),
+              crossFadeState: state.getAccessForCredentialsStep == 0
+                  ? CrossFadeState.showFirst
+                  : CrossFadeState.showSecond,
+              duration: const Duration(milliseconds: 500),
+            ),
+            _buildStepItem(
+              stepNumber: "2",
+              label: "National ID",
+              isActive: state.getAccessForCredentialsStep >= 2,
+            ),
+          ],
+        );
+      },
+      // child:
     );
   }
 

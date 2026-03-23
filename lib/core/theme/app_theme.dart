@@ -15,6 +15,13 @@ class AppTheme {
         onPrimary: AppColors.onPrimary,
         onSurface: AppColors.onSurface,
       ),
+
+      pageTransitionsTheme: const PageTransitionsTheme(
+        builders: {
+          TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+        },
+      ),
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.surface,
         foregroundColor: AppColors.onPrimary,

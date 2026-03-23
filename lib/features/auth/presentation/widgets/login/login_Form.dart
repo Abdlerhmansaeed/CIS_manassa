@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'package:mansaa_app/core/widgets/shared_text_form_field.dart';
+import 'package:resposive_xx/responsive/responsive.dart';
 
 class LoginForm extends StatefulWidget {
   final TextEditingController studentIdController;
@@ -28,12 +29,12 @@ class _LoginFormState extends State<LoginForm> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 16.0, bottom: 8.0),
+        Padding(
+          padding: EdgeInsets.only(left: 16.0.r, bottom: 8.0.r),
           child: Text(
             'Student ID',
             style: TextStyle(
-              fontSize: 14,
+              fontSize: 14.sp,
               fontWeight: FontWeight.w600,
               color: AppColors.onSurfaceVariant,
             ),
@@ -43,6 +44,9 @@ class _LoginFormState extends State<LoginForm> {
           controller: widget.studentIdController,
           hintText: 'Cxxxxxxx',
           prefixIcon: Icons.person_outline,
+          // initialValue: context.read<AppManager>().state.isRememberMe
+          //     ? context.read<AppManager>().state.userCode
+          //     : null,
         ),
         const SizedBox(height: 24),
         const Padding(
@@ -64,6 +68,10 @@ class _LoginFormState extends State<LoginForm> {
               hintText: '••••••••',
               prefixIcon: Icons.lock_outline,
               obscureText: _obscurePassword.value,
+
+              // initialValue: context.read<AppManager>().state.isRememberMe
+              // ? context.rea/d<AppManager>().state.userPassword
+              // : null,
               suffixIcon: IconButton(
                 icon: Icon(
                   _obscurePassword.value

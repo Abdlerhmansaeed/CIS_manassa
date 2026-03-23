@@ -1,6 +1,7 @@
 import 'package:mansaa_app/core/network/api_result.dart';
 import 'package:mansaa_app/features/auth/data/models/credential_response/credential_response.dart';
 import 'package:mansaa_app/features/auth/data/models/login_response/login_response.dart';
+import 'package:mansaa_app/features/auth/data/models/user_site_info_response/user_site_info_response.dart';
 
 abstract interface class AuthRepo {
   Future<ApiResult<LoginResponse>> login({
@@ -12,4 +13,6 @@ abstract interface class AuthRepo {
     required String studentId,
     required String nationalNumber,
   });
+
+  Future<ApiResult<UserSiteInfoResponse>> getUserSiteInfo();
 }

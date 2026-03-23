@@ -33,7 +33,10 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
         appBar: AppBar(
           title: const Text('Get Access'),
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: AppColors.primaryContainer),
+            icon: const Icon(
+              Icons.arrow_back,
+              color: AppColors.primaryContainer,
+            ),
             onPressed: () {
               if (context.canPop()) context.pop();
             },
@@ -48,7 +51,10 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             ),
           ),
           child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 24.0,
+              vertical: 16.0,
+            ),
             child: Column(
               children: [
                 const ForgetPasswordBlobHeader(),

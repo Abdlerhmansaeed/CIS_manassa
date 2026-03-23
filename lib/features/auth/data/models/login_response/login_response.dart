@@ -10,7 +10,12 @@ class LoginResponse extends Equatable {
   final String? error;
   final String? errorcode;
 
-  const LoginResponse({this.token, this.privatetoken, this.error, this.errorcode});
+  const LoginResponse({
+    this.token,
+    this.privatetoken,
+    this.error,
+    this.errorcode,
+  });
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) {
     return _$LoginResponseFromJson(json);
@@ -18,7 +23,12 @@ class LoginResponse extends Equatable {
 
   Map<String, dynamic> toJson() => _$LoginResponseToJson(this);
 
-  LoginResponse copyWith({String? token, String? privatetoken, String? error, String? errorcode}) {
+  LoginResponse copyWith({
+    String? token,
+    String? privatetoken,
+    String? error,
+    String? errorcode,
+  }) {
     return LoginResponse(
       token: token ?? this.token,
       privatetoken: privatetoken ?? this.privatetoken,

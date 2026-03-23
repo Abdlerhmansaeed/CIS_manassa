@@ -6,10 +6,12 @@ import 'package:mansaa_app/core/network/endpoints/app_endpoints.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 // import 'package:mansaa_app/core/network/interceptors/logging_interceptor.dart';
 
+import 'package:mansaa_app/core/network/interceptors/auth_interceptor.dart';
+
 @module
 abstract class DioClient {
   @lazySingleton
-  Dio provideDioClient() {
+  Dio provideDioClient(AuthInterceptor authInterceptor) {
     final dio = Dio(
       BaseOptions(
         baseUrl: AppEndPoints.cisMoodleBaseUrl,
@@ -18,17 +20,19 @@ abstract class DioClient {
       ),
     );
 
+    dio.interceptors.add(authInterceptor);
+
     if (kDebugMode) {
-    dio.interceptors.add(
-      PrettyDioLogger(
-        requestHeader: true,
-        requestBody: true,
-        responseHeader: true,
-        responseBody: true,
-        error: true,
-      ),
-    );
-  }
+      dio.interceptors.add(
+        PrettyDioLogger(
+          requestHeader: true,
+          requestBody: true,
+          responseHeader: true,
+          responseBody: true,
+          error: true,
+        ),
+      );
+    }
 
     return dio;
   }

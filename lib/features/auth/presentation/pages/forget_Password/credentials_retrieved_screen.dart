@@ -258,9 +258,7 @@ class _CredentialsRetrievedScreenState
               color: AppColors.onSurfaceVariant,
             ),
           ),
-          style: TextButton.styleFrom(
-            foregroundColor: AppColors.primary,
-          ),
+          style: TextButton.styleFrom(foregroundColor: AppColors.primary),
         ),
       ],
     );

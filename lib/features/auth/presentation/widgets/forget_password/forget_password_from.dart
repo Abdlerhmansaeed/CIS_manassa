@@ -34,7 +34,9 @@ class ForgetPasswordForm extends StatelessWidget {
         } else if (state.credentialsState == AppStates.failure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(state.errorMessage ?? 'Failed to retrieve credentials'),
+              content: Text(
+                state.errorMessage ?? 'Failed to retrieve credentials',
+              ),
               backgroundColor: Colors.red,
             ),
           );
@@ -47,7 +49,7 @@ class ForgetPasswordForm extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const ForgetPasswordStepIndicator(),
+            ForgetPasswordStepIndicator(authCubit: context.read<AuthCubit>()),
             const SizedBox(height: 32),
             const Padding(
               padding: EdgeInsets.only(left: 16.0, bottom: 8.0),
@@ -64,6 +66,13 @@ class ForgetPasswordForm extends StatelessWidget {
               hintText: 'Enter your student code',
               prefixIcon: Icons.badge_outlined,
               controller: studentCodeController,
+              onChanged: (value) {
+                if (value.isEmpty || value.length < 7) {
+                  context.read<AuthCubit>().updateGetAccessForCredentialsStep(
+                    currentStep: 1,
+                  );
+                }
+              },
             ),
             const SizedBox(height: 4),
             const Padding(
@@ -94,6 +103,13 @@ class ForgetPasswordForm extends StatelessWidget {
               prefixIcon: Icons.fingerprint_outlined,
               controller: nationalIdController,
               keyboardType: TextInputType.number,
+              onChanged: (value) {
+                if (value.isEmpty || value.length < 14) {
+                  context.read<AuthCubit>().updateGetAccessForCredentialsStep(
+                    currentStep: 2,
+                  );
+                }
+              },
             ),
             const SizedBox(height: 40),
             ElevatedButton(
@@ -104,15 +120,17 @@ class ForgetPasswordForm extends StatelessWidget {
                           nationalIdController.text.trim().isEmpty) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text('Please enter Student Code and National ID'),
+                            content: Text(
+                              'Please enter Student Code and National ID',
+                            ),
                           ),
                         );
                         return;
                       }
                       context.read<AuthCubit>().getCredentials(
-                            studentId: studentCodeController.text.trim(),
-                            nationalNumber: nationalIdController.text.trim(),
-                          );
+                        studentId: studentCodeController.text.trim(),
+                        nationalNumber: nationalIdController.text.trim(),
+                      );
                     },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 18),

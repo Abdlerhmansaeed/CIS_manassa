@@ -3,6 +3,7 @@ import 'package:mansaa_app/core/network/api_result.dart';
 import 'package:mansaa_app/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:mansaa_app/features/auth/data/models/credential_response/credential_response.dart';
 import 'package:mansaa_app/features/auth/data/models/login_response/login_response.dart';
+import 'package:mansaa_app/features/auth/data/models/user_site_info_response/user_site_info_response.dart';
 import 'package:mansaa_app/features/auth/domain/repositories/auth_repo.dart';
 
 @Injectable(as: AuthRepo)
@@ -41,6 +42,16 @@ class AuthRepoImpl implements AuthRepo {
       return ApiResult.success(result);
     } on FormatException catch (e) {
       return ApiResult.failure(e.message);
+    } catch (e) {
+      return ApiResult.failure(e.toString());
+    }
+  }
+
+  @override
+  Future<ApiResult<UserSiteInfoResponse>> getUserSiteInfo() async {
+    try {
+      final result = await _remoteDataSource.getUserSiteInfo();
+      return ApiResult.success(result);
     } catch (e) {
       return ApiResult.failure(e.toString());
     }
