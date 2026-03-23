@@ -92,10 +92,14 @@ class CoursesCubit extends Cubit<CoursesState> {
     result.when(
       onSuccess: (courseContents) {
         log(courseContents.toString());
+
+        final courseContentsWithoutEmptySections = courseContents
+            .where((element) => element.modules.isNotEmpty)
+            .toList();
         emit(
           state.copyWith(
             courseContentsState: AppStates.success,
-            courseContents: courseContents,
+            courseContents: courseContentsWithoutEmptySections,
           ),
         );
       },

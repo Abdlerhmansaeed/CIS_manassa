@@ -175,7 +175,7 @@ class _CoursesListSliver extends StatelessWidget {
           return CourseCard(
             code: course.shortname ?? 'N/A',
             title: course.fullname ?? 'Untitled',
-            headerColor: _headerColors[index % _headerColors.length],
+            headerColor: AppColors.courseHeaderColors[index % AppColors.courseHeaderColors.length],
             courseImage: course.courseimage,
             onTap: () {
               context.pushNamed(
@@ -190,11 +190,4 @@ class _CoursesListSliver extends StatelessWidget {
   }
 }
 
-const _headerColors = [
-  Color(0xFFA0000A),
-  Color(0xFF1976D2),
-  Color(0xFF0097A7),
-  Color(0xFF7B1FA2),
-  Color(0xFFE65100),
-  Color(0xFF2E7D32),
-];
+

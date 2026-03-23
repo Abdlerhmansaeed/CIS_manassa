@@ -6,13 +6,12 @@ import 'package:mansaa_app/features/my_courses/presentation/cubit/courses_cubit.
 import 'package:mansaa_app/features/my_courses/presentation/cubit/courses_state.dart';
 import 'package:mansaa_app/features/my_courses/presentation/widgets/course_details/course_hero_card.dart';
 import 'package:mansaa_app/features/my_courses/presentation/widgets/course_details/course_tabs_bar.dart';
+import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'package:mansaa_app/features/my_courses/presentation/widgets/course_details/weekly_accordion.dart';
+import 'package:resposive_xx/responsive/responsive_extensions.dart';
 
 class CourseDetailsScreen extends StatefulWidget {
-  const CourseDetailsScreen({
-    super.key,
-    required this.course,
-  });
+  const CourseDetailsScreen({super.key, required this.course});
 
   final StudentCourseResponse course;
 
@@ -22,13 +21,19 @@ class CourseDetailsScreen extends StatefulWidget {
 
 class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
   int _selectedTabIndex = 0;
+  late final ScrollController scrollController;
 
   @override
   void initState() {
     super.initState();
+    scrollController = ScrollController();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      // API call
       if (widget.course.id != null) {
-        context.read<CoursesCubit>().getCourseDetails(courseId: widget.course.id!);
+        context.read<CoursesCubit>().getCourseDetails(
+          courseId: widget.course.id!,
+        );
       }
     });
   }
@@ -36,9 +41,9 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFF8F2), // scaffold background
+      backgroundColor: AppColors.surface, // scaffold background
       appBar: AppBar(
-        backgroundColor: const Color(0xFFF5EDE3).withOpacity(0.8),
+        backgroundColor: AppColors.surfaceContainer.withOpacity(0.8),
         elevation: 0,
         centerTitle: true,
         title: const Text(
@@ -46,25 +51,45 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
           style: TextStyle(
             fontFamily: 'Plus Jakarta Sans',
             fontWeight: FontWeight.bold,
-            color: Color(0xFF1E1B15),
+            color: AppColors.onSurface,
             fontSize: 18,
           ),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color(0xFFC8191A)),
+          icon: const Icon(Icons.arrow_back, color: AppColors.primaryContainer),
           onPressed: () => Navigator.of(context).pop(),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.more_vert, color: Color(0xFFC8191A)),
+            icon: const Icon(
+              Icons.more_vert,
+              color: AppColors.primaryContainer,
+            ),
             onPressed: () {},
           ),
         ],
       ),
-      body: BlocBuilder<CoursesCubit, CoursesState>(
+      body: BlocConsumer<CoursesCubit, CoursesState>(
+        listener: (context, state) {
+          if (state.courseContentsState == AppStates.success) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (scrollController.hasClients) {
+                scrollController.animateTo(
+                  scrollController.position.maxScrollExtent + 1000,
+                  duration: const Duration(milliseconds: 400),
+                  curve: Curves.easeOut,
+                );
+              }
+            });
+          }
+        },
         builder: (context, state) {
           if (state.courseContentsState == AppStates.loading) {
-            return const Center(child: CircularProgressIndicator(color: Color(0xFFC8191A)));
+            return const Center(
+              child: CircularProgressIndicator(
+                color: AppColors.primaryContainer,
+              ),
+            );
           }
 
           if (state.courseContentsState == AppStates.failure) {
@@ -78,30 +103,34 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
 
           final sections = state.courseContents;
 
-          return SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CourseHeroCard(course: widget.course),
-                const SizedBox(height: 24),
-                CourseTabsBar(
-                  selectedIndex: _selectedTabIndex,
-                  onTabSelected: (index) {
-                    setState(() {
-                      _selectedTabIndex = index;
-                    });
-                  },
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.r, vertical: 8.r),
+            child: CustomScrollView(
+              controller: scrollController,
+              slivers: [
+                SliverToBoxAdapter(
+                  child: CourseHeroCard(course: widget.course),
                 ),
-                const SizedBox(height: 24),
+                SliverToBoxAdapter(child: const SizedBox(height: 24)),
+                SliverToBoxAdapter(
+                  child: CourseTabsBar(
+                    selectedIndex: _selectedTabIndex,
+                    onTabSelected: (index) {
+                      setState(() {
+                        _selectedTabIndex = index;
+                      });
+                    },
+                  ),
+                ),
+                const SliverToBoxAdapter(child: SizedBox(height: 24)),
                 if (_selectedTabIndex == 0) ...[
                   WeeklyAccordion(sections: sections),
-                ] else if (_selectedTabIndex == 1) ...[
-                  const Center(child: Text('Quizzes Content Placeholder')),
                 ] else ...[
-                  const Center(child: Text('Grades Content Placeholder')),
+                  const SliverToBoxAdapter(
+                    child: Center(child: Text('Grades Content Placeholder')),
+                  ),
                 ],
-                const SizedBox(height: 32),
+                const SliverToBoxAdapter(child: SizedBox(height: 32)),
               ],
             ),
           );

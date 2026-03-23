@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'package:mansaa_app/features/my_courses/data/models/student_course_details_response/course_content_models.dart';
 import 'package:mansaa_app/features/my_courses/presentation/widgets/course_details/module_item.dart';
 
@@ -7,10 +8,14 @@ class WeekItem extends StatefulWidget {
     super.key,
     required this.section,
     required this.isInitiallyExpanded,
+    this.isnew,
+    this.isCurrent,
   });
 
   final SectionModel section;
   final bool isInitiallyExpanded;
+  final bool? isnew;
+  final bool? isCurrent;
 
   @override
   State<WeekItem> createState() => _WeekItemState();
@@ -18,7 +23,6 @@ class WeekItem extends StatefulWidget {
 
 class _WeekItemState extends State<WeekItem> {
   late bool _isExpanded;
-
 
   @override
   void initState() {
@@ -37,11 +41,11 @@ class _WeekItemState extends State<WeekItem> {
       margin: const EdgeInsets.only(bottom: 16.0),
       decoration: BoxDecoration(
         color: isCurrent
-            ? const Color(0xFFFFFFFF) // surface-container-lowest
-            : const Color(0xFFFBF2E8), // surface-container-low
+            ? AppColors.surfaceContainerLowest
+            : AppColors.surfaceContainerLow,
         borderRadius: BorderRadius.circular(8.0),
         border: isCurrent
-            ? const Border(left: BorderSide(color: Color(0xFFC8191A), width: 4))
+            ? const Border(left: BorderSide(color: AppColors.primaryContainer, width: 4))
             : null,
         boxShadow: isCurrent
             ? [
@@ -49,7 +53,7 @@ class _WeekItemState extends State<WeekItem> {
                   color: Colors.black.withAlpha(8),
                   blurRadius: 10,
                   offset: const Offset(0, 4),
-                )
+                ),
               ]
             : [],
       ),
@@ -85,11 +89,14 @@ class _WeekItemState extends State<WeekItem> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (isCurrent) ...[
+                      if (widget.isCurrent ?? false) ...[
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFC8191A).withAlpha(26),
+                            color: AppColors.primaryContainer.withAlpha(26),
                             borderRadius: BorderRadius.circular(4.0),
                           ),
                           child: const Text(
@@ -97,7 +104,7 @@ class _WeekItemState extends State<WeekItem> {
                             style: TextStyle(
                               fontSize: 10,
                               fontWeight: FontWeight.w800,
-                              color: Color(0xFFC8191A),
+                              color: AppColors.primaryContainer,
                               letterSpacing: 1.2,
                             ),
                           ),
@@ -125,7 +132,7 @@ class _WeekItemState extends State<WeekItem> {
                           style: const TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF5C403C),
+                            color: AppColors.onSurfaceVariant,
                             letterSpacing: 1.0,
                           ),
                         ),
@@ -141,7 +148,10 @@ class _WeekItemState extends State<WeekItem> {
                 ...widget.section.modules.map(
                   (module) => Padding(
                     padding: const EdgeInsets.only(bottom: 16.0),
-                    child: ModuleItem(module: module),
+                    child: ModuleItem(
+                      module: module,
+                      isNew: widget.isnew ?? false,
+                    ),
                   ),
                 )
               else

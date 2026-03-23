@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'package:mansaa_app/features/my_courses/data/models/student_courese_response/student_courese_response.dart';
 
 class CourseHeroCard extends StatelessWidget {
-  const CourseHeroCard({
-    super.key,
-    required this.course,
-  });
+  const CourseHeroCard({super.key, required this.course});
 
   final StudentCourseResponse course;
 
@@ -17,16 +15,13 @@ class CourseHeroCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.0),
         gradient: const LinearGradient(
-          colors: [
-            Color(0xFFC8191A),
-            Color(0xFF8B0000),
-          ],
+          colors: [AppColors.primaryContainer, AppColors.primaryDark],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFFC8191A).withAlpha(51),
+            color: AppColors.primaryContainer.withAlpha(51),
             blurRadius: 24,
             offset: const Offset(0, 10),
           ),
@@ -57,26 +52,13 @@ class CourseHeroCard extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              const SizedBox(height: 8),
-              Text(
-                course.displayname ?? course.fullname ?? '',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white.withAlpha(204),
-                ),
-              ),
             ],
           ),
           // Bookmark Icon
           const Positioned(
             top: -16,
             right: -16,
-            child: Icon(
-              Icons.bookmark,
-              color: Colors.white,
-              size: 24,
-            ),
+            child: Icon(Icons.bookmark, color: Colors.white, size: 24),
           ),
           // Decorative Circle
           Positioned(

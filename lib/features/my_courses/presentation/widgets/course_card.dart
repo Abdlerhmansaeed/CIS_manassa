@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:resposive_xx/responsive/responsive.dart';
-
 
 class CourseCard extends StatelessWidget {
   final String code;
@@ -107,7 +107,7 @@ class CourseCard extends StatelessWidget {
                 width: 56.w,
                 height: 56.w,
                 fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) => const SizedBox.shrink(),
+                errorBuilder: (_, __, ___) => SizedBox.shrink(),
               ),
             ),
           ],

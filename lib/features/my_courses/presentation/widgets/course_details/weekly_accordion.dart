@@ -3,30 +3,31 @@ import 'package:mansaa_app/features/my_courses/data/models/student_course_detail
 import 'package:mansaa_app/features/my_courses/presentation/widgets/course_details/week_item.dart';
 
 class WeeklyAccordion extends StatelessWidget {
-  const WeeklyAccordion({
-    super.key,
-    required this.sections,
-  });
+  const WeeklyAccordion({super.key, required this.sections});
 
   final List<SectionModel> sections;
 
   @override
   Widget build(BuildContext context) {
     if (sections.isEmpty) {
-      return const Center(child: Text('No contents available.'));
+      return const SliverToBoxAdapter(
+        child: Center(child: Text('No contents available.')),
+      );
     }
 
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
+    return SliverList.separated(
+      // shrinkWrap: true,
+      // physics: const NeverScrollableScrollPhysics(),
       itemCount: sections.length,
+      separatorBuilder: (context, index) => const SizedBox(height: 16),
       itemBuilder: (context, index) {
         final section = sections[index];
-        // For demonstration, let's treat the first section with modules as expanded
-        final isInitiallyExpanded = index == 0; 
+        // final isInitiallyExpanded = index == 0;
         return WeekItem(
           section: section,
-          isInitiallyExpanded: isInitiallyExpanded,
+          isInitiallyExpanded: sections.last == section,
+          isnew: sections.last == section,
+          isCurrent: sections.last == section,
         );
       },
     );
