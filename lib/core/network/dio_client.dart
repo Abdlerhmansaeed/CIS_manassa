@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mansaa_app/core/network/api_client.dart';
+import 'package:mansaa_app/core/network/cis_api_client.dart';
 import 'package:mansaa_app/core/network/endpoints/app_endpoints.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 // import 'package:mansaa_app/core/network/interceptors/logging_interceptor.dart';
@@ -10,13 +11,24 @@ import 'package:mansaa_app/core/network/interceptors/auth_interceptor.dart';
 
 @module
 abstract class DioClient {
+  @Named('moodle_baseUrl')
+  @singleton
+  String get moodleBaseUrl => AppEndPoints.cisMoodleBaseUrl;
+
+  @Named('services_baseUrl')
+  @singleton
+  String get servicesBaseUrl => AppEndPoints.cisServicesBaseUrl;
+
   @lazySingleton
-  Dio provideDioClient(AuthInterceptor authInterceptor) {
+  Dio provideDioClient(
+    AuthInterceptor authInterceptor, {
+    @Named('moodle_baseUrl') required String baseUrl,
+  }) {
     final dio = Dio(
       BaseOptions(
-        baseUrl: AppEndPoints.cisMoodleBaseUrl,
+        baseUrl: baseUrl,
         connectTimeout: const Duration(seconds: 5),
-        receiveTimeout: const Duration(seconds: 5),
+        receiveTimeout: const Duration(seconds: 5) * 2,
       ),
     );
 
@@ -38,7 +50,18 @@ abstract class DioClient {
   }
 
   @singleton
-  ApiClient provideApiClient(Dio dio) {
-    return ApiClient(dio);
+  ApiClient provideApiClient(
+    Dio dio, {
+    @Named('moodle_baseUrl') required String baseUrl,
+  }) {
+    return ApiClient(dio, baseUrl: baseUrl);
+  }
+
+  @singleton
+  CisApiClient provideCisApiClient(
+    Dio dio, {
+    @Named('services_baseUrl') required String baseUrl,
+  }) {
+    return CisApiClient(dio, baseUrl: baseUrl);
   }
 }

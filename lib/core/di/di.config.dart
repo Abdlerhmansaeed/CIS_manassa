@@ -15,6 +15,18 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
+import '../../features/academic_schedule/data/datasources/academic_schedule_remote_data_source.dart'
+    as _i918;
+import '../../features/academic_schedule/data/datasources/academic_schedule_remote_data_source_impl.dart'
+    as _i849;
+import '../../features/academic_schedule/data/repositories/academic_schedule_repo_impl.dart'
+    as _i335;
+import '../../features/academic_schedule/domain/repositories/academic_schedule_repo.dart'
+    as _i189;
+import '../../features/academic_schedule/domain/usecases/get_acadmic_schedule_use_case.dart'
+    as _i877;
+import '../../features/academic_schedule/presentation/cubit/academic_schedule_cubit.dart'
+    as _i5;
 import '../../features/auth/data/datasources/auth_remote_data_source.dart'
     as _i107;
 import '../../features/auth/data/datasources/auth_remote_data_source_impl.dart'
@@ -49,6 +61,7 @@ import '../local_storage/local_storage_client.dart' as _i401;
 import '../local_storage/local_storage_client_impl.dart' as _i157;
 import '../manager/app_manager.dart' as _i381;
 import '../network/api_client.dart' as _i557;
+import '../network/cis_api_client.dart' as _i858;
 import '../network/dio_client.dart' as _i667;
 import '../network/interceptors/auth_interceptor.dart' as _i745;
 import '../network/session/user_session.dart' as _i120;
@@ -79,6 +92,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i120.UserSession>(
       () => _i120.UserSession(gh<_i401.LocalStorageClient>()),
     );
+    gh.singleton<String>(
+      () => dioClient.moodleBaseUrl,
+      instanceName: 'moodle_baseUrl',
+    );
+    gh.singleton<String>(
+      () => dioClient.servicesBaseUrl,
+      instanceName: 'services_baseUrl',
+    );
     gh.singleton<_i381.AppManager>(
       () => _i381.AppManager(
         gh<_i401.LocalStorageClient>(),
@@ -88,14 +109,36 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i745.AuthInterceptor>(
       () => _i745.AuthInterceptor(gh<_i120.UserSession>()),
     );
-    gh.lazySingleton<_i361.Dio>(
-      () => dioClient.provideDioClient(gh<_i745.AuthInterceptor>()),
-    );
     gh.factory<_i374.CoursesLocalDataSource>(
       () => _i853.CoursesLocalDataSourceImpl(gh<_i401.LocalStorageClient>()),
     );
+    gh.lazySingleton<_i361.Dio>(
+      () => dioClient.provideDioClient(
+        gh<_i745.AuthInterceptor>(),
+        baseUrl: gh<String>(instanceName: 'moodle_baseUrl'),
+      ),
+    );
+    gh.singleton<_i858.CisApiClient>(
+      () => dioClient.provideCisApiClient(
+        gh<_i361.Dio>(),
+        baseUrl: gh<String>(instanceName: 'services_baseUrl'),
+      ),
+    );
     gh.singleton<_i557.ApiClient>(
-      () => dioClient.provideApiClient(gh<_i361.Dio>()),
+      () => dioClient.provideApiClient(
+        gh<_i361.Dio>(),
+        baseUrl: gh<String>(instanceName: 'moodle_baseUrl'),
+      ),
+    );
+    gh.factory<_i107.AuthRemoteDataSource>(
+      () => _i123.AuthRemoteDataSourceImpl(
+        gh<_i557.ApiClient>(),
+        gh<_i858.CisApiClient>(),
+      ),
+    );
+    gh.factory<_i918.AcademicScheduleRemoteDataSource>(
+      () =>
+          _i849.AcademicScheduleRemoteDataSourceImpl(gh<_i858.CisApiClient>()),
     );
     gh.factory<_i144.CoursesRemoteDataSource>(
       () => _i535.CoursesRemoteDataSourceImpl(
@@ -103,11 +146,28 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i120.UserSession>(),
       ),
     );
-    gh.factory<_i107.AuthRemoteDataSource>(
-      () => _i123.AuthRemoteDataSourceImpl(
-        gh<_i557.ApiClient>(),
-        gh<_i361.Dio>(),
+    gh.factory<_i189.AcademicScheduleRepo>(
+      () => _i335.AcademicScheduleRepoImpl(
+        gh<_i918.AcademicScheduleRemoteDataSource>(),
       ),
+    );
+    gh.factory<_i723.AuthRepo>(
+      () => _i662.AuthRepoImpl(gh<_i107.AuthRemoteDataSource>()),
+    );
+    gh.factory<_i877.GetAcademicScheduleUseCase>(
+      () => _i877.GetAcademicScheduleUseCase(gh<_i189.AcademicScheduleRepo>()),
+    );
+    gh.factory<_i910.GetCredentialsUseCase>(
+      () => _i910.GetCredentialsUseCase(gh<_i723.AuthRepo>()),
+    );
+    gh.factory<_i37.LoginUseCase>(
+      () => _i37.LoginUseCase(gh<_i723.AuthRepo>()),
+    );
+    gh.factory<_i5.AcademicScheduleCubit>(
+      () => _i5.AcademicScheduleCubit(gh<_i877.GetAcademicScheduleUseCase>()),
+    );
+    gh.factory<_i142.GetUserSiteInfoUseCase>(
+      () => _i142.GetUserSiteInfoUseCase(gh<_i723.AuthRepo>()),
     );
     gh.factory<_i127.CoursesRepository>(
       () => _i855.CoursesRepositoryImpl(
@@ -118,9 +178,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i408.GetEnrolledCoursesUseCase>(
       () => _i408.GetEnrolledCoursesUseCase(gh<_i127.CoursesRepository>()),
     );
-    gh.factory<_i723.AuthRepo>(
-      () => _i662.AuthRepoImpl(gh<_i107.AuthRemoteDataSource>()),
-    );
     gh.factory<_i369.GetCourseContentUseCase>(
       () => _i369.GetCourseContentUseCase(gh<_i127.CoursesRepository>()),
     );
@@ -130,15 +187,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i120.UserSession>(),
         gh<_i369.GetCourseContentUseCase>(),
       ),
-    );
-    gh.factory<_i910.GetCredentialsUseCase>(
-      () => _i910.GetCredentialsUseCase(gh<_i723.AuthRepo>()),
-    );
-    gh.factory<_i37.LoginUseCase>(
-      () => _i37.LoginUseCase(gh<_i723.AuthRepo>()),
-    );
-    gh.factory<_i142.GetUserSiteInfoUseCase>(
-      () => _i142.GetUserSiteInfoUseCase(gh<_i723.AuthRepo>()),
     );
     gh.factory<_i117.AuthCubit>(
       () => _i117.AuthCubit(

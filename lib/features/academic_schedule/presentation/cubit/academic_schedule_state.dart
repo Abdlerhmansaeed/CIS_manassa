@@ -1,10 +1,58 @@
-part of 'academic_schedule_cubit.dart';
+import 'package:equatable/equatable.dart';
+import 'package:mansaa_app/core/helpers/app_states.dart';
+import 'package:mansaa_app/features/academic_schedule/data/models/schedule_item_model.dart';
 
-abstract class AcademicScheduleState extends Equatable {
-  const AcademicScheduleState();
+class AcademicScheduleState extends Equatable {
+  final List<ScheduleItemModel> scheduleItems;
+  final AppStates academicScheduleState;
+  final String? error;
+  final String selectedDay;
+
+  const AcademicScheduleState({
+    this.scheduleItems = const [],
+    this.academicScheduleState = AppStates.initial,
+    this.error,
+    this.selectedDay = "", // Will be initialized in Cubit
+  });
+
+  AcademicScheduleState copyWith({
+    List<ScheduleItemModel>? scheduleItems,
+    AppStates? academicScheduleState,
+    String? error,
+    String? selectedDay,
+  }) {
+    return AcademicScheduleState(
+      scheduleItems: scheduleItems ?? this.scheduleItems,
+      academicScheduleState: academicScheduleState ?? this.academicScheduleState,
+      error: error ?? this.error,
+      selectedDay: selectedDay ?? this.selectedDay,
+    );
+  }
+
+  List<ScheduleItemModel> get filteredItems {
+    final filtered = scheduleItems.where((item) {
+      return _normalize(item.day ?? "") == _normalize(selectedDay);
+    }).toList();
+
+    // Sort by time
+    filtered.sort((a, b) => a.startTimeMinutes.compareTo(b.startTimeMinutes));
+    return filtered;
+  }
+
+  static String _normalize(String input) {
+    return input
+        .replaceAll("أ", "ا")
+        .replaceAll("إ", "ا")
+        .replaceAll("آ", "ا")
+        .replaceAll("ة", "ه")
+        .trim();
+  }
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [
+        scheduleItems,
+        academicScheduleState,
+        error,
+        selectedDay,
+      ];
 }
-
-class AcademicScheduleInitial extends AcademicScheduleState {}

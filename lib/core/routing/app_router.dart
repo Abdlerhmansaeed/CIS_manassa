@@ -2,6 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mansaa_app/core/di/di.dart';
 import 'package:mansaa_app/core/routing/app_route_names.dart';
+import 'package:mansaa_app/features/academic_schedule/presentation/cubit/academic_schedule_cubit.dart';
+import 'package:mansaa_app/features/academic_schedule/presentation/pages/academic_schedule_screen.dart';
 import 'package:mansaa_app/features/auth/data/models/credential_response/credential_response.dart';
 import 'package:mansaa_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:mansaa_app/features/auth/presentation/pages/forget_Password/credentials_retrieved_screen.dart';
@@ -72,7 +74,10 @@ class AppRouter {
               GoRoute(
                 path: AppRouteNames.profile,
                 name: AppRouteNames.profile,
-                builder: (context, state) => const HomeScreen(),
+                builder: (context, state) => BlocProvider(
+                  create: (context) => getIt<AcademicScheduleCubit>(),
+                  child: const AcademicScheduleScreen(),
+                ),
               ),
             ],
           ),
@@ -102,4 +107,3 @@ class AppRouter {
     ],
   );
 }
-

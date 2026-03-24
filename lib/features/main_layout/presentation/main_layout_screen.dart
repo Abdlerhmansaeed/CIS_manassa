@@ -38,8 +38,8 @@ class MainLayoutScreen extends StatelessWidget {
             ),
             BottomNavItem(
               index: 1,
-              icon: Icons.person_rounded,
-              label: 'Profile',
+              icon: Icons.schedule,
+              label: 'Schedule',
               navigationShell: navigationShell,
               isSelected: navigationShell.currentIndex == 1,
               activeColor: AppColors.primaryContainer,

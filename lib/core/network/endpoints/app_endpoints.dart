@@ -10,4 +10,6 @@ class AppEndPoints {
   static const String getStudentEnrolledCoursesEndPoint =
       "core_enrol_get_users_courses";
   static const String getCourseDetailsEndPoint = "core_course_get_contents";
+
+  static const String getAcademicScheduleEndPoint = "Students_sec_lec/Search";
 }

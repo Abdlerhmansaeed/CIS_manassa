@@ -98,19 +98,23 @@ class CourseCard extends StatelessWidget {
               ],
             ),
           ),
-          if (courseImage != null) ...[
-            SizedBox(width: 12.w),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8.r),
-              child: Image.network(
-                courseImage ?? "",
-                width: 56.w,
-                height: 56.w,
-                fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) => SizedBox.shrink(),
-              ),
-            ),
-          ],
+
+          ///  [The Image is Not Working so its Commented For Now]
+          
+          
+          // if (courseImage != null) ...[
+          //   SizedBox(width: 12.w),
+          //   ClipRRect(
+          //     borderRadius: BorderRadius.circular(8.r),
+          //     child: Image.network(
+          //       courseImage ?? "",
+          //       width: 56.w,
+          //       height: 56.w,
+          //       fit: BoxFit.cover,
+          //       errorBuilder: (_, __, ___) => SizedBox.shrink(),
+          //     ),
+          //   ),
+          // ],
         ],
       ),
     );
