@@ -19,14 +19,23 @@ class CourseDetailsScreen extends StatefulWidget {
   State<CourseDetailsScreen> createState() => _CourseDetailsScreenState();
 }
 
-class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
+class _CourseDetailsScreenState extends State<CourseDetailsScreen>
+    with TickerProviderStateMixin {
   int _selectedTabIndex = 0;
   late final ScrollController scrollController;
+  late final TabController _tabController;
 
   @override
   void initState() {
     super.initState();
     scrollController = ScrollController();
+    _tabController = TabController(length: 2, vsync: this);
+
+    _tabController.addListener(() {
+      if (!_tabController.indexIsChanging) {
+        setState(() => _selectedTabIndex = _tabController.index);
+      }
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // API call
@@ -115,11 +124,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen> {
                 SliverToBoxAdapter(
                   child: CourseTabsBar(
                     selectedIndex: _selectedTabIndex,
-                    onTabSelected: (index) {
-                      setState(() {
-                        _selectedTabIndex = index;
-                      });
-                    },
+                    tabController: _tabController,
                   ),
                 ),
                 const SliverToBoxAdapter(child: SizedBox(height: 24)),
