@@ -37,6 +37,12 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocConsumer<AuthCubit, AuthState>(
+        buildWhen: (previous, current) {
+          return previous.loginState != current.loginState;
+        },
+        listenWhen: (previous, current) {
+          return previous.loginState != current.loginState;
+        },
         listener: (context, state) {
           if (state.loginState == AppStates.success) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -131,8 +137,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   );
                                 },
                                 activeColor: AppColors.primary,
-                                activeTrackColor:
-                                    AppColors.primary.withOpacity(0.2),
+                                activeTrackColor: AppColors.primary.withOpacity(
+                                  0.2,
+                                ),
                                 inactiveThumbColor: AppColors.onSurfaceVariant,
                                 inactiveTrackColor:
                                     AppColors.surfaceContainerHighest,
@@ -194,9 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ? const SizedBox(
                               height: 20,
                               width: 20,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                              ),
+                              child: CircularProgressIndicator(strokeWidth: 2),
                             )
                           : const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
