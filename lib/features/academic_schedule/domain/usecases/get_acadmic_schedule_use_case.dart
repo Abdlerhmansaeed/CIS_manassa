@@ -12,10 +12,12 @@ class GetAcademicScheduleUseCase {
   Future<ApiResult<List<ScheduleItemModel>>> call({
     String? studentCode,
     required String studentNationalId,
+    bool forceRefresh = false,
   }) async {
     return await _repo.getAcademicSchedule(
       studentCode: studentCode,
       studentNationalId: studentNationalId,
+      forceRefresh: forceRefresh,
     );
   }
 }

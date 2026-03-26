@@ -8,6 +8,7 @@ class SharedTextFormField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final void Function(String)? onChanged;
+  final String? Function(String?)? validator;
   // final String? initialValue;
 
   const SharedTextFormField({
@@ -19,6 +20,7 @@ class SharedTextFormField extends StatelessWidget {
     this.controller,
     this.keyboardType,
     this.onChanged,
+    this.validator,
     // this.initialValue,
   });
 
@@ -30,6 +32,7 @@ class SharedTextFormField extends StatelessWidget {
       keyboardType: keyboardType,
       onTapOutside: (_) => FocusScope.of(context).unfocus(),
       onChanged: onChanged,
+      validator: validator,
       // initialValue: initialValue ?? '',
       decoration: InputDecoration(
         hintText: hintText,

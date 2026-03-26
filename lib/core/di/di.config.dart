@@ -15,6 +15,8 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
+import '../../features/academic_schedule/data/datasources/academic_schedule_local_data_source.dart'
+    as _i479;
 import '../../features/academic_schedule/data/datasources/academic_schedule_remote_data_source.dart'
     as _i918;
 import '../../features/academic_schedule/data/datasources/academic_schedule_remote_data_source_impl.dart'
@@ -25,6 +27,10 @@ import '../../features/academic_schedule/domain/repositories/academic_schedule_r
     as _i189;
 import '../../features/academic_schedule/domain/usecases/get_acadmic_schedule_use_case.dart'
     as _i877;
+import '../../features/academic_schedule/domain/usecases/get_student_credentials_use_case.dart'
+    as _i1050;
+import '../../features/academic_schedule/domain/usecases/save_student_credentials_use_case.dart'
+    as _i796;
 import '../../features/academic_schedule/presentation/cubit/academic_schedule_cubit.dart'
     as _i5;
 import '../../features/auth/data/datasources/auth_remote_data_source.dart'
@@ -57,6 +63,8 @@ import '../../features/my_courses/domain/usecases/get_enrolled_courses_use_case.
     as _i408;
 import '../../features/my_courses/presentation/cubit/courses_cubit.dart'
     as _i355;
+import '../local_storage/hive_client.dart' as _i969;
+import '../local_storage/hive_client_impl.dart' as _i1049;
 import '../local_storage/local_storage_client.dart' as _i401;
 import '../local_storage/local_storage_client_impl.dart' as _i157;
 import '../manager/app_manager.dart' as _i381;
@@ -89,6 +97,7 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i558.FlutterSecureStorage>(),
       ),
     );
+    gh.lazySingleton<_i969.HiveClient>(() => _i1049.HiveClientImpl());
     gh.singleton<_i120.UserSession>(
       () => _i120.UserSession(gh<_i401.LocalStorageClient>()),
     );
@@ -105,6 +114,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i401.LocalStorageClient>(),
         gh<_i120.UserSession>(),
       ),
+    );
+    gh.lazySingleton<_i479.AcademicScheduleLocalDataSource>(
+      () => _i479.AcademicScheduleLocalDataSourceImpl(gh<_i969.HiveClient>()),
     );
     gh.singleton<_i745.AuthInterceptor>(
       () => _i745.AuthInterceptor(gh<_i120.UserSession>()),
@@ -146,16 +158,25 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i120.UserSession>(),
       ),
     );
-    gh.factory<_i189.AcademicScheduleRepo>(
-      () => _i335.AcademicScheduleRepoImpl(
-        gh<_i918.AcademicScheduleRemoteDataSource>(),
-      ),
-    );
     gh.factory<_i723.AuthRepo>(
       () => _i662.AuthRepoImpl(gh<_i107.AuthRemoteDataSource>()),
     );
+    gh.factory<_i189.AcademicScheduleRepo>(
+      () => _i335.AcademicScheduleRepoImpl(
+        gh<_i918.AcademicScheduleRemoteDataSource>(),
+        gh<_i479.AcademicScheduleLocalDataSource>(),
+      ),
+    );
     gh.factory<_i877.GetAcademicScheduleUseCase>(
       () => _i877.GetAcademicScheduleUseCase(gh<_i189.AcademicScheduleRepo>()),
+    );
+    gh.factory<_i1050.GetStudentCredentialsUseCase>(
+      () =>
+          _i1050.GetStudentCredentialsUseCase(gh<_i189.AcademicScheduleRepo>()),
+    );
+    gh.factory<_i796.SaveStudentCredentialsUseCase>(
+      () =>
+          _i796.SaveStudentCredentialsUseCase(gh<_i189.AcademicScheduleRepo>()),
     );
     gh.factory<_i910.GetCredentialsUseCase>(
       () => _i910.GetCredentialsUseCase(gh<_i723.AuthRepo>()),
@@ -164,7 +185,11 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i37.LoginUseCase(gh<_i723.AuthRepo>()),
     );
     gh.factory<_i5.AcademicScheduleCubit>(
-      () => _i5.AcademicScheduleCubit(gh<_i877.GetAcademicScheduleUseCase>()),
+      () => _i5.AcademicScheduleCubit(
+        gh<_i877.GetAcademicScheduleUseCase>(),
+        gh<_i796.SaveStudentCredentialsUseCase>(),
+        gh<_i1050.GetStudentCredentialsUseCase>(),
+      ),
     );
     gh.factory<_i142.GetUserSiteInfoUseCase>(
       () => _i142.GetUserSiteInfoUseCase(gh<_i723.AuthRepo>()),
