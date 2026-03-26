@@ -15,11 +15,20 @@ import 'package:mansaa_app/features/my_courses/presentation/cubit/courses_cubit.
 import 'package:mansaa_app/features/my_courses/presentation/pages/course_details_screen.dart';
 import 'package:mansaa_app/features/my_courses/presentation/pages/my_courses_screen.dart';
 import 'package:mansaa_app/features/my_courses/data/models/student_courese_response/student_courese_response.dart';
+import 'package:mansaa_app/features/splash/splash_screen.dart';
 
 class AppRouter {
   static final router = GoRouter(
-    initialLocation: AppRouteNames.login,
+    initialLocation: AppRouteNames.splash,
     routes: [
+      GoRoute(
+        path: AppRouteNames.splash,
+        name: AppRouteNames.splash,
+        builder: (context, state) => BlocProvider(
+          create: (context) => getIt<AuthCubit>(),
+          child: const SplashScreen(),
+        ),
+      ),
       GoRoute(
         path: AppRouteNames.login,
         name: AppRouteNames.login,
