@@ -29,10 +29,10 @@ class MyApp extends StatelessWidget {
         child: MaterialApp.router(
           title: "Cis Manssaa",
           theme: AppTheme.lightTheme,
-          darkTheme: AppTheme.darkTheme,
+          // darkTheme: AppTheme.darkTheme,
           debugShowCheckedModeBanner: false,
           routerConfig: AppRouter.router,
-          themeMode: ThemeMode.system,
+          // themeMode: ThemeMode.system,
         ),
       ),
     );
