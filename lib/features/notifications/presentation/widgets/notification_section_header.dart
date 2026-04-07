@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:resposive_xx/responsive_x.dart';
 import '../../../../core/theme/app_colors.dart';
 
 class NotificationSectionHeader extends StatelessWidget {
@@ -12,7 +13,7 @@ class NotificationSectionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
+      padding: EdgeInsets.symmetric(horizontal: 8.0.w, vertical: 12.0.h),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -24,10 +25,10 @@ class NotificationSectionHeader extends StatelessWidget {
                   color: AppColors.onSurfaceVariant,
                 ),
           ),
-          const SizedBox(width: 16),
+          SizedBox(width: 16.w),
           Expanded(
             child: Container(
-              height: 1,
+              height: 1.h,
               color: AppColors.outline.withAlpha(76), // 30% opacity
             ),
           ),

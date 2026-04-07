@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:resposive_xx/responsive_x.dart';
 import '../../../../core/theme/app_colors.dart';
 
 class NotificationCard extends StatelessWidget {
@@ -27,19 +28,19 @@ class NotificationCard extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: () {},
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         child: Container(
-          padding: const EdgeInsets.all(20),
+          padding:  EdgeInsets.all(20.r),
           decoration: BoxDecoration(
             color: isUnread
                 ? AppColors.surfaceContainerLowest
                 : AppColors.surfaceContainerHighest,
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(16.r),
             border: isUnread
                 ? Border(
                     left: BorderSide(
                     color: AppColors.primaryContainer.withAlpha(51), // 20% opacity
-                    width: 4,
+                    width: 4.w,
                   ))
                 : null,
             boxShadow: isUnread
@@ -55,8 +56,8 @@ class NotificationCard extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                width: 48,
-                height: 48,
+                width: 48.w,
+                height: 48.h,
                 decoration: BoxDecoration(
                   color: iconBackgroundColor,
                   shape: BoxShape.circle,
@@ -64,7 +65,7 @@ class NotificationCard extends StatelessWidget {
                 child: Icon(
                   iconData,
                   color: iconColor,
-                  size: 24,
+                  size: 24.r,
                 ),
               ),
               const SizedBox(width: 16),
@@ -87,7 +88,7 @@ class NotificationCard extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        const SizedBox(width: 8),
+                         SizedBox(width: 8.w),
                         Text(
                           time,
                           style: Theme.of(context).textTheme.labelSmall?.copyWith(
@@ -112,8 +113,8 @@ class NotificationCard extends StatelessWidget {
               if (isUnread) ...[
                 const SizedBox(width: 16),
                 Container(
-                  width: 8,
-                  height: 8,
+                  width: 8.w,
+                  height: 8.h,
                   decoration: const BoxDecoration(
                     color: AppColors.primary,
                     shape: BoxShape.circle,

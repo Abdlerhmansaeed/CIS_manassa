@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:resposive_xx/responsive_x.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../widgets/notification_card.dart';
 import '../widgets/notification_section_header.dart';
@@ -8,21 +9,21 @@ class NotificationsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: AppColors.surface,
-      appBar: _NotificationsAppBar(),
+      appBar: const _NotificationsAppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+          padding: EdgeInsets.symmetric(horizontal: 24.0.w, vertical: 16.0.h),
           child: Column(
             children: [
-              NotificationSectionHeader(title: 'Today'),
-              SizedBox(height: 12),
-              _TodayNotifications(),
-              SizedBox(height: 24),
-              NotificationSectionHeader(title: 'Yesterday'),
-              SizedBox(height: 12),
-              _YesterdayNotifications(),
+              const NotificationSectionHeader(title: 'Today'),
+              SizedBox(height: 12.h),
+              const _TodayNotifications(),
+              SizedBox(height: 24.h),
+              const NotificationSectionHeader(title: 'Yesterday'),
+              SizedBox(height: 12.h),
+              const _YesterdayNotifications(),
             ],
           ),
         ),
@@ -47,10 +48,10 @@ class _NotificationsAppBar extends StatelessWidget implements PreferredSizeWidge
           Row(
             children: [
               IconButton(
-                icon: const Icon(Icons.arrow_back, color: AppColors.onSurface),
+                icon: Icon(Icons.arrow_back, color: AppColors.onSurface, size: 24.r),
                 onPressed: () => Navigator.of(context).pop(),
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8.w),
               Text(
                 'Notifications',
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -78,9 +79,9 @@ class _TodayNotifications extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        NotificationCard(
+        const NotificationCard(
           title: 'DEADLINE REMINDER',
           subtitle: 'Sheet 1 OS due in 2 hours',
           time: '9:45 AM',
@@ -89,8 +90,8 @@ class _TodayNotifications extends StatelessWidget {
           iconBackgroundColor: Color(0x1AA0000A), // primary at 10%
           isUnread: true,
         ),
-        SizedBox(height: 12),
-        NotificationCard(
+        SizedBox(height: 12.h),
+        const NotificationCard(
           title: 'NEW FILE',
           subtitle: 'Dr. Ahmed uploaded Lecture 8 PDF in CS333',
           time: '8:30 AM',
@@ -99,8 +100,8 @@ class _TodayNotifications extends StatelessWidget {
           iconBackgroundColor: Color(0x1A004E8F), // tertiary at 10%
           isUnread: false,
         ),
-        SizedBox(height: 12),
-        NotificationCard(
+        SizedBox(height: 12.h),
+        const NotificationCard(
           title: 'QUIZ ALERT',
           subtitle: 'Data Structures quiz starts in 24 hours',
           time: '7:00 AM',
@@ -119,9 +120,9 @@ class _YesterdayNotifications extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        NotificationCard(
+        const NotificationCard(
           title: 'SUBMITTED',
           subtitle: 'Lab Report 2 marked as received',
           time: '11:58 PM',
@@ -130,8 +131,8 @@ class _YesterdayNotifications extends StatelessWidget {
           iconBackgroundColor: Color(0x1A4CAF50), // emerald at 10%
           isUnread: false,
         ),
-        SizedBox(height: 12),
-        NotificationCard(
+        SizedBox(height: 12.h),
+        const NotificationCard(
           title: 'NEW FILE',
           subtitle: '2 new files in CS211 - Slides',
           time: '3:00 PM',
