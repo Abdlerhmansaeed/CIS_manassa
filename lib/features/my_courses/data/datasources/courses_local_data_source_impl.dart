@@ -22,10 +22,7 @@ class CoursesLocalDataSourceImpl implements CoursesLocalDataSource {
     final encoded = jsonEncode(jsonList);
 
     await Future.wait([
-      _storageClient.saveData(
-        key: AppKeys.cachedCourses,
-        value: encoded,
-      ),
+      _storageClient.saveData(key: AppKeys.cachedCourses, value: encoded),
       _storageClient.saveData(
         key: AppKeys.coursesCachedAt,
         value: DateTime.now().millisecondsSinceEpoch.toString(),
@@ -43,8 +40,7 @@ class CoursesLocalDataSourceImpl implements CoursesLocalDataSource {
     try {
       final decoded = jsonDecode(raw) as List<dynamic>;
       return decoded
-          .map((e) =>
-              StudentCourseResponse.fromJson(e as Map<String, dynamic>))
+          .map((e) => StudentCourseResponse.fromJson(e as Map<String, dynamic>))
           .toList();
     } catch (e, stackTrace) {
       Logger.error('Failed to decode cached courses', e, stackTrace);
@@ -54,12 +50,10 @@ class CoursesLocalDataSourceImpl implements CoursesLocalDataSource {
 
   @override
   Future<bool> isCacheValid() async {
-    final cachedAt =
-        await _storageClient.getData(key: AppKeys.coursesCachedAt);
+    final cachedAt = await _storageClient.getData(key: AppKeys.coursesCachedAt);
     if (cachedAt == null) return false;
 
-    final timestamp =
-        DateTime.fromMillisecondsSinceEpoch(int.parse(cachedAt));
+    final timestamp = DateTime.fromMillisecondsSinceEpoch(int.parse(cachedAt));
     return DateTime.now().difference(timestamp) < _cacheTtl;
   }
 }

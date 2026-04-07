@@ -5,7 +5,7 @@ import 'package:mansaa_app/core/theme/app_colors.dart';
 class AcademicScheduleErrorStateUi extends StatelessWidget {
   // final AcademicScheduleCubit _cubit;
   final String? error;
- final VoidCallback onTryAnotherStudentActionCalled;
+  final VoidCallback onTryAnotherStudentActionCalled;
   const AcademicScheduleErrorStateUi({
     super.key,
     // required AcademicScheduleCubit cubit,

@@ -12,10 +12,7 @@ class AcademicScheduleRepoImpl implements AcademicScheduleRepo {
   final AcademicScheduleRemoteDataSource _remoteDataSource;
   final AcademicScheduleLocalDataSource _localDataSource;
 
-  AcademicScheduleRepoImpl(
-    this._remoteDataSource,
-    this._localDataSource,
-  );
+  AcademicScheduleRepoImpl(this._remoteDataSource, this._localDataSource);
 
   @override
   Future<ApiResult<List<ScheduleItemModel>>> getAcademicSchedule({
@@ -38,10 +35,7 @@ class AcademicScheduleRepoImpl implements AcademicScheduleRepo {
 
       // Cache the new schedule
       await _localDataSource.saveSchedule(
-        CachedScheduleModel(
-          scheduleItems: response,
-          cachedAt: DateTime.now(),
-        ),
+        CachedScheduleModel(scheduleItems: response, cachedAt: DateTime.now()),
       );
 
       return ApiResult.success(response);

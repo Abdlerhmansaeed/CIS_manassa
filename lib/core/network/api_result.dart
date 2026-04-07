@@ -18,5 +18,3 @@ class ApiResult<T> {
     }
   }
 }
-
-// extension ApiResultExtension

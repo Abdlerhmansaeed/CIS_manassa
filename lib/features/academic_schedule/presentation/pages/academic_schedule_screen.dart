@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mansaa_app/core/di/di.dart';
@@ -16,6 +15,7 @@ import 'package:mansaa_app/features/academic_schedule/presentation/widgets/get_a
 import 'package:mansaa_app/features/academic_schedule/presentation/widgets/lecture_card.dart';
 import 'package:mansaa_app/features/academic_schedule/presentation/widgets/schedule_header.dart';
 import 'package:mansaa_app/features/academic_schedule/presentation/widgets/gap_indicator.dart';
+import 'package:resposive_xx/responsive/responsive.dart';
 
 class AcademicScheduleScreen extends StatefulWidget {
   const AcademicScheduleScreen({super.key});
@@ -29,15 +29,6 @@ class _AcademicScheduleScreenState extends State<AcademicScheduleScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nationalIdController = TextEditingController();
   final _studentCodeController = TextEditingController();
-
-  // final List<String> _days = [
-  //   "السبت",
-  //   "الأحد",
-  //   "الاثنين",
-  //   "الثلاثاء",
-  //   "الأربعاء",
-  // ];
-
   @override
   void initState() {
     _cubit = getIt<AcademicScheduleCubit>()..loadInitialData();
@@ -129,12 +120,17 @@ class _AcademicScheduleScreenState extends State<AcademicScheduleScreen> {
                     selectedDay: state.selectedDay,
                     onDaySelected: (day) => _cubit.selectDay(day),
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: 24.h),
                   Expanded(
                     child: items.isEmpty
                         ? AcademicScheduleNoData()
                         : ListView.builder(
-                            padding: const EdgeInsets.fromLTRB(24, 0, 24, 100),
+                            padding: EdgeInsets.fromLTRB(
+                              24.w,
+                              0.r,
+                              24.r,
+                              100.r,
+                            ),
                             itemCount: items.length,
                             itemBuilder: (context, index) {
                               final current = items[index];
@@ -150,7 +146,7 @@ class _AcademicScheduleScreenState extends State<AcademicScheduleScreen> {
                               }
 
                               return Padding(
-                                padding: const EdgeInsets.only(bottom: 16),
+                                padding: EdgeInsets.only(bottom: 16.h),
                                 child: card,
                               );
                             },

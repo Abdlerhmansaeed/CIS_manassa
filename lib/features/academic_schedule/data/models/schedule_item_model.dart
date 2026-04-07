@@ -71,19 +71,22 @@ class ScheduleItemModel extends Equatable {
       final timePart = text.split(RegExp(r'-|الى')).first.trim();
 
       // Extract numbers (supporting Arabic and Western numerals)
-      final timeMatch = RegExp(r'(\d+|[٠-٩]+):(\d+|[٠-٩]+)').firstMatch(timePart);
+      final timeMatch = RegExp(
+        r'(\d+|[٠-٩]+):(\d+|[٠-٩]+)',
+      ).firstMatch(timePart);
       if (timeMatch == null) return 0;
 
       int hour = _parseArabicInt(timeMatch.group(1)!);
       int minute = _parseArabicInt(timeMatch.group(2)!);
 
       // AM/PM detection
-      bool isPm = text.contains('ظهراً') ||
+      bool isPm =
+          text.contains('ظهراً') ||
           text.contains('عصراً') ||
           text.contains('مساءً') ||
           text.contains('pm');
 
-      // Special case: "12 PM" is 720, "12 AM" is 0. 
+      // Special case: "12 PM" is 720, "12 AM" is 0.
       // Most university schedules start from 8 or 9 AM.
       if (isPm && hour < 12) hour += 12;
       if (!isPm && hour == 12) hour = 0;
@@ -107,7 +110,10 @@ class ScheduleItemModel extends Equatable {
       '٨': '8',
       '٩': '9',
     };
-    final western = input.split('').map((c) => arabicToWestern[c] ?? c).join('');
+    final western = input
+        .split('')
+        .map((c) => arabicToWestern[c] ?? c)
+        .join('');
     return int.tryParse(western) ?? 0;
   }
 

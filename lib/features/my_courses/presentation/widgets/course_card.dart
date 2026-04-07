@@ -100,8 +100,7 @@ class CourseCard extends StatelessWidget {
           ),
 
           ///  [The Image is Not Working so its Commented For Now]
-          
-          
+
           // if (courseImage != null) ...[
           //   SizedBox(width: 12.w),
           //   ClipRRect(

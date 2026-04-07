@@ -9,6 +9,7 @@ import 'package:mansaa_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:mansaa_app/features/auth/presentation/pages/forget_Password/credentials_retrieved_screen.dart';
 import 'package:mansaa_app/features/auth/presentation/pages/forget_Password/forget_password_screen.dart';
 import 'package:mansaa_app/features/auth/presentation/pages/login/login_screen.dart';
+import 'package:mansaa_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:mansaa_app/features/home/presentation/pages/home_screen.dart';
 import 'package:mansaa_app/features/main_layout/presentation/main_layout_screen.dart';
 import 'package:mansaa_app/features/my_courses/presentation/cubit/courses_cubit.dart';
@@ -24,6 +25,7 @@ class AppRouter {
       GoRoute(
         path: AppRouteNames.splash,
         name: AppRouteNames.splash,
+
         builder: (context, state) => BlocProvider(
           create: (context) => getIt<AuthCubit>(),
           child: const SplashScreen(),
@@ -74,7 +76,10 @@ class AppRouter {
               GoRoute(
                 path: AppRouteNames.home,
                 name: AppRouteNames.home,
-                builder: (context, state) => const HomeScreen(),
+                builder: (context, state) => BlocProvider(
+                  create: (context) => getIt<HomeCubit>(),
+                  child: const HomeScreen(),
+                ),
               ),
             ],
           ),

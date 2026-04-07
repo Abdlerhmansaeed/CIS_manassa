@@ -7,7 +7,8 @@ import 'package:mansaa_app/core/network/session/user_session.dart';
 
 @singleton
 class AppManager extends Cubit<AppManagerState> {
-  AppManager(this._storageClient, this._userSession) : super(const AppManagerState());
+  AppManager(this._storageClient, this._userSession)
+    : super(const AppManagerState());
 
   final LocalStorageClient _storageClient;
   final UserSession _userSession;

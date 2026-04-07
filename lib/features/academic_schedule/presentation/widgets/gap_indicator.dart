@@ -4,10 +4,7 @@ import 'package:mansaa_app/core/theme/app_colors.dart';
 class GapIndicator extends StatelessWidget {
   final String label;
 
-  const GapIndicator({
-    super.key,
-    this.label = "1 HR GAP - BREAK",
-  });
+  const GapIndicator({super.key, this.label = "1 HR GAP - BREAK"});
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +12,7 @@ class GapIndicator extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: Row(
         children: [
-          Expanded(
-            child: _buildDashedLine(),
-          ),
+          Expanded(child: _buildDashedLine()),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
@@ -30,9 +25,7 @@ class GapIndicator extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
-            child: _buildDashedLine(),
-          ),
+          Expanded(child: _buildDashedLine()),
         ],
       ),
     );

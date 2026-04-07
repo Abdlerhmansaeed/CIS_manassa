@@ -20,9 +20,10 @@ class _CoursesShimmerState extends State<CoursesShimmer>
       vsync: this,
       duration: const Duration(milliseconds: 1200),
     )..repeat();
-    _animation = Tween<double>(begin: 0.3, end: 0.7).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _animation = Tween<double>(
+      begin: 0.3,
+      end: 0.7,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override
@@ -96,17 +97,9 @@ class _ShimmerCard extends StatelessWidget {
                 SizedBox(height: 16.h),
                 Row(
                   children: [
-                    _shimmerBox(
-                      width: 80.w,
-                      height: 24.h,
-                      opacity: opacity,
-                    ),
+                    _shimmerBox(width: 80.w, height: 24.h, opacity: opacity),
                     SizedBox(width: 8.w),
-                    _shimmerBox(
-                      width: 70.w,
-                      height: 24.h,
-                      opacity: opacity,
-                    ),
+                    _shimmerBox(width: 70.w, height: 24.h, opacity: opacity),
                   ],
                 ),
               ],

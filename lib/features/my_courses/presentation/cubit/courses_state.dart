@@ -40,11 +40,11 @@ class CoursesState extends Equatable {
 
   @override
   List<Object?> get props => [
-        coursesState,
-        courses,
-        errorMessage,
-        courseContents,
-        courseContentsState,
-        isRefreshing,
-      ];
+    coursesState,
+    courses,
+    errorMessage,
+    courseContents,
+    courseContentsState,
+    isRefreshing,
+  ];
 }

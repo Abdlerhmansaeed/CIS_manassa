@@ -21,7 +21,11 @@ class HiveClientImpl implements HiveClient {
     try {
       return Hive.box<T>(name);
     } catch (e, stackTrace) {
-      Logger.error('Failed to get Hive box: $name. Ensure it is opened.', e, stackTrace);
+      Logger.error(
+        'Failed to get Hive box: $name. Ensure it is opened.',
+        e,
+        stackTrace,
+      );
       rethrow;
     }
   }

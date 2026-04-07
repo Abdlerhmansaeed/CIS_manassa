@@ -45,6 +45,17 @@ import '../../features/auth/domain/usecases/get_user_site_info_use_case.dart'
     as _i142;
 import '../../features/auth/domain/usecases/login_use_case.dart' as _i37;
 import '../../features/auth/presentation/cubit/auth_cubit.dart' as _i117;
+import '../../features/home/data/datasources/home_remote_data_source.dart'
+    as _i362;
+import '../../features/home/data/datasources/home_remote_data_source_impl.dart'
+    as _i819;
+import '../../features/home/data/repositories/home_repo_impl.dart' as _i333;
+import '../../features/home/domain/repositories/home_repo.dart' as _i1021;
+import '../../features/home/domain/usecases/get_quiz_detailes_use_case.dart'
+    as _i409;
+import '../../features/home/domain/usecases/get_student_running_events_use_case.dart'
+    as _i9;
+import '../../features/home/presentation/cubit/home_cubit.dart' as _i9;
 import '../../features/my_courses/data/datasources/courses_local_data_source.dart'
     as _i374;
 import '../../features/my_courses/data/datasources/courses_local_data_source_impl.dart'
@@ -191,6 +202,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i1050.GetStudentCredentialsUseCase>(),
       ),
     );
+    gh.factory<_i362.HomeRemoteDataSource>(
+      () => _i819.HomeRemoteDataSourceImpl(gh<_i557.ApiClient>()),
+    );
     gh.factory<_i142.GetUserSiteInfoUseCase>(
       () => _i142.GetUserSiteInfoUseCase(gh<_i723.AuthRepo>()),
     );
@@ -213,6 +227,15 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i369.GetCourseContentUseCase>(),
       ),
     );
+    gh.factory<_i1021.HomeRepo>(
+      () => _i333.HomeRepoImpl(gh<_i362.HomeRemoteDataSource>()),
+    );
+    gh.factory<_i409.GetQuizDetailsUseCase>(
+      () => _i409.GetQuizDetailsUseCase(gh<_i1021.HomeRepo>()),
+    );
+    gh.factory<_i9.GetStudentRunningEventsUseCase>(
+      () => _i9.GetStudentRunningEventsUseCase(gh<_i1021.HomeRepo>()),
+    );
     gh.factory<_i117.AuthCubit>(
       () => _i117.AuthCubit(
         gh<_i37.LoginUseCase>(),
@@ -220,6 +243,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i142.GetUserSiteInfoUseCase>(),
         gh<_i401.LocalStorageClient>(),
         gh<_i120.UserSession>(),
+      ),
+    );
+    gh.factory<_i9.HomeCubit>(
+      () => _i9.HomeCubit(
+        gh<_i9.GetStudentRunningEventsUseCase>(),
+        gh<_i409.GetQuizDetailsUseCase>(),
       ),
     );
     return this;

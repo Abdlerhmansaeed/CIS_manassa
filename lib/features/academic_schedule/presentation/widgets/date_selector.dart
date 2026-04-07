@@ -31,13 +31,21 @@ class DateSelector extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 10,
+                  ),
                   decoration: BoxDecoration(
-                    color: isSelected ? AppColors.primary : AppColors.surfaceContainerHighest,
+                    color: isSelected
+                        ? AppColors.primary
+                        : AppColors.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(20),
                     gradient: isSelected
                         ? const LinearGradient(
-                            colors: [AppColors.primary, AppColors.primaryContainer],
+                            colors: [
+                              AppColors.primary,
+                              AppColors.primaryContainer,
+                            ],
                           )
                         : null,
                     boxShadow: isSelected
@@ -46,16 +54,20 @@ class DateSelector extends StatelessWidget {
                               color: AppColors.onSurface.withOpacity(0.06),
                               blurRadius: 24,
                               offset: const Offset(0, 8),
-                            )
+                            ),
                           ]
                         : null,
                   ),
                   child: Text(
                     day,
                     style: TextStyle(
-                      color: isSelected ? AppColors.onPrimary : AppColors.onSurfaceVariant,
+                      color: isSelected
+                          ? AppColors.onPrimary
+                          : AppColors.onSurfaceVariant,
                       fontSize: 14,
-                      fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
+                      fontWeight: isSelected
+                          ? FontWeight.bold
+                          : FontWeight.w600,
                     ),
                   ),
                 ),

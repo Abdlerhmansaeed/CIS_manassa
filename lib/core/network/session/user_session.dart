@@ -32,7 +32,10 @@ class UserSession {
 
     await Future.wait([
       _storageClient.saveSecureData(key: AppKeys.token, value: token),
-      _storageClient.saveSecureData(key: AppKeys.userId, value: userId.toString()),
+      _storageClient.saveSecureData(
+        key: AppKeys.userId,
+        value: userId.toString(),
+      ),
     ]);
   }
 

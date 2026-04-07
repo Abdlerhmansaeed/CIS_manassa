@@ -27,6 +27,10 @@ class AppColors {
   static const Color secondary = Color(0xFF6A5B51);
   static const Color secondaryContainer = Color(0xFFF0DCCF);
 
+  // Semantic
+  static const Color error = Color(0xFFD32F2F);
+  static const Color errorContainer = Color(0xFFFFCDD2);
+
   // Fallbacks for dark theme if needed (keeping existing)
   static const Color darkPrimary = Color(0xFFE02020);
   static const Color darkSecondary = Color(0xFFA89880);

@@ -19,6 +19,6 @@ abstract class CisApiClient {
   @DioResponseType(ResponseType.plain)
   Future<String> getAcademicSchedule({
     @Query('student_id') String studentId = "",
-    @Query('national_number') String nationalNumber= "",
+    @Query('national_number') String nationalNumber = "",
   });
 }

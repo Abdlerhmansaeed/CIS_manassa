@@ -52,27 +52,25 @@ class _SplashScreenState extends State<SplashScreen>
 
     // Timing Constants (mapped to 2000ms duration)
     // Phase 1: 0 - 600ms (0.0 to 0.3)
-    _logoScale = TweenSequence<double>([
-      TweenSequenceItem(
-        tween: Tween<double>(
-          begin: 0.6,
-          end: 1.05,
-        ).chain(CurveTween(curve: Curves.easeOutCubic)),
-        weight: 70,
-      ),
-      TweenSequenceItem(
-        tween: Tween<double>(
-          begin: 1.05,
-          end: 1.0,
-        ).chain(CurveTween(curve: Curves.easeInOut)),
-        weight: 30,
-      ),
-    ]).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: const Interval(0.0, 0.3),
-      ),
-    );
+    _logoScale =
+        TweenSequence<double>([
+          TweenSequenceItem(
+            tween: Tween<double>(
+              begin: 0.6,
+              end: 1.05,
+            ).chain(CurveTween(curve: Curves.easeOutCubic)),
+            weight: 70,
+          ),
+          TweenSequenceItem(
+            tween: Tween<double>(
+              begin: 1.05,
+              end: 1.0,
+            ).chain(CurveTween(curve: Curves.easeInOut)),
+            weight: 30,
+          ),
+        ]).animate(
+          CurvedAnimation(parent: _controller, curve: const Interval(0.0, 0.3)),
+        );
 
     _logoOpacity = CurvedAnimation(
       parent: _controller,
@@ -116,10 +114,7 @@ class _SplashScreenState extends State<SplashScreen>
       curve: const Interval(0.4, 0.8),
     );
     _loadingOpacity = Tween<double>(begin: 1.0, end: 0.0).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: const Interval(0.75, 0.8),
-      ),
+      CurvedAnimation(parent: _controller, curve: const Interval(0.75, 0.8)),
     );
 
     // Phase 4: 1600ms - 2000ms (0.8 to 1.0)
@@ -132,15 +127,13 @@ class _SplashScreenState extends State<SplashScreen>
     _exitOpacity = Tween<double>(begin: 1.0, end: 0.0).animate(
       CurvedAnimation(parent: _controller, curve: const Interval(0.8, 1.0)),
     );
-    _bgFade = ColorTween(
-      begin: null, // Transparent/Radial background handled in build
-      end: Colors.white,
-    ).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: const Interval(0.8, 1.0),
-      ),
-    );
+    _bgFade =
+        ColorTween(
+          begin: null, // Transparent/Radial background handled in build
+          end: Colors.white,
+        ).animate(
+          CurvedAnimation(parent: _controller, curve: const Interval(0.8, 1.0)),
+        );
 
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
@@ -173,9 +166,9 @@ class _SplashScreenState extends State<SplashScreen>
                   state.userPassword != null) {
                 setState(() => _isAutoLoggingIn = true);
                 context.read<AuthCubit>().loginStudent(
-                      studentCode: state.userCode!,
-                      studentPassword: state.userPassword!,
-                    );
+                  studentCode: state.userCode!,
+                  studentPassword: state.userPassword!,
+                );
               }
             },
           ),
@@ -276,7 +269,9 @@ class _SplashScreenState extends State<SplashScreen>
                                         height: 56,
                                         decoration: BoxDecoration(
                                           color: const Color(0xFFC8191A),
-                                          borderRadius: BorderRadius.circular(8),
+                                          borderRadius: BorderRadius.circular(
+                                            8,
+                                          ),
                                         ),
                                         child: const Icon(
                                           Icons.school_outlined,
@@ -354,7 +349,9 @@ class _SplashScreenState extends State<SplashScreen>
                                       child: Container(
                                         decoration: BoxDecoration(
                                           color: const Color(0xFFC8191A),
-                                          borderRadius: BorderRadius.circular(2),
+                                          borderRadius: BorderRadius.circular(
+                                            2,
+                                          ),
                                           boxShadow: [
                                             BoxShadow(
                                               color: const Color(

@@ -14,7 +14,8 @@ abstract interface class AcademicScheduleLocalDataSource {
 }
 
 @LazySingleton(as: AcademicScheduleLocalDataSource)
-class AcademicScheduleLocalDataSourceImpl implements AcademicScheduleLocalDataSource {
+class AcademicScheduleLocalDataSourceImpl
+    implements AcademicScheduleLocalDataSource {
   final HiveClient _hiveClient;
   static const String _boxName = 'academic_schedule_box';
   static const String _credentialsKey = 'student_credentials';

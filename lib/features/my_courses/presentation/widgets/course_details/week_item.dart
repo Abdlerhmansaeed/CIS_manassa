@@ -45,7 +45,9 @@ class _WeekItemState extends State<WeekItem> {
             : AppColors.surfaceContainerLow,
         borderRadius: BorderRadius.circular(8.0),
         border: isCurrent
-            ? const Border(left: BorderSide(color: AppColors.primaryContainer, width: 4))
+            ? const Border(
+                left: BorderSide(color: AppColors.primaryContainer, width: 4),
+              )
             : null,
         boxShadow: isCurrent
             ? [
