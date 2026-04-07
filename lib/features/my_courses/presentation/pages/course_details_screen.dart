@@ -6,9 +6,9 @@ import 'package:mansaa_app/features/my_courses/presentation/cubit/courses_cubit.
 import 'package:mansaa_app/features/my_courses/presentation/cubit/courses_state.dart';
 import 'package:mansaa_app/features/my_courses/presentation/widgets/course_details/course_hero_card.dart';
 import 'package:mansaa_app/features/my_courses/presentation/widgets/course_details/course_tabs_bar.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'package:mansaa_app/features/my_courses/presentation/widgets/course_details/weekly_accordion.dart';
 import 'package:resposive_xx/responsive/responsive_extensions.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class CourseDetailsScreen extends StatefulWidget {
   const CourseDetailsScreen({super.key, required this.course});
@@ -50,29 +50,29 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.surface, // scaffold background
+      backgroundColor: context.colors.surface, // scaffold background
       appBar: AppBar(
-        backgroundColor: AppColors.surfaceContainer.withOpacity(0.8),
+        backgroundColor: context.colors.surfaceContainer.withOpacity(0.8),
         elevation: 0,
         centerTitle: true,
-        title: const Text(
+        title: Text(
           'Course Detail',
           style: TextStyle(
             fontFamily: 'Plus Jakarta Sans',
             fontWeight: FontWeight.bold,
-            color: AppColors.onSurface,
+            color: context.colors.onSurface,
             fontSize: 18,
           ),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppColors.primaryContainer),
+          icon: Icon(Icons.arrow_back, color: context.colors.primaryContainer),
           onPressed: () => Navigator.of(context).pop(),
         ),
         actions: [
           IconButton(
-            icon: const Icon(
+            icon:  Icon(
               Icons.more_vert,
-              color: AppColors.primaryContainer,
+              color: context.colors.primaryContainer,
             ),
             onPressed: () {},
           ),
@@ -94,9 +94,9 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen>
         },
         builder: (context, state) {
           if (state.courseContentsState == AppStates.loading) {
-            return const Center(
+            return  Center(
               child: CircularProgressIndicator(
-                color: AppColors.primaryContainer,
+                color: context.colors.primaryContainer,
               ),
             );
           }
@@ -120,7 +120,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen>
                 SliverToBoxAdapter(
                   child: CourseHeroCard(course: widget.course),
                 ),
-                SliverToBoxAdapter(child: const SizedBox(height: 24)),
+                const SliverToBoxAdapter(child: SizedBox(height: 24)),
                 SliverToBoxAdapter(
                   child: CourseTabsBar(
                     selectedIndex: _selectedTabIndex,

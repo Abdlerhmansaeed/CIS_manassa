@@ -60,6 +60,8 @@ import '../../features/my_courses/data/datasources/courses_local_data_source.dar
     as _i374;
 import '../../features/my_courses/data/datasources/courses_local_data_source_impl.dart'
     as _i853;
+import '../../features/my_courses/data/datasources/courses_local_data_source_impl_now.dart'
+    as _i195;
 import '../../features/my_courses/data/datasources/courses_remote_data_source.dart'
     as _i144;
 import '../../features/my_courses/data/datasources/courses_remote_data_source_impl.dart'
@@ -74,6 +76,8 @@ import '../../features/my_courses/domain/usecases/get_enrolled_courses_use_case.
     as _i408;
 import '../../features/my_courses/presentation/cubit/courses_cubit.dart'
     as _i355;
+import '../../features/notifications/presentation/cubit/notifications_cubit.dart'
+    as _i405;
 import '../local_storage/hive_client.dart' as _i969;
 import '../local_storage/hive_client_impl.dart' as _i1049;
 import '../local_storage/local_storage_client.dart' as _i401;
@@ -99,6 +103,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => localStorageModule.sharedPreferences,
       preResolve: true,
     );
+    gh.factory<_i405.NotificationsCubit>(() => _i405.NotificationsCubit());
     gh.lazySingleton<_i558.FlutterSecureStorage>(
       () => localStorageModule.secureStorage,
     );
@@ -109,6 +114,10 @@ extension GetItInjectableX on _i174.GetIt {
       ),
     );
     gh.lazySingleton<_i969.HiveClient>(() => _i1049.HiveClientImpl());
+    gh.factory<_i374.CoursesLocalDataSource>(
+      () => _i853.CoursesLocalDataSourceImpl(gh<_i401.LocalStorageClient>()),
+      instanceName: 'oldCoursesLocalDataSource',
+    );
     gh.singleton<_i120.UserSession>(
       () => _i120.UserSession(gh<_i401.LocalStorageClient>()),
     );
@@ -133,7 +142,8 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i745.AuthInterceptor(gh<_i120.UserSession>()),
     );
     gh.factory<_i374.CoursesLocalDataSource>(
-      () => _i853.CoursesLocalDataSourceImpl(gh<_i401.LocalStorageClient>()),
+      () => _i195.CoursesLocalDataSourceImplNow(gh<_i969.HiveClient>()),
+      instanceName: 'newCoursesLocalDataSource',
     );
     gh.lazySingleton<_i361.Dio>(
       () => dioClient.provideDioClient(
@@ -205,14 +215,19 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i362.HomeRemoteDataSource>(
       () => _i819.HomeRemoteDataSourceImpl(gh<_i557.ApiClient>()),
     );
-    gh.factory<_i142.GetUserSiteInfoUseCase>(
-      () => _i142.GetUserSiteInfoUseCase(gh<_i723.AuthRepo>()),
-    );
     gh.factory<_i127.CoursesRepository>(
       () => _i855.CoursesRepositoryImpl(
         gh<_i144.CoursesRemoteDataSource>(),
-        gh<_i374.CoursesLocalDataSource>(),
+        gh<_i374.CoursesLocalDataSource>(
+          instanceName: 'oldCoursesLocalDataSource',
+        ),
+        gh<_i374.CoursesLocalDataSource>(
+          instanceName: 'newCoursesLocalDataSource',
+        ),
       ),
+    );
+    gh.factory<_i142.GetUserSiteInfoUseCase>(
+      () => _i142.GetUserSiteInfoUseCase(gh<_i723.AuthRepo>()),
     );
     gh.factory<_i408.GetEnrolledCoursesUseCase>(
       () => _i408.GetEnrolledCoursesUseCase(gh<_i127.CoursesRepository>()),

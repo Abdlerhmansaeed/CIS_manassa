@@ -3,14 +3,15 @@ import 'package:mansaa_app/core/helpers/date_helper.dart';
 import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'package:mansaa_app/features/home/data/models/student_calander_events_response/event.dart';
 import 'package:mansaa_app/features/home/presentation/cubit/home_display_data.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class HomeEventsMapper {
   /// Maps a raw list of [Event] models to the [HomeDisplayData] view model.
   static HomeDisplayData mapToDisplayData(List<Event> events) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
-    final tomorrow = today.add(const Duration(days: 1));
-    final nextWeekEnd = today.add(const Duration(days: 8));
+    final tomorrow = today.add(Duration(days: 1));
+    final nextWeekEnd = today.add(Duration(days: 8));
 
     // --- Aggregate counts & top urgent event ---
     int overdueCount = 0;

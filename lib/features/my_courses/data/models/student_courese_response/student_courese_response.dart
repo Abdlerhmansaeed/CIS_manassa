@@ -1,38 +1,69 @@
 import 'package:equatable/equatable.dart';
+import 'package:hive_ce/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'student_courese_response.g.dart';
 
 @JsonSerializable()
+@HiveType(typeId: 0)
 class StudentCourseResponse extends Equatable {
+  @HiveField(0)
   final int? id;
+  @HiveField(1)
   final String? shortname;
+  @HiveField(2)
   final String? fullname;
+  @HiveField(3)
   final String? displayname;
+  @HiveField(4)
   final int? enrolledusercount;
+  @HiveField(5)
   final String? idnumber;
+  @HiveField(6)
   final int? visible;
+  @HiveField(7)
   final String? summary;
+  @HiveField(8)
   final int? summaryformat;
+  @HiveField(9)
   final String? format;
+  @HiveField(10)
   final String? courseimage;
+  @HiveField(11)
   final bool? showgrades;
+  @HiveField(12)
   final String? lang;
+  @HiveField(13)
   final bool? enablecompletion;
+  @HiveField(14)
   final bool? completionhascriteria;
+  @HiveField(15)
   final bool? completionusertracked;
+  @HiveField(16)
   final int? category;
+  @HiveField(17)
   final dynamic progress;
+  @HiveField(18)
   final bool? completed;
+  @HiveField(19)
   final int? startdate;
+  @HiveField(20)
   final int? enddate;
+  @HiveField(21)
   final int? marker;
+  @HiveField(22)
   final int? lastaccess;
+  @HiveField(23)
   final bool? isfavourite;
+  @HiveField(24)
   final bool? hidden;
+  @HiveField(25)
   final List<dynamic>? overviewfiles;
+  @HiveField(26)
   final bool? showactivitydates;
+  @HiveField(27)
   final bool? showcompletionconditions;
+  @HiveField(28)
   final int? timemodified;
 
   const StudentCourseResponse({

@@ -1,8 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mansaa_app/core/routing/app_route_names.dart';
 import 'package:resposive_xx/responsive/responsive.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
@@ -13,7 +15,7 @@ class HomeAppBar extends StatelessWidget {
       pinned: true,
       expandedHeight: 70.h,
       collapsedHeight: 70.h,
-      backgroundColor: AppColors.surfaceContainer.withOpacity(0.8),
+      backgroundColor: context.colors.surfaceContainer.withOpacity(0.8),
       flexibleSpace: ClipRect(
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
@@ -30,16 +32,16 @@ class HomeAppBar extends StatelessWidget {
                 height: 40.w,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColors.surfaceContainerHighest,
+                  color: context.colors.surfaceContainerHighest,
                   border: Border.all(
-                    color: AppColors.primary.withOpacity(0.2),
+                    color: context.colors.primary.withOpacity(0.2),
                     width: 2,
                   ),
                 ),
                 child: ClipOval(
                   child: Icon(
                     Icons.person,
-                    color: AppColors.primary,
+                    color: context.colors.primary,
                     size: 24.sp,
                   ),
                 ),
@@ -53,7 +55,7 @@ class HomeAppBar extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w800,
-                      color: AppColors.primaryContainer,
+                      color: context.colors.primaryContainer,
                     ),
                   ),
                   Text(
@@ -62,45 +64,27 @@ class HomeAppBar extends StatelessWidget {
                       fontSize: 10.sp,
                       fontWeight: FontWeight.w800,
                       letterSpacing: 1.5,
-                      color: AppColors.onSurfaceVariant.withOpacity(0.7),
+                      color: context.colors.onSurfaceVariant.withOpacity(0.7),
                     ),
                   ),
                 ],
               ),
             ],
           ),
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              Icon(
-                Icons.notifications,
-                color: AppColors.primaryContainer,
+          IconButton(
+            onPressed: () {
+              context.pushNamed(AppRouteNames.notifications);
+            },
+            icon: Badge(
+              label: const Text("1"),
+              alignment: Alignment.topRight,
+              largeSize: 16.sp,
+              child: Icon(
+                Icons.notifications_none_outlined,
+                color: context.colors.primaryContainer,
                 size: 28.sp,
               ),
-              Positioned(
-                top: 0,
-                right: 0,
-                child: Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    color: AppColors.primary,
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: AppColors.surfaceContainer,
-                      width: 2,
-                    ),
-                  ),
-                  child: Text(
-                    '3',
-                    style: TextStyle(
-                      fontSize: 8.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ],
       ),

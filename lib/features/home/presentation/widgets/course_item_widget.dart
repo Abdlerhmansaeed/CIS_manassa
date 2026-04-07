@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:resposive_xx/responsive/responsive.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class CourseItemWidget extends StatelessWidget {
   final String code;
@@ -26,7 +26,7 @@ class CourseItemWidget extends StatelessWidget {
       width: 176.w,
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
-        color: AppColors.surfaceContainerHighest,
+        color: context.colors.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(16.r),
       ),
       child: Column(
@@ -39,7 +39,7 @@ class CourseItemWidget extends StatelessWidget {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
                 decoration: BoxDecoration(
-                  color: AppColors.surfaceContainerLowest,
+                  color: context.colors.surfaceContainerLowest,
                   borderRadius: BorderRadius.circular(4.r),
                 ),
                 child: Text(
@@ -47,7 +47,7 @@ class CourseItemWidget extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 10.sp,
                     fontWeight: FontWeight.w900,
-                    color: AppColors.onSurface,
+                    color: context.colors.onSurface,
                   ),
                 ),
               ),
@@ -78,7 +78,7 @@ class CourseItemWidget extends StatelessWidget {
             subtitle,
             style: TextStyle(
               fontSize: 10.sp,
-              color: AppColors.onSurfaceVariant,
+              color: context.colors.onSurfaceVariant,
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -92,7 +92,7 @@ class CourseItemWidget extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 9.sp,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.onSurfaceVariant,
+                  color: context.colors.onSurfaceVariant,
                 ),
               ),
               Text(
@@ -110,7 +110,7 @@ class CourseItemWidget extends StatelessWidget {
             width: double.infinity,
             height: 4.h,
             decoration: BoxDecoration(
-              color: AppColors.surfaceContainerLowest,
+              color: context.colors.surfaceContainerLowest,
               borderRadius: BorderRadius.circular(2.r),
             ),
             child: FractionallySizedBox(

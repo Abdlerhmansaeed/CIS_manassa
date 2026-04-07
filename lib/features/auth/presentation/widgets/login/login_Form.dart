@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'package:mansaa_app/core/widgets/shared_text_form_field.dart';
 import 'package:resposive_xx/responsive/responsive.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class LoginForm extends StatefulWidget {
   final TextEditingController studentIdController;
@@ -36,7 +36,7 @@ class _LoginFormState extends State<LoginForm> {
             style: TextStyle(
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
-              color: AppColors.onSurfaceVariant,
+              color: context.colors.onSurfaceVariant,
             ),
           ),
         ),
@@ -49,14 +49,14 @@ class _LoginFormState extends State<LoginForm> {
           //     : null,
         ),
         const SizedBox(height: 24),
-        const Padding(
+        Padding(
           padding: EdgeInsets.only(left: 16.0, bottom: 8.0),
           child: Text(
             'Password',
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: AppColors.onSurfaceVariant,
+              color: context.colors.onSurfaceVariant,
             ),
           ),
         ),
@@ -77,7 +77,7 @@ class _LoginFormState extends State<LoginForm> {
                   _obscurePassword.value
                       ? Icons.visibility_outlined
                       : Icons.visibility_off_outlined,
-                  color: AppColors.onSurfaceVariant,
+                  color: context.colors.onSurfaceVariant,
                 ),
                 onPressed: () {
                   toggleObscurePassword();

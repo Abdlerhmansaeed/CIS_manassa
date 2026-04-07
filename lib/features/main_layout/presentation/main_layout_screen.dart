@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'package:mansaa_app/features/main_layout/presentation/widgets/bottom_nav_item.dart';
 import 'package:resposive_xx/responsive/responsive.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class MainLayoutScreen extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
@@ -14,7 +14,7 @@ class MainLayoutScreen extends StatelessWidget {
     return Scaffold(
       body: navigationShell,
       bottomNavigationBar: Container(
-        height: 85.h,
+        height: 80.h,
         decoration: BoxDecoration(
           color: Theme.of(context).scaffoldBackgroundColor,
           boxShadow: [
@@ -33,8 +33,8 @@ class MainLayoutScreen extends StatelessWidget {
               label: 'Home',
               navigationShell: navigationShell,
               isSelected: navigationShell.currentIndex == 0,
-              activeColor: AppColors.primaryContainer,
-              inactiveColor: AppColors.darkNeutral,
+              activeColor: context.colors.primaryContainer,
+              inactiveColor: context.colors.onSurfaceVariant,
             ),
             BottomNavItem(
               index: 1,
@@ -42,8 +42,8 @@ class MainLayoutScreen extends StatelessWidget {
               label: 'Schedule',
               navigationShell: navigationShell,
               isSelected: navigationShell.currentIndex == 1,
-              activeColor: AppColors.primaryContainer,
-              inactiveColor: AppColors.darkNeutral,
+              activeColor: context.colors.primaryContainer,
+              inactiveColor: context.colors.onSurfaceVariant,
             ),
             BottomNavItem(
               index: 2,
@@ -51,17 +51,17 @@ class MainLayoutScreen extends StatelessWidget {
               label: 'My Courses',
               navigationShell: navigationShell,
               isSelected: navigationShell.currentIndex == 2,
-              activeColor: AppColors.primaryContainer,
-              inactiveColor: AppColors.darkNeutral,
+              activeColor: context.colors.primaryContainer,
+              inactiveColor: context.colors.onSurfaceVariant,
             ),
             BottomNavItem(
               index: 3,
-              icon: Icons.settings_rounded,
-              label: 'Settings',
+              icon: Icons.person_2_rounded,
+              label: 'profile',
               navigationShell: navigationShell,
               isSelected: navigationShell.currentIndex == 3,
-              activeColor: AppColors.primaryContainer,
-              inactiveColor: AppColors.darkNeutral,
+              activeColor: context.colors.primaryContainer,
+              inactiveColor: context.colors.onSurfaceVariant,
             ),
           ],
         ),

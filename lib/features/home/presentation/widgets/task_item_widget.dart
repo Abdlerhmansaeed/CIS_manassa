@@ -4,9 +4,9 @@ import 'package:mansaa_app/core/helpers/app_states.dart';
 import 'package:mansaa_app/features/home/presentation/cubit/home_state.dart';
 import 'package:mansaa_app/features/home/presentation/widgets/quiz_details_bottom_sheet.dart';
 import 'package:resposive_xx/responsive/responsive.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'package:mansaa_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:mansaa_app/features/home/presentation/cubit/home_display_data.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 /// Pure renderer — receives pre-computed [TaskDisplayData] from [HomeCubit].
 class TaskItemWidget extends StatelessWidget {
@@ -19,20 +19,20 @@ class TaskItemWidget extends StatelessWidget {
     final bool isQuiz = data.eventType == EventType.quiz;
     final bool showStatus = isQuiz ? data.isStarted : true;
     final Color mainColor = data.isOverdue
-        ? AppColors.error
-        : AppColors.primary;
+        ? context.colors.error
+        : context.colors.primary;
 
     return Container(
       padding: EdgeInsets.all(12.w),
       margin: EdgeInsets.only(bottom: 12.h),
       decoration: BoxDecoration(
         color: (data.isOverdue && showStatus)
-            ? AppColors.errorContainer.withValues(alpha: 0.1)
-            : AppColors.surfaceContainerLowest,
+            ? context.colors.errorContainer.withValues(alpha: 0.1)
+            : context.colors.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(16.r),
         border: Border.all(
           color: (data.isOverdue && showStatus)
-              ? AppColors.error.withValues(alpha: 0.2)
+              ? context.colors.error.withValues(alpha: 0.2)
               : Colors.black.withValues(alpha: 0.05),
         ),
         boxShadow: [
@@ -56,11 +56,11 @@ class TaskItemWidget extends StatelessWidget {
               const Spacer(),
               if (showStatus) ...[
                 if (data.isOverdue)
-                  const _StatusBadge(label: 'OVERDUE', color: AppColors.error)
+                  _StatusBadge(label: 'OVERDUE', color: context.colors.error)
                 else if (data.timeText.isNotEmpty)
                   _StatusBadge(
                     label: 'DUE',
-                    color: AppColors.onSurfaceVariant.withValues(alpha: 0.6),
+                    color: context.colors.onSurfaceVariant.withValues(alpha: 0.6),
                   ),
               ],
             ],
@@ -78,7 +78,7 @@ class TaskItemWidget extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.bold,
-                        color: AppColors.onSurface,
+                        color: context.colors.onSurface,
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -88,7 +88,7 @@ class TaskItemWidget extends StatelessWidget {
                       data.courseName,
                       style: TextStyle(
                         fontSize: 12.sp,
-                        color: AppColors.onSurfaceVariant,
+                        color: context.colors.onSurfaceVariant,
                       ),
                     ),
                   ],
@@ -105,15 +105,15 @@ class TaskItemWidget extends StatelessWidget {
                         fontSize: 13.sp,
                         fontWeight: FontWeight.w800,
                         color: (data.isOverdue && showStatus)
-                            ? AppColors.error
-                            : AppColors.primary,
+                            ? context.colors.error
+                            : context.colors.primary,
                       ),
                     ),
                     Text(
                       _resolveTimeLabel(),
                       style: TextStyle(
                         fontSize: 10.sp,
-                        color: AppColors.onSurfaceVariant,
+                        color: context.colors.onSurfaceVariant,
                       ),
                     ),
                   ],

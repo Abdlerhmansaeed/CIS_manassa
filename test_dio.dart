@@ -19,6 +19,6 @@ void main() async {
     File('response.bin').writeAsBytesSync(response.data.toString().codeUnits);
     print('Done writing response.bin');
   } catch (e) {
-    print('Error: ' + e.toString());
+    print('Error: $e');
   }
 }

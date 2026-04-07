@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:resposive_xx/responsive/responsive.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'package:mansaa_app/features/home/presentation/cubit/home_display_data.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 /// Pure renderer — receives pre-computed [WeekDayData] from [HomeCubit].
 /// Contains zero business logic, date arithmetic, or epoch conversions.
@@ -29,7 +29,7 @@ class WeeklyScheduleWidget extends StatelessWidget {
                 fontSize: 12.sp,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1.5,
-                color: AppColors.onSurfaceVariant,
+                color: context.colors.onSurfaceVariant,
               ),
             ),
             Text(
@@ -37,7 +37,7 @@ class WeeklyScheduleWidget extends StatelessWidget {
               style: TextStyle(
                 fontSize: 12.sp,
                 fontWeight: FontWeight.w600,
-                color: AppColors.primary,
+                color: context.colors.primary,
               ),
             ),
           ],
@@ -72,13 +72,13 @@ class _DayItemWidget extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
       decoration: BoxDecoration(
         color: day.isToday
-            ? AppColors.primary
-            : AppColors.surfaceContainerLowest,
+            ? context.colors.primary
+            : context.colors.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(16.r),
         boxShadow: day.isToday
             ? [
                 BoxShadow(
-                  color: AppColors.primary.withValues(alpha: 0.2),
+                  color: context.colors.primary.withValues(alpha: 0.2),
                   blurRadius: 10,
                   offset: const Offset(0, 4),
                 ),
@@ -103,7 +103,7 @@ class _DayItemWidget extends StatelessWidget {
               fontWeight: FontWeight.bold,
               color: day.isToday
                   ? Colors.white.withValues(alpha: 0.8)
-                  : AppColors.onSurfaceVariant,
+                  : context.colors.onSurfaceVariant,
             ),
           ),
           SizedBox(height: 4.h),
@@ -112,7 +112,7 @@ class _DayItemWidget extends StatelessWidget {
             style: TextStyle(
               fontSize: 18.sp,
               fontWeight: FontWeight.w800,
-              color: day.isToday ? Colors.white : AppColors.onSurface,
+              color: day.isToday ? Colors.white : context.colors.onSurface,
             ),
           ),
           if (day.isToday || day.dots.isNotEmpty) SizedBox(height: 4.h),

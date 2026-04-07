@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mansaa_app/core/helpers/app_states.dart';
 import 'package:mansaa_app/core/routing/app_route_names.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'package:mansaa_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:mansaa_app/features/auth/presentation/cubit/auth_state.dart';
 import 'package:mansaa_app/features/auth/presentation/widgets/login/login_form.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -74,40 +74,40 @@ class _LoginScreenState extends State<LoginScreen> {
                     width: 80,
                     height: 80,
                     decoration: BoxDecoration(
-                      color: AppColors.primaryContainer,
+                      color: context.colors.primaryContainer,
                       shape: BoxShape.circle,
                       boxShadow: [
                         BoxShadow(
-                          color: AppColors.onSurface.withOpacity(0.08),
+                          color: context.colors.onSurface.withOpacity(0.08),
                           blurRadius: 48,
                           offset: const Offset(0, 24),
                         ),
                       ],
                     ),
                     alignment: Alignment.center,
-                    child: const Icon(
+                    child: Icon(
                       Icons.school_outlined,
-                      color: AppColors.onPrimary,
+                      color: context.colors.onPrimary,
                       size: 40,
                     ),
                   ),
                   const SizedBox(height: 24),
-                  const Text(
+                  Text(
                     'CIS Student Hub',
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.w800,
-                      color: AppColors.onSurface,
+                      color: context.colors.onSurface,
                       letterSpacing: -0.5,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
+                  Text(
                     'Your academic life, simplified.',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.onSurfaceVariant,
+                      color: context.colors.onSurfaceVariant,
                     ),
                   ),
                   const SizedBox(height: 40),
@@ -136,23 +136,23 @@ class _LoginScreenState extends State<LoginScreen> {
                                     shouldRememberMe: value,
                                   );
                                 },
-                                activeColor: AppColors.primary,
-                                activeTrackColor: AppColors.primary.withOpacity(
+                                activeColor: context.colors.primary,
+                                activeTrackColor: context.colors.primary.withOpacity(
                                   0.2,
                                 ),
-                                inactiveThumbColor: AppColors.onSurfaceVariant,
+                                inactiveThumbColor: context.colors.onSurfaceVariant,
                                 inactiveTrackColor:
-                                    AppColors.surfaceContainerHighest,
+                                    context.colors.surfaceContainerHighest,
                               );
                             },
                           ),
                           const SizedBox(width: 8),
-                          const Text(
+                          Text(
                             'Remember Me',
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
-                              color: AppColors.onSurfaceVariant,
+                              color: context.colors.onSurfaceVariant,
                             ),
                           ),
                         ],
@@ -161,12 +161,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: () {
                           context.pushNamed(AppRouteNames.getPasswordsScreen);
                         },
-                        child: const Text(
+                        child: Text(
                           'Forgot Password? Get Access',
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
-                            color: AppColors.primaryContainer,
+                            color: context.colors.primaryContainer,
                           ),
                         ),
                       ),

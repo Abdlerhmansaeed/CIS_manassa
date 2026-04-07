@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:resposive_xx/responsive/responsive.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'course_item_widget.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class MyCoursesWidget extends StatelessWidget {
   const MyCoursesWidget({super.key});
@@ -20,7 +20,7 @@ class MyCoursesWidget extends StatelessWidget {
                 fontSize: 12.sp,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1.5,
-                color: AppColors.onSurfaceVariant,
+                color: context.colors.onSurfaceVariant,
               ),
             ),
             TextButton(
@@ -35,7 +35,7 @@ class MyCoursesWidget extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.primary,
+                  color: context.colors.primary,
                 ),
               ),
             ),
@@ -47,12 +47,12 @@ class MyCoursesWidget extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           child: Row(
             children: [
-              const CourseItemWidget(
+              CourseItemWidget(
                 code: 'CS333',
                 title: 'Operating Systems',
                 subtitle: 'Section A • Dr. Sarah',
                 progress: 65,
-                themeColor: AppColors.primary,
+                themeColor: context.colors.primary,
                 hasNotification: true,
               ),
               SizedBox(width: 16.w),

@@ -31,11 +31,35 @@ class AppColors {
   static const Color error = Color(0xFFD32F2F);
   static const Color errorContainer = Color(0xFFFFCDD2);
 
-  // Fallbacks for dark theme if needed (keeping existing)
-  static const Color darkPrimary = Color(0xFFE02020);
-  static const Color darkSecondary = Color(0xFFA89880);
-  static const Color darkTertiary = Color(0xFF382820);
-  static const Color darkNeutral = Color(0xFF000000);
+  // The Modern Archivist (Dark Theme)
+  static const Color darkPrimary = Color(0xFFE02020); // The Pulse
+  static const Color darkPrimaryLight = Color(0xFFFFB4AA); // For gradients
+  static const Color darkPrimaryContainer = Color(0xFFE02020);
+  static const Color darkOnPrimaryContainer = Color(0xFFFFF8F7);
+
+  static const Color darkSurface = Color(0xFF1B110A); // The Foundation
+  static const Color darkOnSurface = Color(0xFFF3DFD2); // The Ink
+  static const Color darkOnSurfaceVariant = Color(0xFFE7BDB7); // Body text
+
+  static const Color darkSecondary = Color(0xFFD6C4AA); // The Vellum
+  static const Color darkTertiaryContainer = Color(0xFF846E64);
+
+  static const Color darkSurfaceContainerLowest = Color(
+    0xFF1C1008,
+  ); // Input Fields Container/Recessed
+  static const Color darkSurfaceContainerLow = Color(
+    0xff000000,
+  ); // Background Sections
+  static const Color darkSurfaceContainer = Color(0xFF281D15);
+  static const Color darkSurfaceContainerHigh = Color(
+    0xFF33281F,
+  ); // Interactive Cards
+  static const Color darkSurfaceContainerHighest = Color(
+    0xFF42372E,
+  ); // Lifted (assuming value, to fit gradient)
+
+  static const Color darkOutlineVariant = Color(0xFF4A3828); // Input Border
+  static const Color darkOutlineVariantAlt = Color(0xFF5D3F3C); // Ghost Border
 
   // Course Header Defaults
   static const List<Color> courseHeaderColors = [

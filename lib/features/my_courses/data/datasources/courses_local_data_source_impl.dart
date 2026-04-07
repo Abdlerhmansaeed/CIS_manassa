@@ -7,6 +7,7 @@ import 'package:mansaa_app/core/local_storage/local_storage_client.dart';
 import 'package:mansaa_app/features/my_courses/data/datasources/courses_local_data_source.dart';
 import 'package:mansaa_app/features/my_courses/data/models/student_courese_response/student_courese_response.dart';
 
+@Named("oldCoursesLocalDataSource")
 @Injectable(as: CoursesLocalDataSource)
 class CoursesLocalDataSourceImpl implements CoursesLocalDataSource {
   final LocalStorageClient _storageClient;

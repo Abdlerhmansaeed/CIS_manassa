@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:resposive_xx/responsive_x.dart';
-import '../../../../core/theme/app_colors.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class NotificationCard extends StatelessWidget {
   final String title;
@@ -33,13 +33,13 @@ class NotificationCard extends StatelessWidget {
           padding:  EdgeInsets.all(20.r),
           decoration: BoxDecoration(
             color: isUnread
-                ? AppColors.surfaceContainerLowest
-                : AppColors.surfaceContainerHighest,
+                ? context.colors.surfaceContainerLowest
+                : context.colors.surfaceContainerHighest,
             borderRadius: BorderRadius.circular(16.r),
             border: isUnread
                 ? Border(
                     left: BorderSide(
-                    color: AppColors.primaryContainer.withAlpha(51), // 20% opacity
+                    color: context.colors.primaryContainer.withAlpha(51), // 20% opacity
                     width: 4.w,
                   ))
                 : null,
@@ -82,7 +82,7 @@ class NotificationCard extends StatelessWidget {
                             title,
                             style: Theme.of(context).textTheme.titleSmall?.copyWith(
                                   fontWeight: FontWeight.bold,
-                                  color: AppColors.onSurface,
+                                  color: context.colors.onSurface,
                                 ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -92,7 +92,7 @@ class NotificationCard extends StatelessWidget {
                         Text(
                           time,
                           style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                                color: AppColors.onSurfaceVariant,
+                                color: context.colors.onSurfaceVariant,
                                 fontWeight: FontWeight.w500,
                               ),
                         ),
@@ -102,7 +102,7 @@ class NotificationCard extends StatelessWidget {
                     Text(
                       subtitle,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.secondary,
+                            color: context.colors.secondary,
                           ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -115,8 +115,8 @@ class NotificationCard extends StatelessWidget {
                 Container(
                   width: 8.w,
                   height: 8.h,
-                  decoration: const BoxDecoration(
-                    color: AppColors.primary,
+                  decoration: BoxDecoration(
+                    color: context.colors.primary,
                     shape: BoxShape.circle,
                   ),
                 ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mansaa_app/core/theme/app_colors.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class ForgetPasswordBlobHeader extends StatelessWidget {
   const ForgetPasswordBlobHeader({super.key});
@@ -42,7 +43,7 @@ class ForgetPasswordBlobHeader extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                color: AppColors.surfaceContainerLowest.withOpacity(0.9),
+                color: context.colors.surfaceContainerLowest.withOpacity(0.9),
                 shape: BoxShape.circle,
                 border: Border.all(color: Colors.white.withOpacity(0.2)),
                 boxShadow: const [
@@ -53,9 +54,9 @@ class ForgetPasswordBlobHeader extends StatelessWidget {
                   ),
                 ],
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.security_rounded,
-                color: AppColors.primary,
+                color: context.colors.primary,
                 size: 48,
               ),
             ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mansaa_app/core/helpers/date_helper.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'package:mansaa_app/features/home/data/models/quizezs_response/quiz.dart';
 import 'package:resposive_xx/responsive/responsive.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class QuizDetailsBottomSheet extends StatelessWidget {
   final Quiz quiz;
@@ -13,7 +13,7 @@ class QuizDetailsBottomSheet extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppColors.surfaceContainerLowest,
+        color: context.colors.surfaceContainerLowest,
         borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
       ),
       child: SafeArea(
@@ -44,13 +44,13 @@ class QuizDetailsBottomSheet extends StatelessWidget {
                     width: 56.w,
                     height: 56.w,
                     decoration: BoxDecoration(
-                      color: AppColors.primary.withValues(alpha: 0.05),
+                      color: context.colors.primary.withValues(alpha: 0.05),
                       shape: BoxShape.circle,
                     ),
                     child: Center(
                       child: Icon(
                         Icons.timer,
-                        color: AppColors.primary,
+                        color: context.colors.primary,
                         size: 28.sp,
                       ),
                     ),
@@ -66,7 +66,7 @@ class QuizDetailsBottomSheet extends StatelessWidget {
                             vertical: 2.h,
                           ),
                           decoration: BoxDecoration(
-                            border: Border.all(color: AppColors.primary),
+                            border: Border.all(color: context.colors.primary),
                             borderRadius: BorderRadius.circular(4.r),
                           ),
                           child: Text(
@@ -74,7 +74,7 @@ class QuizDetailsBottomSheet extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 10.sp,
                               fontWeight: FontWeight.bold,
-                              color: AppColors.primary,
+                              color: context.colors.primary,
                               letterSpacing: 1.2,
                             ),
                           ),
@@ -85,7 +85,7 @@ class QuizDetailsBottomSheet extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 20.sp,
                             fontWeight: FontWeight.bold,
-                            color: AppColors.onSurface,
+                            color: context.colors.onSurface,
                           ),
                         ),
                         if (quiz.course != null) ...[
@@ -95,7 +95,7 @@ class QuizDetailsBottomSheet extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
-                              color: AppColors.onSurfaceVariant,
+                              color: context.colors.onSurfaceVariant,
                             ),
                           ),
                         ],
@@ -114,8 +114,8 @@ class QuizDetailsBottomSheet extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: const Color(0xFFFFF5F5),
                     borderRadius: BorderRadius.circular(16.r),
-                    border: const Border(
-                      right: BorderSide(color: AppColors.primary, width: 3.0),
+                    border: Border(
+                      right: BorderSide(color: context.colors.primary, width: 3.0),
                     ),
                     boxShadow: [
                       BoxShadow(
@@ -135,7 +135,7 @@ class QuizDetailsBottomSheet extends StatelessWidget {
                             children: [
                               Icon(
                                 Icons.schedule,
-                                color: AppColors.primary,
+                                color: context.colors.primary,
                                 size: 20.sp,
                               ),
                               SizedBox(width: 8.w),
@@ -144,7 +144,7 @@ class QuizDetailsBottomSheet extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.bold,
-                                  color: AppColors.primary,
+                                  color: context.colors.primary,
                                 ),
                               ),
                             ],
@@ -154,7 +154,7 @@ class QuizDetailsBottomSheet extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 14.sp,
                               fontWeight: FontWeight.bold,
-                              color: AppColors.primary,
+                              color: context.colors.primary,
                             ),
                           ),
                         ],
@@ -164,7 +164,7 @@ class QuizDetailsBottomSheet extends StatelessWidget {
                         children: [
                           Icon(
                             Icons.calendar_today,
-                            color: AppColors.onSurfaceVariant,
+                            color: context.colors.onSurfaceVariant,
                             size: 20.sp,
                           ),
                           SizedBox(width: 8.w),
@@ -172,7 +172,7 @@ class QuizDetailsBottomSheet extends StatelessWidget {
                             DateHelper.formatEpochToFullDate(quiz.timeclose),
                             style: TextStyle(
                               fontSize: 14.sp,
-                              color: AppColors.onSurfaceVariant,
+                              color: context.colors.onSurfaceVariant,
                             ),
                           ),
                         ],
@@ -272,7 +272,7 @@ class QuizDetailsBottomSheet extends StatelessWidget {
                       style: TextButton.styleFrom(
                         padding: EdgeInsets.all(12.r),
 
-                        foregroundColor: AppColors.onSurfaceVariant,
+                        foregroundColor: context.colors.onSurfaceVariant,
                       ),
                       child: Text(
                         "إغلاق",

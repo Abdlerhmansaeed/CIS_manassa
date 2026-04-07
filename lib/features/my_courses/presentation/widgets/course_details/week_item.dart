@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'package:mansaa_app/features/my_courses/data/models/student_course_details_response/course_content_models.dart';
 import 'package:mansaa_app/features/my_courses/presentation/widgets/course_details/module_item.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class WeekItem extends StatefulWidget {
   const WeekItem({
@@ -41,12 +41,12 @@ class _WeekItemState extends State<WeekItem> {
       margin: const EdgeInsets.only(bottom: 16.0),
       decoration: BoxDecoration(
         color: isCurrent
-            ? AppColors.surfaceContainerLowest
-            : AppColors.surfaceContainerLow,
+            ? context.colors.surfaceContainerLowest
+            : context.colors.surfaceContainerLow,
         borderRadius: BorderRadius.circular(8.0),
         border: isCurrent
-            ? const Border(
-                left: BorderSide(color: AppColors.primaryContainer, width: 4),
+            ? Border(
+                left: BorderSide(color: context.colors.primaryContainer, width: 4),
               )
             : null,
         boxShadow: isCurrent
@@ -98,15 +98,15 @@ class _WeekItemState extends State<WeekItem> {
                             vertical: 4,
                           ),
                           decoration: BoxDecoration(
-                            color: AppColors.primaryContainer.withAlpha(26),
+                            color: context.colors.primaryContainer.withAlpha(26),
                             borderRadius: BorderRadius.circular(4.0),
                           ),
-                          child: const Text(
+                          child: Text(
                             'CURRENT WEEK',
                             style: TextStyle(
                               fontSize: 10,
                               fontWeight: FontWeight.w800,
-                              color: AppColors.primaryContainer,
+                              color: context.colors.primaryContainer,
                               letterSpacing: 1.2,
                             ),
                           ),
@@ -131,10 +131,10 @@ class _WeekItemState extends State<WeekItem> {
                         const SizedBox(height: 2),
                         Text(
                           '${widget.section.modules.length} modules',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.bold,
-                            color: AppColors.onSurfaceVariant,
+                            color: context.colors.onSurfaceVariant,
                             letterSpacing: 1.0,
                           ),
                         ),

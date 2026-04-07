@@ -11,5 +11,5 @@ class AppRouteNames {
   static const String notifications = "/notifications";
   static const String courseDetailsScreen = "/courseDetailsScreen";
   static const String splash = "/";
-  // static const String notifications = "";
+  static const String academicScheduleScreen = "/academicScheduleScreen";
 }

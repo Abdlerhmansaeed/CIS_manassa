@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mansaa_app/core/routing/app_route_names.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'package:mansaa_app/features/auth/data/models/credential_response/credential_response.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class CredentialsRetrievedScreen extends StatefulWidget {
   final CredentialResponse credentials;
@@ -22,12 +22,12 @@ class _CredentialsRetrievedScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.surfaceContainer,
+      backgroundColor: context.colors.surfaceContainer,
       appBar: AppBar(
         title: const Text('Credentials'),
         backgroundColor: Colors.transparent,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppColors.primaryContainer),
+          icon: Icon(Icons.arrow_back, color: context.colors.primaryContainer),
           onPressed: () {
             if (context.canPop()) context.pop();
           },
@@ -60,20 +60,20 @@ class _CredentialsRetrievedScreenState
         Container(
           width: 96,
           height: 96,
-          decoration: const BoxDecoration(
-            color: AppColors.surfaceContainerHighest,
+          decoration: BoxDecoration(
+            color: context.colors.surfaceContainerHighest,
             shape: BoxShape.circle,
           ),
           alignment: Alignment.center,
           child: const Icon(Icons.check_circle, color: Colors.green, size: 64),
         ),
         const SizedBox(height: 24),
-        const Text(
+        Text(
           'Credentials Retrieved! 🎉',
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.w800,
-            color: AppColors.onSurface,
+            color: context.colors.onSurface,
           ),
           textAlign: TextAlign.center,
         ),
@@ -81,8 +81,8 @@ class _CredentialsRetrievedScreenState
           const SizedBox(height: 8),
           Text(
             creds.studentName!,
-            style: const TextStyle(
-              color: AppColors.onSurfaceVariant,
+            style: TextStyle(
+              color: context.colors.onSurfaceVariant,
               fontSize: 16,
               fontWeight: FontWeight.w600,
             ),
@@ -90,9 +90,9 @@ class _CredentialsRetrievedScreenState
           ),
         ],
         const SizedBox(height: 12),
-        const Text(
+        Text(
           'Save these details and log in to get started.',
-          style: TextStyle(color: AppColors.onSurfaceVariant, fontSize: 14),
+          style: TextStyle(color: context.colors.onSurfaceVariant, fontSize: 14),
           textAlign: TextAlign.center,
         ),
       ],
@@ -104,7 +104,7 @@ class _CredentialsRetrievedScreenState
     return Container(
       padding: const EdgeInsets.all(32),
       decoration: BoxDecoration(
-        color: AppColors.surfaceContainerLowest,
+        color: context.colors.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(24),
         boxShadow: const [
           BoxShadow(
@@ -121,18 +121,18 @@ class _CredentialsRetrievedScreenState
             value: creds.studentId,
             onCopy: () => _copyToClipboard(context, creds.studentId),
           ),
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(vertical: 24.0),
-            child: Divider(color: AppColors.surfaceContainerHighest, height: 1),
+            child: Divider(color: context.colors.surfaceContainerHighest, height: 1),
           ),
           _buildCredentialRow(
             label: 'USERNAME (EMAIL)',
             value: creds.username,
             onCopy: () => _copyToClipboard(context, creds.username),
           ),
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(vertical: 24.0),
-            child: Divider(color: AppColors.surfaceContainerHighest, height: 1),
+            child: Divider(color: context.colors.surfaceContainerHighest, height: 1),
           ),
           _buildCredentialRow(
             label: 'PASSWORD',
@@ -165,11 +165,11 @@ class _CredentialsRetrievedScreenState
             children: [
               Text(
                 label,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1.5,
-                  color: AppColors.onSurfaceVariant,
+                  color: context.colors.onSurfaceVariant,
                 ),
               ),
               const SizedBox(height: 4),
@@ -178,7 +178,7 @@ class _CredentialsRetrievedScreenState
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.onSurface,
+                  color: context.colors.onSurface,
                   letterSpacing: isPassword && obscurePassword ? 4.0 : null,
                 ),
                 overflow: TextOverflow.ellipsis,
@@ -194,12 +194,12 @@ class _CredentialsRetrievedScreenState
                 onPressed: onToggleVisibility,
                 icon: Icon(
                   obscurePassword ? Icons.visibility : Icons.visibility_off,
-                  color: AppColors.secondary,
+                  color: context.colors.secondary,
                 ),
               ),
             IconButton(
               onPressed: onCopy,
-              icon: const Icon(Icons.content_copy, color: AppColors.secondary),
+              icon: Icon(Icons.content_copy, color: context.colors.secondary),
             ),
           ],
         ),
@@ -216,14 +216,14 @@ class _CredentialsRetrievedScreenState
             onPressed: () => context.go(AppRouteNames.login),
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 20),
-              backgroundColor: AppColors.primaryContainer,
+              backgroundColor: context.colors.primaryContainer,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(32),
               ),
-              shadowColor: AppColors.primaryContainer.withOpacity(0.2),
+              shadowColor: context.colors.primaryContainer.withOpacity(0.2),
               elevation: 8,
             ),
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
@@ -231,11 +231,11 @@ class _CredentialsRetrievedScreenState
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: AppColors.onPrimary,
+                    color: context.colors.onPrimary,
                   ),
                 ),
                 SizedBox(width: 8),
-                Icon(Icons.arrow_forward, color: AppColors.onPrimary, size: 20),
+                Icon(Icons.arrow_forward, color: context.colors.onPrimary, size: 20),
               ],
             ),
           ),
@@ -245,20 +245,20 @@ class _CredentialsRetrievedScreenState
           onPressed: () {
             if (context.canPop()) context.pop();
           },
-          icon: const Icon(
+          icon: Icon(
             Icons.chevron_left,
-            color: AppColors.onSurfaceVariant,
+            color: context.colors.onSurfaceVariant,
             size: 20,
           ),
-          label: const Text(
+          label: Text(
             'Go back',
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: AppColors.onSurfaceVariant,
+              color: context.colors.onSurfaceVariant,
             ),
           ),
-          style: TextButton.styleFrom(foregroundColor: AppColors.primary),
+          style: TextButton.styleFrom(foregroundColor: context.colors.primary),
         ),
       ],
     );

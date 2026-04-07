@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:resposive_xx/responsive_x.dart';
-import '../../../../core/theme/app_colors.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class NotificationSectionHeader extends StatelessWidget {
   final String title;
@@ -22,14 +22,14 @@ class NotificationSectionHeader extends StatelessWidget {
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
                   fontWeight: FontWeight.w800,
                   letterSpacing: 1.2,
-                  color: AppColors.onSurfaceVariant,
+                  color: context.colors.onSurfaceVariant,
                 ),
           ),
           SizedBox(width: 16.w),
           Expanded(
             child: Container(
               height: 1.h,
-              color: AppColors.outline.withAlpha(76), // 30% opacity
+              color: context.colors.outline.withAlpha(76), // 30% opacity
             ),
           ),
         ],

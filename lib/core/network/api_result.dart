@@ -12,7 +12,7 @@ class ApiResult<T> {
     required R Function(String error) onFailure,
   }) {
     if (data != null) {
-      return onSuccess(data!);
+      return onSuccess(data as T);
     } else {
       return onFailure(error!);
     }

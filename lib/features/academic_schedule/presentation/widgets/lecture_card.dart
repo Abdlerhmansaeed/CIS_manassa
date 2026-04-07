@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'package:mansaa_app/features/academic_schedule/data/models/schedule_item_model.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class LectureCard extends StatelessWidget {
   final ScheduleItemModel item;
   final Color accentColor;
 
-  const LectureCard({
+  LectureCard({
     super.key,
     required this.item,
     this.accentColor = AppColors.primary,
@@ -27,13 +28,13 @@ class LectureCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
-        color: AppColors.surfaceContainerLowest,
+        color: context.colors.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: AppColors.onSurface.withOpacity(0.04),
+            color: context.colors.onSurface.withOpacity(0.04),
             blurRadius: 16,
-            offset: const Offset(0, 4),
+            offset: Offset(0, 4),
           ),
         ],
       ),
@@ -50,7 +51,7 @@ class LectureCard extends StatelessWidget {
             //     height: 4,
             //     decoration: BoxDecoration(
             //       color: themeColor,
-            //       borderRadius: const BorderRadius.only(
+            //       borderRadius: BorderRadius.only(
             //         bottomRight: Radius.circular(4),
             //       ),
             //     ),
@@ -65,14 +66,14 @@ class LectureCard extends StatelessWidget {
             //     height: 60,
             //     decoration: BoxDecoration(
             //       color: themeColor,
-            //       borderRadius: const BorderRadius.only(
+            //       borderRadius: BorderRadius.only(
             //         bottomRight: Radius.circular(4),
             //       ),
             //     ),
             //   ),
             // ),
             Padding(
-              padding: const EdgeInsets.all(20),
+              padding: EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -87,7 +88,7 @@ class LectureCard extends StatelessWidget {
                             size: 16,
                             color: themeColor,
                           ),
-                          const SizedBox(width: 6),
+                          SizedBox(width: 6),
                           Text(
                             item.period ?? "",
                             style: TextStyle(
@@ -99,41 +100,41 @@ class LectureCard extends StatelessWidget {
                         ],
                       ),
                       Container(
-                        padding: const EdgeInsets.symmetric(
+                        padding: EdgeInsets.symmetric(
                           horizontal: 8,
                           vertical: 4,
                         ),
                         decoration: BoxDecoration(
-                          color: AppColors.surfaceContainerHighest.withOpacity(
+                          color: context.colors.surfaceContainerHighest.withOpacity(
                             0.5,
                           ),
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: Text(
                           (item.type ?? "LECTURE").toUpperCase(),
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.w800,
-                            color: AppColors.onSurfaceVariant,
+                            color: context.colors.onSurfaceVariant,
                             letterSpacing: 0.5,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: 16),
 
                   // Course Name
                   Text(
                     item.subjectName ?? "",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 19,
                       fontWeight: FontWeight.w800,
-                      color: AppColors.onSurface,
+                      color: context.colors.onSurface,
                       height: 1.2,
                     ),
                   ),
-                  const SizedBox(height: 6),
+                  SizedBox(height: 6),
 
                   // Course Code and Group
                   Row(
@@ -147,9 +148,9 @@ class LectureCard extends StatelessWidget {
                         ),
                       ),
                       if (isSection) ...[
-                        const SizedBox(width: 8),
+                        SizedBox(width: 8),
                         Container(
-                          padding: const EdgeInsets.symmetric(
+                          padding: EdgeInsets.symmetric(
                             horizontal: 6,
                             vertical: 2,
                           ),
@@ -169,11 +170,11 @@ class LectureCard extends StatelessWidget {
                       ],
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: 20),
 
                   // Footer Rows: Instructor and Location
                   _buildIconDetail(Icons.person_pin, item.doctor ?? ""),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 10),
                   _buildIconDetail(Icons.location_on, item.place ?? ""),
                 ],
               ),
@@ -188,18 +189,18 @@ class LectureCard extends StatelessWidget {
     return Row(
       children: [
         Container(
-          padding: const EdgeInsets.all(4),
+          padding: EdgeInsets.all(4),
           decoration: BoxDecoration(
             color: AppColors.surfaceContainer,
             shape: BoxShape.circle,
           ),
           child: Icon(icon, size: 14, color: AppColors.onSurfaceVariant),
         ),
-        const SizedBox(width: 10),
+        SizedBox(width: 10),
         Expanded(
           child: Text(
             text,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
               color: AppColors.onSurfaceVariant,
@@ -211,11 +212,11 @@ class LectureCard extends StatelessWidget {
   }
 
   Color _getCourseColor(String code) {
-    if (code.contains("CS333")) return const Color(0xFFD32F2F); // Red
-    if (code.contains("CS361")) return const Color(0xFF1976D2); // Blue
-    if (code.contains("CS362")) return const Color(0xFF388E3C); // Green
-    if (code.contains("CS363")) return const Color(0xFF7B1FA2); // Purple
-    if (code.contains("CS371")) return const Color(0xFFF57C00); // Orange
+    if (code.contains("CS333")) return Color(0xFFD32F2F); // Red
+    if (code.contains("CS361")) return Color(0xFF1976D2); // Blue
+    if (code.contains("CS362")) return Color(0xFF388E3C); // Green
+    if (code.contains("CS363")) return Color(0xFF7B1FA2); // Purple
+    if (code.contains("CS371")) return Color(0xFFF57C00); // Orange
     return AppColors.primary;
   }
 }

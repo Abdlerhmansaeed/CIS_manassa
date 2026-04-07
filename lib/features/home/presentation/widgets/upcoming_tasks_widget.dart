@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:resposive_xx/responsive/responsive.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'package:mansaa_app/features/home/presentation/cubit/home_display_data.dart';
 import 'task_item_widget.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 /// Pure renderer — receives pre-grouped, pre-formatted tasks from [HomeCubit].
 /// Contains zero date arithmetic or business logic.
@@ -26,15 +26,15 @@ class UpcomingTasksWidget extends StatelessWidget {
             fontSize: 12.sp,
             fontWeight: FontWeight.bold,
             letterSpacing: 1.5,
-            color: AppColors.onSurfaceVariant,
+            color: context.colors.onSurfaceVariant,
           ),
         ),
         SizedBox(height: 16.h),
         ...groupedEvents.entries.expand((entry) {
           final isUrgentGroup = entry.key == 'Today';
           final indicatorColor = isUrgentGroup
-              ? AppColors.error
-              : AppColors.primary.withValues(alpha: 0.6);
+              ? context.colors.error
+              : context.colors.primary.withValues(alpha: 0.6);
 
           return [
             _GroupHeaderWidget(title: entry.key, color: indicatorColor),

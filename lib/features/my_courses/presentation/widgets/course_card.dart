@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:resposive_xx/responsive/responsive.dart';
 
 class CourseCard extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class GapIndicator extends StatelessWidget {
   final String label;
@@ -20,7 +20,7 @@ class GapIndicator extends StatelessWidget {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w800,
-                color: AppColors.onSurfaceVariant.withOpacity(0.5),
+                color: context.colors.onSurfaceVariant.withOpacity(0.5),
                 letterSpacing: 1.2,
               ),
             ),
@@ -46,7 +46,7 @@ class GapIndicator extends StatelessWidget {
               height: 1,
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  color: AppColors.onSurfaceVariant.withOpacity(0.2),
+                  color: context.colors.onSurfaceVariant.withOpacity(0.2),
                 ),
               ),
             );

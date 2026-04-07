@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class DateSelector extends StatelessWidget {
   final List<String> days;
@@ -37,21 +37,21 @@ class DateSelector extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     color: isSelected
-                        ? AppColors.primary
-                        : AppColors.surfaceContainerHighest,
+                        ? context.colors.primary
+                        : context.colors.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(20),
                     gradient: isSelected
-                        ? const LinearGradient(
+                        ? LinearGradient(
                             colors: [
-                              AppColors.primary,
-                              AppColors.primaryContainer,
+                              context.colors.primary,
+                              context.colors.primaryContainer,
                             ],
                           )
                         : null,
                     boxShadow: isSelected
                         ? [
                             BoxShadow(
-                              color: AppColors.onSurface.withOpacity(0.06),
+                              color: context.colors.onSurface.withOpacity(0.06),
                               blurRadius: 24,
                               offset: const Offset(0, 8),
                             ),
@@ -62,8 +62,8 @@ class DateSelector extends StatelessWidget {
                     day,
                     style: TextStyle(
                       color: isSelected
-                          ? AppColors.onPrimary
-                          : AppColors.onSurfaceVariant,
+                          ? context.colors.onPrimary
+                          : context.colors.onSurfaceVariant,
                       fontSize: 14,
                       fontWeight: isSelected
                           ? FontWeight.bold
@@ -76,8 +76,8 @@ class DateSelector extends StatelessWidget {
                     margin: const EdgeInsets.only(top: 4),
                     height: 6,
                     width: 6,
-                    decoration: const BoxDecoration(
-                      color: AppColors.primary,
+                    decoration: BoxDecoration(
+                      color: context.colors.primary,
                       shape: BoxShape.circle,
                     ),
                   ),

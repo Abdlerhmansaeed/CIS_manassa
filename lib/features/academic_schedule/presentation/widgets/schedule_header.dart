@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class ScheduleHeader extends StatelessWidget {
   final String title;
@@ -20,8 +20,8 @@ class ScheduleHeader extends StatelessWidget {
         children: [
           Text(
             title,
-            style: const TextStyle(
-              color: AppColors.onSurface,
+            style: TextStyle(
+              color: context.colors.onSurface,
               fontSize: 24,
               fontWeight: FontWeight.bold,
               fontFamily: 'Plus Jakarta Sans',
@@ -31,7 +31,7 @@ class ScheduleHeader extends StatelessWidget {
           Text(
             subtitle,
             style: TextStyle(
-              color: AppColors.onSurfaceVariant.withOpacity(0.8),
+              color: context.colors.onSurfaceVariant.withOpacity(0.8),
               fontSize: 14,
               fontWeight: FontWeight.w500,
             ),

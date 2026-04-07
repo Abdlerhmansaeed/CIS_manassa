@@ -4,7 +4,6 @@ import 'package:mansaa_app/features/home/presentation/widgets/home_app_bar.dart'
 import 'package:resposive_xx/responsive/responsive.dart';
 import 'package:mansaa_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:mansaa_app/features/home/presentation/cubit/home_state.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'package:mansaa_app/core/helpers/app_states.dart';
 
 import '../widgets/welcome_section_widget.dart';
@@ -12,6 +11,7 @@ import '../widgets/weekly_schedule_widget.dart';
 import '../widgets/urgent_task_widget.dart';
 import '../widgets/upcoming_tasks_widget.dart';
 import '../widgets/my_courses_widget.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.surface,
+      // backgroundColor: context.colors.surface,
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Center(
                     child: Text(
                       state.errorMessage ?? 'Error Loading Data',
-                      style: const TextStyle(color: AppColors.error),
+                      style: TextStyle(color: context.colors.error),
                     ),
                   ),
                 );
@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         SizedBox(height: 24.h),
                       ],
-                      UpcomingTasksWidget(groupedEvents: data.groupedEvents,),
+                      UpcomingTasksWidget(groupedEvents: data.groupedEvents),
                       SizedBox(height: 24.h),
                       const MyCoursesWidget(),
                       SizedBox(height: 32.h),

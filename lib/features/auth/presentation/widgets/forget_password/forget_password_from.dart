@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mansaa_app/core/helpers/app_states.dart';
 import 'package:mansaa_app/core/routing/app_route_names.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'package:mansaa_app/core/widgets/shared_text_form_field.dart';
 import 'package:mansaa_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:mansaa_app/features/auth/presentation/cubit/auth_state.dart';
 import 'package:mansaa_app/features/auth/presentation/widgets/forget_password/step_indicator.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class ForgetPasswordForm extends StatelessWidget {
   const ForgetPasswordForm({
@@ -51,14 +51,14 @@ class ForgetPasswordForm extends StatelessWidget {
           children: [
             ForgetPasswordStepIndicator(authCubit: context.read<AuthCubit>()),
             const SizedBox(height: 32),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 16.0, bottom: 8.0),
               child: Text(
                 'Student Code',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.onSurface,
+                  color: context.colors.onSurface,
                 ),
               ),
             ),
@@ -87,14 +87,14 @@ class ForgetPasswordForm extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 16.0, bottom: 8.0),
               child: Text(
                 'National ID',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.onSurface,
+                  color: context.colors.onSurface,
                 ),
               ),
             ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:resposive_xx/responsive/responsive.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class WelcomeSectionWidget extends StatelessWidget {
   final String userName;
@@ -24,14 +24,14 @@ class WelcomeSectionWidget extends StatelessWidget {
           style: TextStyle(
             fontSize: 24.sp,
             fontWeight: FontWeight.w800,
-            color: AppColors.onSurface,
+            color: context.colors.onSurface,
           ),
         ),
         SizedBox(height: 4.h),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
           decoration: BoxDecoration(
-            color: AppColors.surfaceContainerLow,
+            color: context.colors.surfaceContainerLow,
             borderRadius: BorderRadius.circular(12.r),
           ),
           child: Row(
@@ -40,7 +40,7 @@ class WelcomeSectionWidget extends StatelessWidget {
               Icon(
                 Icons.assignment_late,
                 size: 16.sp,
-                color: AppColors.primary,
+                color: context.colors.primary,
               ),
               SizedBox(width: 8.w),
               RichText(
@@ -49,15 +49,15 @@ class WelcomeSectionWidget extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.onSurfaceVariant,
+                    color: context.colors.onSurfaceVariant,
                     fontFamily: 'Be Vietnam Pro',
                   ),
                   children: [
                     TextSpan(
                       text: '$overdueCounter overdue',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: AppColors.primary,
+                        color: context.colors.primary,
                       ),
                     ),
                   ],

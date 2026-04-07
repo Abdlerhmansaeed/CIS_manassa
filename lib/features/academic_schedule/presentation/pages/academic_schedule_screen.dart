@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mansaa_app/core/di/di.dart';
 import 'package:mansaa_app/core/helpers/app_states.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'package:mansaa_app/features/academic_schedule/data/models/schedule_item_model.dart';
 import 'package:mansaa_app/features/academic_schedule/presentation/cubit/academic_schedule_cubit.dart';
 import 'package:mansaa_app/features/academic_schedule/presentation/cubit/academic_schedule_state.dart';
@@ -16,6 +15,7 @@ import 'package:mansaa_app/features/academic_schedule/presentation/widgets/lectu
 import 'package:mansaa_app/features/academic_schedule/presentation/widgets/schedule_header.dart';
 import 'package:mansaa_app/features/academic_schedule/presentation/widgets/gap_indicator.dart';
 import 'package:resposive_xx/responsive/responsive.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class AcademicScheduleScreen extends StatefulWidget {
   const AcademicScheduleScreen({super.key});
@@ -47,15 +47,13 @@ class _AcademicScheduleScreenState extends State<AcademicScheduleScreen> {
     return BlocProvider.value(
       value: _cubit,
       child: Scaffold(
-        backgroundColor: AppColors.surface,
         appBar: AppBar(
-          backgroundColor: AppColors.surface,
           elevation: 0,
           centerTitle: false,
           title: const Text(
             "Academic Schedule",
             style: TextStyle(
-              color: AppColors.primary,
+              // color: context.colors.primary,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -71,11 +69,11 @@ class _AcademicScheduleScreenState extends State<AcademicScheduleScreen> {
                   },
                   icon: Icon(
                     state.isEditing ? Icons.close : Icons.edit_note,
-                    color: AppColors.primary,
+                    // color: context.colors.primary,
                   ),
                   label: Text(
                     state.isEditing ? "Cancel" : "Another Student",
-                    style: const TextStyle(color: AppColors.primary),
+                    // style: TextStyle(color: context.colors.primary),
                   ),
                 );
               },
@@ -123,7 +121,7 @@ class _AcademicScheduleScreenState extends State<AcademicScheduleScreen> {
                   SizedBox(height: 24.h),
                   Expanded(
                     child: items.isEmpty
-                        ? AcademicScheduleNoData()
+                        ? const AcademicScheduleNoData()
                         : ListView.builder(
                             padding: EdgeInsets.fromLTRB(
                               24.w,

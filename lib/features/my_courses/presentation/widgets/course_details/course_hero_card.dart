@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'package:mansaa_app/features/my_courses/data/models/student_courese_response/student_courese_response.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class CourseHeroCard extends StatelessWidget {
   const CourseHeroCard({super.key, required this.course});
@@ -14,14 +15,14 @@ class CourseHeroCard extends StatelessWidget {
       padding: const EdgeInsets.all(32.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.0),
-        gradient: const LinearGradient(
-          colors: [AppColors.primaryContainer, AppColors.primaryDark],
+        gradient: LinearGradient(
+          colors: [context.colors.primaryContainer, AppColors.primaryDark],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primaryContainer.withAlpha(51),
+            color: context.colors.primaryContainer.withAlpha(51),
             blurRadius: 24,
             offset: const Offset(0, 10),
           ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 // import 'package:mansaa_app/features/academic_schedule/presentation/cubit/academic_schedule_cubit.dart';
 
 class AcademicScheduleErrorStateUi extends StatelessWidget {
@@ -23,7 +23,7 @@ class AcademicScheduleErrorStateUi extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             error ?? "Failed to load schedule",
-            style: const TextStyle(color: AppColors.onSurfaceVariant),
+            style: TextStyle(color: context.colors.onSurfaceVariant),
           ),
           const SizedBox(height: 16),
           ElevatedButton(

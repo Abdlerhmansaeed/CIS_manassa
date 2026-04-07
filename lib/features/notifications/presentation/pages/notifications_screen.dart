@@ -3,6 +3,7 @@ import 'package:resposive_xx/responsive_x.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../widgets/notification_card.dart';
 import '../widgets/notification_section_header.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class NotificationsScreen extends StatelessWidget {
   const NotificationsScreen({super.key});
@@ -10,7 +11,7 @@ class NotificationsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.surface,
+      // backgroundColor: context.colors.surface,
       appBar: const _NotificationsAppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -32,13 +33,16 @@ class NotificationsScreen extends StatelessWidget {
   }
 }
 
-class _NotificationsAppBar extends StatelessWidget implements PreferredSizeWidget {
+class _NotificationsAppBar extends StatelessWidget
+    implements PreferredSizeWidget {
   const _NotificationsAppBar();
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColors.surfaceContainer.withAlpha(204), // 80% opacity
+      // backgroundColor: context.colors.surfaceContainer.withAlpha(
+      //   204,
+      // ), // 80% opacity
       elevation: 0,
       scrolledUnderElevation: 0,
       automaticallyImplyLeading: false,
@@ -48,23 +52,24 @@ class _NotificationsAppBar extends StatelessWidget implements PreferredSizeWidge
           Row(
             children: [
               IconButton(
-                icon: Icon(Icons.arrow_back, color: AppColors.onSurface, size: 24.r),
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: context.colors.onSurface,
+                  size: 24.r,
+                ),
                 onPressed: () => Navigator.of(context).pop(),
               ),
               SizedBox(width: 8.w),
               Text(
                 'Notifications',
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.onSurface,
-                    ),
+                  fontWeight: FontWeight.bold,
+                  color: context.colors.onSurface,
+                ),
               ),
             ],
           ),
-          TextButton(
-            onPressed: () {},
-            child: const Text('Mark all as read'),
-          ),
+          TextButton(onPressed: () {}, child: const Text('Mark all as read')),
         ],
       ),
     );
@@ -81,12 +86,12 @@ class _TodayNotifications extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const NotificationCard(
+        NotificationCard(
           title: 'DEADLINE REMINDER',
           subtitle: 'Sheet 1 OS due in 2 hours',
           time: '9:45 AM',
           iconData: Icons.error,
-          iconColor: AppColors.primary,
+          iconColor: context.colors.primary,
           iconBackgroundColor: Color(0x1AA0000A), // primary at 10%
           isUnread: true,
         ),
@@ -144,4 +149,4 @@ class _YesterdayNotifications extends StatelessWidget {
       ],
     );
   }
-}
+}

@@ -18,6 +18,7 @@ import 'package:mansaa_app/features/my_courses/presentation/pages/my_courses_scr
 import 'package:mansaa_app/features/my_courses/data/models/student_courese_response/student_courese_response.dart';
 import 'package:mansaa_app/features/notifications/presentation/cubit/notifications_cubit.dart';
 import 'package:mansaa_app/features/notifications/presentation/pages/notifications_screen.dart';
+import 'package:mansaa_app/features/profile/presentation/pages/profile_screen.dart';
 import 'package:mansaa_app/features/splash/splash_screen.dart';
 
 class AppRouter {
@@ -74,7 +75,8 @@ class AppRouter {
         name: AppRouteNames.notifications,
         builder: (context, state) => BlocProvider(
           create: (context) => getIt<NotificationsCubit>(),
-          child: const NotificationsScreen()),
+          child: const NotificationsScreen(),
+        ),
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
@@ -96,8 +98,8 @@ class AppRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: AppRouteNames.profile,
-                name: AppRouteNames.profile,
+                path: AppRouteNames.academicScheduleScreen,
+                name: AppRouteNames.academicScheduleScreen,
                 builder: (context, state) => BlocProvider(
                   create: (context) => getIt<AcademicScheduleCubit>(),
                   child: const AcademicScheduleScreen(),
@@ -120,9 +122,9 @@ class AppRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: AppRouteNames.settings,
-                name: AppRouteNames.settings,
-                builder: (context, state) => const HomeScreen(),
+                path: AppRouteNames.profile,
+                name: AppRouteNames.profile,
+                builder: (context, state) => const ProfileScreen(),
               ),
             ],
           ),

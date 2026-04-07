@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:resposive_xx/responsive/responsive.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class UrgentTaskWidget extends StatelessWidget {
   final String deadlineText;
@@ -79,7 +79,7 @@ class UrgentTaskWidget extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 18.sp,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.onSurface,
+                  color: context.colors.onSurface,
                 ),
               ),
               SizedBox(height: 2.h),
@@ -87,21 +87,21 @@ class UrgentTaskWidget extends StatelessWidget {
                 subtitle,
                 style: TextStyle(
                   fontSize: 14.sp,
-                  color: AppColors.onSurfaceVariant,
+                  color: context.colors.onSurfaceVariant,
                 ),
               ),
               SizedBox(height: 16.h),
               ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
+                  backgroundColor: context.colors.primary,
                   foregroundColor: Colors.white,
                   minimumSize: Size(double.infinity, 48.h),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(24.r),
                   ),
                   elevation: 2,
-                  shadowColor: AppColors.primary.withOpacity(0.2),
+                  shadowColor: context.colors.primary.withOpacity(0.2),
                 ),
                 child: Text(
                   'Submit Now',
