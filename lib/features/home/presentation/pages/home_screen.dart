@@ -69,12 +69,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      WelcomeSectionWidget(
-                        userName: 'Ahmed',
-                        tasksDueCounter: data.upcomingCount,
-                        overdueCounter: data.overdueCount,
-                      ),
-                      SizedBox(height: 24.h),
+
+                      /// TODO: WELCOME SECTION : commented For now
+                      // WelcomeSectionWidget(
+                      //   userName: 'Ahmed',
+                      //   tasksDueCounter: data.upcomingCount,
+                      //   overdueCounter: data.overdueCount,
+                      // ),
+                      // SizedBox(height: 24.h),
                       WeeklyScheduleWidget(
                         weekDays: data.weekDays,
                         monthLabel: data.monthLabel,

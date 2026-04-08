@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mansaa_app/core/extensions/theme_extension.dart';
+import 'package:mansaa_app/core/theme/app_colors.dart';
 
 class DateSelector extends StatelessWidget {
   final List<String> days;
@@ -62,7 +63,7 @@ class DateSelector extends StatelessWidget {
                     day,
                     style: TextStyle(
                       color: isSelected
-                          ? context.colors.onPrimary
+                          ? Colors.white
                           : context.colors.onSurfaceVariant,
                       fontSize: 14,
                       fontWeight: isSelected

@@ -33,7 +33,7 @@ class _MyCoursesScreenState extends State<MyCoursesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.colors.surface,
+      // backgroundColor: context.colors.surface,
       body: SafeArea(
         child: BlocConsumer<CoursesCubit, CoursesState>(
           listener: _onStateChanged,

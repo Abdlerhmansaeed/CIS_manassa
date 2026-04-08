@@ -66,6 +66,7 @@ class AuthCubit extends Cubit<AuthState> {
               await _userSession.saveSession(
                 token: data.token ?? "",
                 userId: siteInfo.userid ?? 0,
+                userName: siteInfo.fullname,
               );
 
               emit(

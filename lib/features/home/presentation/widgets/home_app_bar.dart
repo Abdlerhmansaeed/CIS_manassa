@@ -58,15 +58,15 @@ class HomeAppBar extends StatelessWidget {
                       color: context.colors.primaryContainer,
                     ),
                   ),
-                  Text(
-                    'AHMED\'S PORTAL',
-                    style: TextStyle(
-                      fontSize: 10.sp,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: 1.5,
-                      color: context.colors.onSurfaceVariant.withOpacity(0.7),
-                    ),
-                  ),
+                  // Text(
+                  //   'AHMED\'S PORTAL',
+                  //   style: TextStyle(
+                  //     fontSize: 10.sp,
+                  //     fontWeight: FontWeight.w800,
+                  //     letterSpacing: 1.5,
+                  //     color: context.colors.onSurfaceVariant.withOpacity(0.7),
+                  //   ),
+                  // ),
                 ],
               ),
             ],

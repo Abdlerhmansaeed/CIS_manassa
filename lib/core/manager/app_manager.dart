@@ -39,7 +39,6 @@ class AppManager extends Cubit<AppManagerState> {
   }
 
   void changeTheme(ThemeMode themeMode) {
-    // final themejson = jsonEncode(themeMode);
     _storageClient.saveData(key: AppKeys.themeMode, value: themeMode.name);
     emit(state.copyWith(themeMode: themeMode));
   }

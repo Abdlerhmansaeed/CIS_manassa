@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mansaa_app/core/di/di.dart';
+import 'package:mansaa_app/core/network/session/user_session.dart';
 import 'package:resposive_xx/responsive/responsive.dart';
 import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
@@ -20,7 +22,7 @@ class WelcomeSectionWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Good morning, $userName',
+          'Good morning, ${getIt<UserSession>().userName()?.split(" ").first}${getIt<UserSession>().userName()?.split("").last}',
           style: TextStyle(
             fontSize: 24.sp,
             fontWeight: FontWeight.w800,
