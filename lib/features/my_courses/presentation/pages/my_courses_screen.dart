@@ -10,6 +10,7 @@ import 'package:mansaa_app/features/my_courses/presentation/widgets/course_card.
 import 'package:mansaa_app/features/my_courses/presentation/widgets/courses_error_view.dart';
 import 'package:mansaa_app/features/my_courses/presentation/widgets/courses_shimmer.dart';
 import 'package:resposive_xx/responsive/responsive_extensions.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 // ─────────────────────────────────────────────
 // Screen
@@ -32,7 +33,7 @@ class _MyCoursesScreenState extends State<MyCoursesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.surface,
+      // backgroundColor: context.colors.surface,
       body: SafeArea(
         child: BlocConsumer<CoursesCubit, CoursesState>(
           listener: _onStateChanged,
@@ -41,7 +42,7 @@ class _MyCoursesScreenState extends State<MyCoursesScreen> {
           listenWhen: (previous, current) =>
               previous.coursesState != current.coursesState,
           builder: (context, state) => RefreshIndicator(
-            color: AppColors.primary,
+            color: context.colors.primary,
             onRefresh: context.read<CoursesCubit>().refreshCourses,
             child: _CoursesScrollView(state: state),
           ),
@@ -60,7 +61,7 @@ class _MyCoursesScreenState extends State<MyCoursesScreen> {
       SnackBar(
         content: Text(state.errorMessage ?? 'Could not refresh courses'),
         behavior: SnackBarBehavior.floating,
-        backgroundColor: AppColors.primary,
+        backgroundColor: context.colors.primary,
       ),
     );
   }
@@ -112,7 +113,7 @@ class _CoursesTitle extends StatelessWidget {
           style: TextStyle(
             fontSize: 22.sp,
             fontWeight: FontWeight.w900,
-            color: Colors.black,
+            // color: Colors.black,
             letterSpacing: -1,
           ),
         ),
@@ -123,7 +124,7 @@ class _CoursesTitle extends StatelessWidget {
             style: TextStyle(
               fontSize: 16.sp,
               fontWeight: FontWeight.w500,
-              color: Colors.grey[600],
+              // color: Colors.grey[600],
             ),
           ),
         ],
@@ -175,7 +176,9 @@ class _CoursesListSliver extends StatelessWidget {
           return CourseCard(
             code: course.shortname ?? 'N/A',
             title: course.fullname ?? 'Untitled',
-            headerColor: AppColors.courseHeaderColors[index % AppColors.courseHeaderColors.length],
+            headerColor:
+                AppColors.courseHeaderColors[index %
+                    AppColors.courseHeaderColors.length],
             courseImage: course.courseimage,
             onTap: () {
               context.pushNamed(
@@ -189,5 +192,3 @@ class _CoursesListSliver extends StatelessWidget {
     );
   }
 }
-
-

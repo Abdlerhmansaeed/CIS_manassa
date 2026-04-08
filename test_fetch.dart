@@ -1,26 +1,26 @@
 import 'package:dio/dio.dart';
 
 void main() async {
-  final _dio = Dio();
-  _dio.interceptors.add(LogInterceptor(requestBody: true));
+  final dio = Dio();
+  dio.interceptors.add(LogInterceptor(requestBody: true));
   
-  final _data = {
+  final data = {
     'username': 'C2303024',
     'password': 'Vus00893',
     'service': 'moodle_mobile_app',
   };
   
-  final _options = Options(
+  final options = Options(
     method: 'POST',
     contentType: 'application/x-www-form-urlencoded',
   ).compose(
-    _dio.options,
+    dio.options,
     'https://lmscis.com/login/token.php',
-    data: _data,
+    data: data,
   );
   
   try {
-    final response = await _dio.fetch(_options);
+    final response = await dio.fetch(options);
     print("Response data: \${response.data}");
   } catch (e) {
     print("Error: \$e");

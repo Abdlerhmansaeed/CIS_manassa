@@ -8,6 +8,7 @@ class UserSession {
 
   String? _token;
   int? _userId;
+  String? _userName;
 
   UserSession(this._storageClient);
 
@@ -26,13 +27,17 @@ class UserSession {
   }
 
   /// Save session to memory and secure storage.
-  Future<void> saveSession({required String token, required int userId}) async {
+  Future<void> saveSession({required String token, required int userId, String? userName}) async {
     _token = token;
     _userId = userId;
+    _userName = userName;
 
     await Future.wait([
       _storageClient.saveSecureData(key: AppKeys.token, value: token),
-      _storageClient.saveSecureData(key: AppKeys.userId, value: userId.toString()),
+      _storageClient.saveSecureData(
+        key: AppKeys.userId,
+        value: userId.toString(),
+      ),
     ]);
   }
 
@@ -42,6 +47,8 @@ class UserSession {
   String? getToken() => _token;
 
   int? getUserId() => _userId;
+
+  String? userName() => _userName;
 
   /// Clear session from memory and secure storage.
   Future<void> clearSession() async {

@@ -3,10 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'package:mansaa_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:mansaa_app/features/auth/presentation/cubit/auth_state.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class ForgetPasswordStepIndicator extends StatelessWidget {
   final AuthCubit authCubit;
-  const ForgetPasswordStepIndicator({super.key, required this.authCubit});
+  ForgetPasswordStepIndicator({super.key, required this.authCubit});
 
   @override
   Widget build(BuildContext context) {
@@ -29,19 +30,19 @@ class ForgetPasswordStepIndicator extends StatelessWidget {
               firstChild: Container(
                 width: 64,
                 height: 1,
-                color: AppColors.surfaceContainerHighest,
-                margin: const EdgeInsets.only(bottom: 24),
+                color: context.colors.surfaceContainerHighest,
+                margin: EdgeInsets.only(bottom: 24),
               ),
               secondChild: Container(
                 width: 64,
                 height: 1,
-                color: AppColors.primary,
-                margin: const EdgeInsets.only(bottom: 24),
+                color: context.colors.primary,
+                margin: EdgeInsets.only(bottom: 24),
               ),
               crossFadeState: state.getAccessForCredentialsStep == 0
                   ? CrossFadeState.showFirst
                   : CrossFadeState.showSecond,
-              duration: const Duration(milliseconds: 500),
+              duration: Duration(milliseconds: 500),
             ),
             _buildStepItem(
               stepNumber: "2",
@@ -74,7 +75,7 @@ class ForgetPasswordStepIndicator extends StatelessWidget {
                     BoxShadow(
                       color: AppColors.primary.withOpacity(0.2),
                       blurRadius: 10,
-                      offset: const Offset(0, 4),
+                      offset: Offset(0, 4),
                     ),
                   ]
                 : null,
@@ -91,7 +92,7 @@ class ForgetPasswordStepIndicator extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 8),
         Text(
           label,
           style: TextStyle(

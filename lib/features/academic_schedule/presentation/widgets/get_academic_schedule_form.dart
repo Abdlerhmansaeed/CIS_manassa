@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mansaa_app/core/helpers/app_states.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'package:mansaa_app/core/widgets/shared_text_form_field.dart';
 import 'package:mansaa_app/features/academic_schedule/presentation/cubit/academic_schedule_cubit.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class GetAcademicScheduleForm extends StatelessWidget {
   final TextEditingController _nationalIdController;
@@ -30,36 +29,36 @@ class GetAcademicScheduleForm extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Icon(
+            Icon(
               Icons.school_outlined,
               size: 80,
-              color: AppColors.primary,
+              color: context.colors.primary,
             ),
             const SizedBox(height: 24),
-            const Text(
+            Text(
               "Get Schedule",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: AppColors.onSurface,
+                color: context.colors.onSurface,
               ),
             ),
             const SizedBox(height: 12),
-            const Text(
+            Text(
               "Enter your details below to fetch your Academic Schedule.",
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16, color: AppColors.onSurfaceVariant),
+              style: TextStyle(fontSize: 16, color: context.colors.onSurfaceVariant),
             ),
             const SizedBox(height: 40),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 16.0, bottom: 8.0),
               child: Text(
                 'Student Code',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.onSurface,
+                  color: context.colors.onSurface,
                 ),
               ),
             ),
@@ -82,14 +81,14 @@ class GetAcademicScheduleForm extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 16.0, bottom: 8.0),
               child: Text(
                 'National ID',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.onSurface,
+                  color: context.colors.onSurface,
                 ),
               ),
             ),
@@ -118,7 +117,7 @@ class GetAcademicScheduleForm extends StatelessWidget {
                     },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 18),
-                backgroundColor: AppColors.primary,
+                backgroundColor: context.colors.primary,
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),

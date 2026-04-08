@@ -45,10 +45,23 @@ import '../../features/auth/domain/usecases/get_user_site_info_use_case.dart'
     as _i142;
 import '../../features/auth/domain/usecases/login_use_case.dart' as _i37;
 import '../../features/auth/presentation/cubit/auth_cubit.dart' as _i117;
+import '../../features/home/data/datasources/home_remote_data_source.dart'
+    as _i362;
+import '../../features/home/data/datasources/home_remote_data_source_impl.dart'
+    as _i819;
+import '../../features/home/data/repositories/home_repo_impl.dart' as _i333;
+import '../../features/home/domain/repositories/home_repo.dart' as _i1021;
+import '../../features/home/domain/usecases/get_quiz_detailes_use_case.dart'
+    as _i409;
+import '../../features/home/domain/usecases/get_student_running_events_use_case.dart'
+    as _i9;
+import '../../features/home/presentation/cubit/home_cubit.dart' as _i9;
 import '../../features/my_courses/data/datasources/courses_local_data_source.dart'
     as _i374;
 import '../../features/my_courses/data/datasources/courses_local_data_source_impl.dart'
     as _i853;
+import '../../features/my_courses/data/datasources/courses_local_data_source_impl_now.dart'
+    as _i195;
 import '../../features/my_courses/data/datasources/courses_remote_data_source.dart'
     as _i144;
 import '../../features/my_courses/data/datasources/courses_remote_data_source_impl.dart'
@@ -63,6 +76,8 @@ import '../../features/my_courses/domain/usecases/get_enrolled_courses_use_case.
     as _i408;
 import '../../features/my_courses/presentation/cubit/courses_cubit.dart'
     as _i355;
+import '../../features/notifications/presentation/cubit/notifications_cubit.dart'
+    as _i405;
 import '../local_storage/hive_client.dart' as _i969;
 import '../local_storage/hive_client_impl.dart' as _i1049;
 import '../local_storage/local_storage_client.dart' as _i401;
@@ -88,6 +103,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => localStorageModule.sharedPreferences,
       preResolve: true,
     );
+    gh.factory<_i405.NotificationsCubit>(() => _i405.NotificationsCubit());
     gh.lazySingleton<_i558.FlutterSecureStorage>(
       () => localStorageModule.secureStorage,
     );
@@ -98,6 +114,10 @@ extension GetItInjectableX on _i174.GetIt {
       ),
     );
     gh.lazySingleton<_i969.HiveClient>(() => _i1049.HiveClientImpl());
+    gh.factory<_i374.CoursesLocalDataSource>(
+      () => _i853.CoursesLocalDataSourceImpl(gh<_i401.LocalStorageClient>()),
+      instanceName: 'oldCoursesLocalDataSource',
+    );
     gh.singleton<_i120.UserSession>(
       () => _i120.UserSession(gh<_i401.LocalStorageClient>()),
     );
@@ -122,7 +142,8 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i745.AuthInterceptor(gh<_i120.UserSession>()),
     );
     gh.factory<_i374.CoursesLocalDataSource>(
-      () => _i853.CoursesLocalDataSourceImpl(gh<_i401.LocalStorageClient>()),
+      () => _i195.CoursesLocalDataSourceImplNow(gh<_i969.HiveClient>()),
+      instanceName: 'newCoursesLocalDataSource',
     );
     gh.lazySingleton<_i361.Dio>(
       () => dioClient.provideDioClient(
@@ -191,14 +212,22 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i1050.GetStudentCredentialsUseCase>(),
       ),
     );
-    gh.factory<_i142.GetUserSiteInfoUseCase>(
-      () => _i142.GetUserSiteInfoUseCase(gh<_i723.AuthRepo>()),
+    gh.factory<_i362.HomeRemoteDataSource>(
+      () => _i819.HomeRemoteDataSourceImpl(gh<_i557.ApiClient>()),
     );
     gh.factory<_i127.CoursesRepository>(
       () => _i855.CoursesRepositoryImpl(
         gh<_i144.CoursesRemoteDataSource>(),
-        gh<_i374.CoursesLocalDataSource>(),
+        gh<_i374.CoursesLocalDataSource>(
+          instanceName: 'oldCoursesLocalDataSource',
+        ),
+        gh<_i374.CoursesLocalDataSource>(
+          instanceName: 'newCoursesLocalDataSource',
+        ),
       ),
+    );
+    gh.factory<_i142.GetUserSiteInfoUseCase>(
+      () => _i142.GetUserSiteInfoUseCase(gh<_i723.AuthRepo>()),
     );
     gh.factory<_i408.GetEnrolledCoursesUseCase>(
       () => _i408.GetEnrolledCoursesUseCase(gh<_i127.CoursesRepository>()),
@@ -213,6 +242,15 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i369.GetCourseContentUseCase>(),
       ),
     );
+    gh.factory<_i1021.HomeRepo>(
+      () => _i333.HomeRepoImpl(gh<_i362.HomeRemoteDataSource>()),
+    );
+    gh.factory<_i409.GetQuizDetailsUseCase>(
+      () => _i409.GetQuizDetailsUseCase(gh<_i1021.HomeRepo>()),
+    );
+    gh.factory<_i9.GetStudentRunningEventsUseCase>(
+      () => _i9.GetStudentRunningEventsUseCase(gh<_i1021.HomeRepo>()),
+    );
     gh.factory<_i117.AuthCubit>(
       () => _i117.AuthCubit(
         gh<_i37.LoginUseCase>(),
@@ -220,6 +258,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i142.GetUserSiteInfoUseCase>(),
         gh<_i401.LocalStorageClient>(),
         gh<_i120.UserSession>(),
+      ),
+    );
+    gh.factory<_i9.HomeCubit>(
+      () => _i9.HomeCubit(
+        gh<_i9.GetStudentRunningEventsUseCase>(),
+        gh<_i409.GetQuizDetailsUseCase>(),
       ),
     );
     return this;

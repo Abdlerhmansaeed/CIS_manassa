@@ -3,6 +3,6 @@ import 'package:mansaa_app/features/academic_schedule/data/models/schedule_item_
 abstract interface class AcademicScheduleRemoteDataSource {
   Future<List<ScheduleItemModel>> getAcademicSchedule({
     String? studentCode,
-    required String studentNationalId
+    required String studentNationalId,
   });
 }

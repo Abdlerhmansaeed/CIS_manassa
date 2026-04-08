@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 import 'package:resposive_xx/responsive/responsive.dart';
 
 class CourseCard extends StatelessWidget {
@@ -26,7 +26,8 @@ class CourseCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: context.colors.surfaceContainerHighest,
+
           borderRadius: BorderRadius.circular(16.r),
           boxShadow: [
             BoxShadow(
@@ -85,7 +86,7 @@ class CourseCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 18.sp,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
+                    // color: Colors.black,
                   ),
                 ),
                 if (instructor != null) ...[
@@ -100,8 +101,7 @@ class CourseCard extends StatelessWidget {
           ),
 
           ///  [The Image is Not Working so its Commented For Now]
-          
-          
+
           // if (courseImage != null) ...[
           //   SizedBox(width: 12.w),
           //   ClipRRect(

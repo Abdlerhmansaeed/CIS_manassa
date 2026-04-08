@@ -26,7 +26,7 @@ void main() {
   group('Academic Schedule UseCases', () {
     const tNationalId = '12345678901234';
     const tStudentCode = '20210001';
-    final tCredentials = StudentCredentialsModel(
+    final tCredentials = const StudentCredentialsModel(
       studentNationalId: tNationalId,
       studentCode: tStudentCode,
     );

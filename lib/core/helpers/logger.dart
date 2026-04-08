@@ -41,7 +41,13 @@ class Logger {
     Object? error,
     StackTrace? stackTrace,
     String? tag,
-  ]) => _log(LogLevel.error, message, error: error, stackTrace: stackTrace, tag: tag);
+  ]) => _log(
+    LogLevel.error,
+    message,
+    error: error,
+    stackTrace: stackTrace,
+    tag: tag,
+  );
 
   // ─── Internal ─────────────────────────────────────────────────────────────
 
@@ -103,14 +109,14 @@ class Logger {
   static String _p(int n) => n.toString().padLeft(2, '0');
 
   static int _dartLogLevel(LogLevel l) => switch (l) {
-    LogLevel.debug   => 500,
-    LogLevel.info    => 800,
+    LogLevel.debug => 500,
+    LogLevel.info => 800,
     LogLevel.warning => 900,
-    LogLevel.error   => 1000,
+    LogLevel.error => 1000,
   };
 
   // ANSI codes
-  static const _reset  = '\x1B[0m';
+  static const _reset = '\x1B[0m';
   static const _dimRed = '\x1B[2;31m';
 }
 
@@ -124,9 +130,25 @@ class _Meta {
   final String color;
 
   static _Meta of(LogLevel level) => switch (level) {
-    LogLevel.debug   => const _Meta(label: 'DEBUG',   emoji: '🔍', color: '\x1B[37m'),     // white
-    LogLevel.info    => const _Meta(label: 'INFO',    emoji: '💬', color: '\x1B[36m'),     // cyan
-    LogLevel.warning => const _Meta(label: 'WARNING', emoji: '⚠️', color: '\x1B[33m'),    // yellow
-    LogLevel.error   => const _Meta(label: 'ERROR',   emoji: '🔥', color: '\x1B[1;31m'),  // bold red
+    LogLevel.debug => const _Meta(
+      label: 'DEBUG',
+      emoji: '🔍',
+      color: '\x1B[37m',
+    ), // white
+    LogLevel.info => const _Meta(
+      label: 'INFO',
+      emoji: '💬',
+      color: '\x1B[36m',
+    ), // cyan
+    LogLevel.warning => const _Meta(
+      label: 'WARNING',
+      emoji: '⚠️',
+      color: '\x1B[33m',
+    ), // yellow
+    LogLevel.error => const _Meta(
+      label: 'ERROR',
+      emoji: '🔥',
+      color: '\x1B[1;31m',
+    ), // bold red
   };
 }

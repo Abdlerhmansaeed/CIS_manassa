@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'package:mansaa_app/features/my_courses/data/models/student_course_details_response/course_content_models.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 // ─── Module type enum ────────────────────────────────────────────────────────
 
@@ -51,11 +52,11 @@ class ModuleItem extends StatelessWidget {
         child: _HighlightedCard(
           module: module,
           typeLabel: 'QUIZ',
-          accentColor: AppColors.primaryContainer,
+          accentColor: context.colors.primaryContainer,
           bgColor: AppColors.primarySurface,
-          labelColor: AppColors.primaryContainer,
+          labelColor: context.colors.primaryContainer,
           actionText: 'View Quiz →',
-          actionBgColor: AppColors.primaryContainer,
+          actionBgColor: context.colors.primaryContainer,
           actionTextColor: Colors.white,
           onActionTap: onActionTap,
         ),
@@ -112,7 +113,7 @@ class _ResourceCard extends StatelessWidget {
 
     return Row(
       children: [
-        _CircleIcon(icon: _icon, color: AppColors.primaryContainer),
+        _CircleIcon(icon: _icon, color: context.colors.primaryContainer),
         const SizedBox(width: 16),
         Expanded(
           child: Column(
@@ -137,10 +138,10 @@ class _ResourceCard extends StatelessWidget {
               const SizedBox(height: 4),
               Text(
                 'Resource · $fileCount ${fileCount == 1 ? 'file' : 'files'}',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.onSurfaceVariant,
+                  color: context.colors.onSurfaceVariant,
                 ),
               ),
             ],
@@ -148,7 +149,7 @@ class _ResourceCard extends StatelessWidget {
         ),
         IconButton(
           onPressed: onDownloadTap,
-          icon: const Icon(Icons.download, color: AppColors.onSurfaceVariant),
+          icon: Icon(Icons.download, color: context.colors.onSurfaceVariant),
         ),
       ],
     );
@@ -192,17 +193,17 @@ class _ForumCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 2),
-                  const Text(
+                  Text(
                     'Course forum',
                     style: TextStyle(
                       fontSize: 12,
-                      color: AppColors.onSurfaceVariant,
+                      color: context.colors.onSurfaceVariant,
                     ),
                   ),
                 ],
               ),
             ),
-            const Icon(Icons.chevron_right, color: AppColors.outline, size: 20),
+            Icon(Icons.chevron_right, color: context.colors.outline, size: 20),
           ],
         ),
       ),
@@ -267,12 +268,12 @@ class _HighlightedCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 'Check dates inside',
                 style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.onSurfaceVariant,
+                  color: context.colors.onSurfaceVariant,
                 ),
               ),
               _ActionButton(
@@ -344,7 +345,7 @@ class _NewBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
-        color: AppColors.primaryContainer,
+        color: context.colors.primaryContainer,
         borderRadius: BorderRadius.circular(4),
       ),
       child: const Text(

@@ -10,5 +10,6 @@ class AppKeys {
   static const String rememberMe = "rememberMe";
 
   static const String cachedCourses = 'cachedCourses';
+  static const String coursesBox = 'coursesBox';
   static const String coursesCachedAt = 'coursesCachedAt';
 }

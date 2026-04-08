@@ -1,0 +1,130 @@
+import 'package:flutter/material.dart';
+import 'package:resposive_xx/responsive_x.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
+
+class NotificationCard extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final String time;
+  final IconData iconData;
+  final Color iconColor;
+  final Color iconBackgroundColor;
+  final bool isUnread;
+
+  const NotificationCard({
+    super.key,
+    required this.title,
+    required this.subtitle,
+    required this.time,
+    required this.iconData,
+    required this.iconColor,
+    required this.iconBackgroundColor,
+    this.isUnread = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () {},
+        borderRadius: BorderRadius.circular(16.r),
+        child: Container(
+          padding:  EdgeInsets.all(20.r),
+          decoration: BoxDecoration(
+            color: isUnread
+                ? context.colors.surfaceContainerLowest
+                : context.colors.surfaceContainerHighest,
+            borderRadius: BorderRadius.circular(16.r),
+            border: isUnread
+                ? Border(
+                    left: BorderSide(
+                    color: context.colors.primaryContainer.withAlpha(51), // 20% opacity
+                    width: 4.w,
+                  ))
+                : null,
+            boxShadow: isUnread
+                ? [
+                    BoxShadow(
+                      color: Colors.black.withAlpha(8), // 3% opacity
+                      blurRadius: 20,
+                      offset: const Offset(0, 4),
+                    )
+                  ]
+                : null,
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 48.w,
+                height: 48.h,
+                decoration: BoxDecoration(
+                  color: iconBackgroundColor,
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  iconData,
+                  color: iconColor,
+                  size: 24.r,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            title,
+                            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: context.colors.onSurface,
+                                ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                         SizedBox(width: 8.w),
+                        Text(
+                          time,
+                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                                color: context.colors.onSurfaceVariant,
+                                fontWeight: FontWeight.w500,
+                              ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      subtitle,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: context.colors.secondary,
+                          ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+              if (isUnread) ...[
+                const SizedBox(width: 16),
+                Container(
+                  width: 8.w,
+                  height: 8.h,
+                  decoration: BoxDecoration(
+                    color: context.colors.primary,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              ]
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

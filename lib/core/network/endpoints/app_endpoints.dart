@@ -12,4 +12,8 @@ class AppEndPoints {
   static const String getCourseDetailsEndPoint = "core_course_get_contents";
 
   static const String getAcademicScheduleEndPoint = "Students_sec_lec/Search";
+  static const String getUserCalenderEventsEndPoint =
+      "core_calendar_get_action_events_by_timesort";
+
+  static const String getUserQuizzesEndPoint = "mod_quiz_get_quizzes_by_courses";
 }

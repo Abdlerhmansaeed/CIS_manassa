@@ -11,8 +11,13 @@ import 'package:mansaa_app/features/my_courses/domain/repositories/courses_repos
 class CoursesRepositoryImpl implements CoursesRepository {
   final CoursesRemoteDataSource _remoteDataSource;
   final CoursesLocalDataSource _localDataSource;
+  final CoursesLocalDataSource _localDataSourceNow;
 
-  CoursesRepositoryImpl(this._remoteDataSource, this._localDataSource);
+  CoursesRepositoryImpl(
+    this._remoteDataSource,
+    @Named("oldCoursesLocalDataSource") this._localDataSource,
+    @Named("newCoursesLocalDataSource") this._localDataSourceNow,
+  );
 
   @override
   Future<ApiResult<List<StudentCourseResponse>>> getEnrolledCourses({
@@ -20,7 +25,7 @@ class CoursesRepositoryImpl implements CoursesRepository {
   }) async {
     // Return valid cache when no forced refresh is requested
     if (!forceRefresh && await _localDataSource.isCacheValid()) {
-      final cached = await _localDataSource.getCachedCourses();
+      final cached = await _localDataSourceNow.getCachedCourses();
       if (cached != null) {
         Logger.debug('Returning cached courses (${cached.length} items)');
         return ApiResult.success(cached);
@@ -30,7 +35,7 @@ class CoursesRepositoryImpl implements CoursesRepository {
     // Fetch from API
     try {
       final courses = await _remoteDataSource.getEnrolledCourses();
-      await _localDataSource.cacheCourses(courses);
+      await _localDataSourceNow.cacheCourses(courses);
       return ApiResult.success(courses);
     } catch (e) {
       Logger.error('Failed to fetch courses from API: $e');

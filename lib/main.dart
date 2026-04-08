@@ -9,13 +9,20 @@ import 'package:resposive_xx/responsive/responsive.dart';
 import 'package:resposive_xx/responsive/responsive_extensions.dart';
 
 import 'package:hive_ce_flutter/hive_flutter.dart';
+import 'package:mansaa_app/features/my_courses/data/models/student_courese_response/student_courese_response.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
+  Hive.registerAdapter(StudentCourseResponseAdapter());
   await configureDependencies();
   Bloc.observer = AppBlocObserver();
-  runApp(const MyApp());
+  runApp(
+    BlocProvider(
+      create: (context) => getIt<AppManager>()..initUserSession(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -24,16 +31,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveWrapper(
-      child: BlocProvider(
-        create: (context) => getIt<AppManager>()..checkRememberMe(),
-        child: MaterialApp.router(
-          title: "Cis Manssaa",
-          theme: AppTheme.lightTheme,
-          darkTheme: AppTheme.darkTheme,
-          debugShowCheckedModeBanner: false,
-          routerConfig: AppRouter.router,
-          themeMode: ThemeMode.system,
-        ),
+      child: MaterialApp.router(
+        title: "Cis Manssaa",
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        debugShowCheckedModeBanner: false,
+        routerConfig: AppRouter.router,
+        themeMode: context.watch<AppManager>().state.themeMode,
       ),
     );
   }

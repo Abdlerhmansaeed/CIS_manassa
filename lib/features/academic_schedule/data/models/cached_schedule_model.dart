@@ -19,8 +19,7 @@ class CachedScheduleModel extends Equatable {
 
   Map<String, dynamic> toJson() => _$CachedScheduleModelToJson(this);
 
-  bool get isExpired =>
-      DateTime.now().difference(cachedAt).inDays >= 7;
+  bool get isExpired => DateTime.now().difference(cachedAt).inDays >= 7;
 
   @override
   List<Object?> get props => [scheduleItems, cachedAt];

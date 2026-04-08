@@ -23,7 +23,7 @@ class AcademicScheduleShimmer extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                   Container(
+                  Container(
                     width: 6,
                     decoration: const BoxDecoration(
                       color: Colors.white,
@@ -39,15 +39,31 @@ class AcademicScheduleShimmer extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(width: 150, height: 16, color: Colors.white),
+                          Container(
+                            width: 150,
+                            height: 16,
+                            color: Colors.white,
+                          ),
                           const SizedBox(height: 12),
-                          Container(width: 100, height: 14, color: Colors.white),
+                          Container(
+                            width: 100,
+                            height: 14,
+                            color: Colors.white,
+                          ),
                           const Spacer(),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Container(width: 80, height: 12, color: Colors.white),
-                              Container(width: 60, height: 12, color: Colors.white),
+                              Container(
+                                width: 80,
+                                height: 12,
+                                color: Colors.white,
+                              ),
+                              Container(
+                                width: 60,
+                                height: 12,
+                                color: Colors.white,
+                              ),
                             ],
                           ),
                         ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class AcademicScheduleNoData extends StatelessWidget {
   const AcademicScheduleNoData({super.key});
@@ -13,13 +13,13 @@ class AcademicScheduleNoData extends StatelessWidget {
           Icon(
             Icons.calendar_today_outlined,
             size: 64,
-            color: AppColors.onSurfaceVariant.withOpacity(0.3),
+            color: context.colors.onSurfaceVariant.withOpacity(0.3),
           ),
           const SizedBox(height: 16),
           Text(
             "No entries for this day",
             style: TextStyle(
-              color: AppColors.onSurfaceVariant.withOpacity(0.6),
+              color: context.colors.onSurfaceVariant.withOpacity(0.6),
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),

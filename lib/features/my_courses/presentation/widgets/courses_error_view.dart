@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'package:resposive_xx/responsive/responsive.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class CoursesErrorView extends StatelessWidget {
   final String? message;
@@ -28,7 +28,7 @@ class CoursesErrorView extends StatelessWidget {
               icon: const Icon(Icons.refresh_rounded),
               label: const Text('Retry'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primary,
+                backgroundColor: context.colors.primary,
                 foregroundColor: Colors.white,
               ),
             ),

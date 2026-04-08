@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mansaa_app/core/theme/app_colors.dart';
+import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class CourseTabsBar extends StatelessWidget {
   const CourseTabsBar({
@@ -20,7 +20,7 @@ class CourseTabsBar extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(6.0),
       decoration: BoxDecoration(
-        color: AppColors.surfaceContainerLow, // surface-container-low
+        color: context.colors.surfaceContainerLow, // surface-container-low
         borderRadius: BorderRadius.circular(9999),
       ),
       child: TabBar(
@@ -29,9 +29,9 @@ class CourseTabsBar extends StatelessWidget {
         dividerColor: Colors.transparent,
         indicatorSize: TabBarIndicatorSize.tab,
         // indicatorPadding: EdgeInsets.all(16),
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         indicator: BoxDecoration(
-          color: AppColors.surfaceContainerLowest, // surface-container-lowest
+          color: context.colors.surfaceContainerLowest, // surface-container-lowest
           borderRadius: BorderRadius.circular(9999),
           boxShadow: [
             BoxShadow(
