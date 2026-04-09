@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mansaa_app/core/helpers/app_states.dart';
+import 'package:mansaa_app/core/widgets/failure_message_mapper.dart';
 import 'package:mansaa_app/features/my_courses/data/models/student_courese_response/student_courese_response.dart';
 import 'package:mansaa_app/features/my_courses/presentation/cubit/courses_cubit.dart';
 import 'package:mansaa_app/features/my_courses/presentation/cubit/courses_state.dart';
@@ -104,7 +105,7 @@ class _CourseDetailsScreenState extends State<CourseDetailsScreen>
           if (state.courseContentsState == AppStates.failure) {
             return Center(
               child: Text(
-                state.errorMessage ?? 'Failed to load course details',
+                state.failure?.toUserMessage(context) ?? 'Failed to load course details',
                 style: const TextStyle(color: Colors.red),
               ),
             );

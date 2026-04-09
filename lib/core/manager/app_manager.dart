@@ -15,13 +15,8 @@ class AppManager extends Cubit<AppManagerState> {
   final UserSession _userSession;
 
   Future<void> initUserSession() async {
-    // These functions return Future<void>
-    await Future.wait([
-      _getUserThemeMode(),
-      _userSession.init(),
-    ]);
+    await Future.wait([_getUserThemeMode(), _userSession.init()]);
 
-    // These functions return Future<String?>
     final loginData = await Future.wait([
       _storageClient.getData(key: AppKeys.rememberMe),
       _storageClient.getSecureData(key: AppKeys.userCode),
@@ -55,8 +50,6 @@ class AppManager extends Cubit<AppManagerState> {
       } catch (_) {
         emit(state.copyWith(themeMode: ThemeMode.system));
       }
-    } else {
-      emit(state.copyWith(themeMode: ThemeMode.system));
     }
   }
 }

@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
+import 'package:mansaa_app/core/error_handling/failures/failure.dart';
 import 'package:mansaa_app/core/helpers/app_states.dart';
 import 'package:mansaa_app/features/academic_schedule/data/models/schedule_item_model.dart';
-
 import 'package:mansaa_app/features/academic_schedule/data/models/student_credentials_model.dart';
 
 class AcademicScheduleState extends Equatable {
   final List<ScheduleItemModel> scheduleItems;
   final AppStates academicScheduleState;
-  final String? error;
+  final Failure? error;
   final String selectedDay;
   final bool isEditing;
   final StudentCredentialsModel? studentCredentials;
@@ -24,7 +24,7 @@ class AcademicScheduleState extends Equatable {
   AcademicScheduleState copyWith({
     List<ScheduleItemModel>? scheduleItems,
     AppStates? academicScheduleState,
-    String? error,
+    Failure? error,
     String? selectedDay,
     bool? isEditing,
     StudentCredentialsModel? studentCredentials,

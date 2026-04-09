@@ -22,8 +22,8 @@ class GetQuizDetailsUseCase {
         );
         return ApiResult.success(currentQuizDetails ?? const Quiz());
       },
-      onFailure: (error) {
-        return ApiResult.failure(error);
+      onFailure: (failure) {
+        return ApiResult.failure(failure);
       },
     );
   }

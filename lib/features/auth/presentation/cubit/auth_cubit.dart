@@ -1,16 +1,14 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mansaa_app/core/constants/app_keys.dart';
 import 'package:mansaa_app/core/helpers/app_states.dart';
+import 'package:mansaa_app/core/helpers/logger.dart';
 import 'package:mansaa_app/core/local_storage/local_storage_client.dart';
+import 'package:mansaa_app/core/network/session/user_session.dart';
 import 'package:mansaa_app/features/auth/domain/usecases/get_credentials_use_case.dart';
+import 'package:mansaa_app/features/auth/domain/usecases/get_user_site_info_use_case.dart';
 import 'package:mansaa_app/features/auth/domain/usecases/login_use_case.dart';
 import 'package:mansaa_app/features/auth/presentation/cubit/auth_state.dart';
-
-import 'package:mansaa_app/core/network/session/user_session.dart';
-import 'package:mansaa_app/features/auth/domain/usecases/get_user_site_info_use_case.dart';
 
 @injectable
 class AuthCubit extends Cubit<AuthState> {
@@ -41,7 +39,6 @@ class AuthCubit extends Cubit<AuthState> {
 
     await loginResult.when(
       onSuccess: (data) async {
-        // Save credentials for remember me logic
         await Future.wait([
           _storageClient.saveSecureData(
             key: AppKeys.userCode,
@@ -53,10 +50,8 @@ class AuthCubit extends Cubit<AuthState> {
           ),
         ]);
 
-        // Temporarily set token to fetch site info
-        _userSession.setToken(data.token ?? "");
-
-        log("User token is ${data.token}");
+        _userSession.setToken(data.token ?? '');
+        Logger.info('User token obtained', 'AuthCubit');
 
         final siteInfoResult = await _getUserSiteInfoUseCase.call();
 
@@ -64,11 +59,10 @@ class AuthCubit extends Cubit<AuthState> {
           onSuccess: (siteInfo) async {
             if (siteInfo.userid != null) {
               await _userSession.saveSession(
-                token: data.token ?? "",
+                token: data.token ?? '',
                 userId: siteInfo.userid ?? 0,
                 userName: siteInfo.fullname,
               );
-
               emit(
                 state.copyWith(
                   loginResponse: data,
@@ -79,24 +73,25 @@ class AuthCubit extends Cubit<AuthState> {
               emit(
                 state.copyWith(
                   loginState: AppStates.failure,
-                  errorMessage: "Could not retrieve user ID",
+                  // Inline failure — userId missing is a server logic issue
+                  failure: null,
                 ),
               );
             }
           },
-          onFailure: (error) {
+          onFailure: (failure) {
             emit(
               state.copyWith(
                 loginState: AppStates.failure,
-                errorMessage: error,
+                failure: failure,
               ),
             );
           },
         );
       },
-      onFailure: (error) {
+      onFailure: (failure) {
         emit(
-          state.copyWith(loginState: AppStates.failure, errorMessage: error),
+          state.copyWith(loginState: AppStates.failure, failure: failure),
         );
       },
     );
@@ -104,7 +99,6 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> logout() async {
     await _userSession.clearSession();
-    // Navigation to login should be handled by UI or AppManager
   }
 
   Future<void> getCredentials({
@@ -127,11 +121,11 @@ class AuthCubit extends Cubit<AuthState> {
           ),
         );
       },
-      onFailure: (error) {
+      onFailure: (failure) {
         emit(
           state.copyWith(
             credentialsState: AppStates.failure,
-            errorMessage: error,
+            failure: failure,
           ),
         );
       },
@@ -149,6 +143,4 @@ class AuthCubit extends Cubit<AuthState> {
     );
     emit(state.copyWith(shouldRememberMe: shouldRememberMe));
   }
-
-  // Future<void> get
 }

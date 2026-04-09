@@ -6,7 +6,6 @@ import 'package:mansaa_app/core/manager/app_manager_state.dart';
 import 'package:mansaa_app/features/profile/presentation/widgets/segmented_control.dart';
 import 'package:mansaa_app/features/profile/presentation/widgets/settings_section.dart';
 import 'package:mansaa_app/features/profile/presentation/widgets/settings_tile.dart';
-import 'package:resposive_xx/responsive/responsive_extensions.dart';
 
 class PreferencesSection extends StatelessWidget {
   const PreferencesSection({super.key});

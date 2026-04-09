@@ -1,6 +1,8 @@
 import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:mansaa_app/core/error_handling/enums/app_error_code.dart';
+import 'package:mansaa_app/core/error_handling/failures/network_failure.dart';
 import 'package:mansaa_app/core/helpers/app_states.dart';
 import 'package:mansaa_app/core/network/session/user_session.dart';
 import 'package:mansaa_app/features/my_courses/domain/usecases/get_course_content_use_case.dart';
@@ -41,7 +43,7 @@ class CoursesCubit extends Cubit<CoursesState> {
       emit(
         state.copyWith(
           coursesState: AppStates.failure,
-          errorMessage: 'Session expired — please log in again',
+          failure: const NetworkFailure(AppErrorCode.unauthorized),
           isRefreshing: false,
         ),
       );
@@ -53,7 +55,7 @@ class CoursesCubit extends Cubit<CoursesState> {
       emit(
         state.copyWith(
           coursesState: AppStates.failure,
-          errorMessage: 'Invalid user data — please log in again',
+          failure: const NetworkFailure(AppErrorCode.unauthorized),
           isRefreshing: false,
         ),
       );
@@ -74,11 +76,11 @@ class CoursesCubit extends Cubit<CoursesState> {
           ),
         );
       },
-      onFailure: (error) {
+      onFailure: (failure) {
         emit(
           state.copyWith(
             coursesState: AppStates.failure,
-            errorMessage: error,
+            failure: failure,
             isRefreshing: false,
           ),
         );
@@ -103,11 +105,11 @@ class CoursesCubit extends Cubit<CoursesState> {
           ),
         );
       },
-      onFailure: (error) {
+      onFailure: (failure) {
         emit(
           state.copyWith(
             courseContentsState: AppStates.failure,
-            errorMessage: error,
+            failure: failure,
           ),
         );
       },

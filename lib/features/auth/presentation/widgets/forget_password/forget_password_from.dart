@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mansaa_app/core/helpers/app_states.dart';
 import 'package:mansaa_app/core/routing/app_route_names.dart';
+import 'package:mansaa_app/core/widgets/failure_message_mapper.dart';
 import 'package:mansaa_app/core/widgets/shared_text_form_field.dart';
 import 'package:mansaa_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:mansaa_app/features/auth/presentation/cubit/auth_state.dart';
@@ -35,7 +36,7 @@ class ForgetPasswordForm extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                state.errorMessage ?? 'Failed to retrieve credentials',
+                state.failure?.toUserMessage(context) ?? 'Failed to retrieve credentials',
               ),
               backgroundColor: Colors.red,
             ),

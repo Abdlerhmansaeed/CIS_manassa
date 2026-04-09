@@ -1,5 +1,8 @@
 import 'package:injectable/injectable.dart';
+import 'package:mansaa_app/core/error_handling/error_handling.dart';
+import 'package:mansaa_app/core/helpers/logger.dart';
 import 'package:mansaa_app/core/network/api_result.dart';
+import 'package:mansaa_app/core/network/dio_exception_handler.dart';
 import 'package:mansaa_app/features/academic_schedule/data/datasources/academic_schedule_local_data_source.dart';
 import 'package:mansaa_app/features/academic_schedule/data/datasources/academic_schedule_remote_data_source.dart';
 import 'package:mansaa_app/features/academic_schedule/data/models/cached_schedule_model.dart';
@@ -28,24 +31,24 @@ class AcademicScheduleRepoImpl implements AcademicScheduleRepo {
         }
       }
 
-      final response = await _remoteDataSource.getAcademicSchedule(
-        studentCode: studentCode,
-        studentNationalId: studentNationalId,
+      final response = await safeApiCall(
+        () => _remoteDataSource.getAcademicSchedule(
+          studentCode: studentCode,
+          studentNationalId: studentNationalId,
+        ),
       );
 
-      // Cache the new schedule
       await _localDataSource.saveSchedule(
         CachedScheduleModel(scheduleItems: response, cachedAt: DateTime.now()),
       );
 
       return ApiResult.success(response);
-    } catch (e) {
-      // If remote fails, try to return expired cache as fallback
+    } on AppException catch (e) {
+      Logger.error('Get schedule failed', e, null, 'ScheduleRepo');
+      // عند فشل الشبكة، نُرجع الكاش المنتهي إن وُجد
       final cached = await _localDataSource.getSchedule();
-      if (cached != null) {
-        return ApiResult.success(cached.scheduleItems);
-      }
-      return ApiResult.failure(e.toString());
+      if (cached != null) return ApiResult.success(cached.scheduleItems);
+      return ApiResult.failure(mapExceptionToFailure(e));
     }
   }
 

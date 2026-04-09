@@ -22,7 +22,9 @@ class SegmentedControl extends StatelessWidget {
       decoration: BoxDecoration(
         color: context.colors.surfaceContainer,
         borderRadius: BorderRadius.circular(20.r),
-        border: Border.all(color: context.colors.outlineVariant.withOpacity(0.1)),
+        border: Border.all(
+          color: context.colors.outlineVariant.withOpacity(0.1),
+        ),
       ),
       padding: EdgeInsets.all(2.w),
       child: Row(

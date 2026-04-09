@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mansaa_app/core/di/di.dart';
 import 'package:mansaa_app/core/helpers/app_states.dart';
+import 'package:mansaa_app/core/widgets/failure_message_mapper.dart';
 import 'package:mansaa_app/features/academic_schedule/data/models/schedule_item_model.dart';
 import 'package:mansaa_app/features/academic_schedule/presentation/cubit/academic_schedule_cubit.dart';
 import 'package:mansaa_app/features/academic_schedule/presentation/cubit/academic_schedule_state.dart';
@@ -15,7 +16,6 @@ import 'package:mansaa_app/features/academic_schedule/presentation/widgets/lectu
 import 'package:mansaa_app/features/academic_schedule/presentation/widgets/schedule_header.dart';
 import 'package:mansaa_app/features/academic_schedule/presentation/widgets/gap_indicator.dart';
 import 'package:resposive_xx/responsive/responsive.dart';
-import 'package:mansaa_app/core/extensions/theme_extension.dart';
 
 class AcademicScheduleScreen extends StatefulWidget {
   const AcademicScheduleScreen({super.key});
@@ -97,7 +97,7 @@ class _AcademicScheduleScreenState extends State<AcademicScheduleScreen> {
 
             if (state.academicScheduleState == AppStates.failure) {
               return AcademicScheduleErrorStateUi(
-                error: state.error,
+                error: state.error?.toUserMessage(context),
                 onTryAnotherStudentActionCalled: () => _cubit.toggleEdit(),
               );
             }

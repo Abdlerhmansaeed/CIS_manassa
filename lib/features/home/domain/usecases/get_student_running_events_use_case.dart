@@ -27,8 +27,8 @@ class GetStudentRunningEventsUseCase {
         );
         return ApiResult.success(userEvents);
       },
-      onFailure: (error) {
-        return ApiResult.failure(error);
+      onFailure: (failure) {
+        return ApiResult.failure(failure);
       },
     );
   }

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mansaa_app/core/widgets/failure_message_mapper.dart';
 import 'package:mansaa_app/features/home/presentation/widgets/home_app_bar.dart';
 import 'package:resposive_xx/responsive/responsive.dart';
 import 'package:mansaa_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:mansaa_app/features/home/presentation/cubit/home_state.dart';
 import 'package:mansaa_app/core/helpers/app_states.dart';
-
-import '../widgets/welcome_section_widget.dart';
 import '../widgets/weekly_schedule_widget.dart';
 import '../widgets/urgent_task_widget.dart';
 import '../widgets/upcoming_tasks_widget.dart';
@@ -51,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return SliverFillRemaining(
                   child: Center(
                     child: Text(
-                      state.errorMessage ?? 'Error Loading Data',
+                      state.failure?.toUserMessage(context) ?? 'Error Loading Data',
                       style: TextStyle(color: context.colors.error),
                     ),
                   ),

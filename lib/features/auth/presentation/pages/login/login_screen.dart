@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mansaa_app/core/helpers/app_states.dart';
 import 'package:mansaa_app/core/routing/app_route_names.dart';
+import 'package:mansaa_app/core/widgets/animated_dialogs.dart';
+import 'package:mansaa_app/core/widgets/failure_message_mapper.dart';
 import 'package:mansaa_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:mansaa_app/features/auth/presentation/cubit/auth_state.dart';
 import 'package:mansaa_app/features/auth/presentation/widgets/login/login_form.dart';
@@ -45,17 +47,11 @@ class _LoginScreenState extends State<LoginScreen> {
         },
         listener: (context, state) {
           if (state.loginState == AppStates.success) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.errorMessage ?? 'Login Success')),
-            );
-            context.goNamed(AppRouteNames.home);
+            context.showSuccessDialog(title: 'Login Success');
           } else if (state.loginState == AppStates.failure) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.errorMessage ?? 'Login failed'),
-                backgroundColor: Theme.of(context).colorScheme.error,
-              ),
-            );
+            final message = state.failure?.toUserMessage(context)
+                ?? 'Something went wrong. Please try again.';
+            context.showFailureDialog(title: message);
           }
         },
         builder: (context, state) {
@@ -137,10 +133,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                   );
                                 },
                                 activeColor: context.colors.primary,
-                                activeTrackColor: context.colors.primary.withOpacity(
-                                  0.2,
-                                ),
-                                inactiveThumbColor: context.colors.onSurfaceVariant,
+                                activeTrackColor: context.colors.primary
+                                    .withOpacity(0.2),
+                                inactiveThumbColor:
+                                    context.colors.onSurfaceVariant,
                                 inactiveTrackColor:
                                     context.colors.surfaceContainerHighest,
                               );

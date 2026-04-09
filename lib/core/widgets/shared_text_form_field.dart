@@ -9,7 +9,6 @@ class SharedTextFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final void Function(String)? onChanged;
   final String? Function(String?)? validator;
-  // final String? initialValue;
 
   const SharedTextFormField({
     super.key,
@@ -21,7 +20,6 @@ class SharedTextFormField extends StatelessWidget {
     this.keyboardType,
     this.onChanged,
     this.validator,
-    // this.initialValue,
   });
 
   @override
@@ -33,7 +31,6 @@ class SharedTextFormField extends StatelessWidget {
       onTapOutside: (_) => FocusScope.of(context).unfocus(),
       onChanged: onChanged,
       validator: validator,
-      // initialValue: initialValue ?? '',
       decoration: InputDecoration(
         hintText: hintText,
         prefixIcon: Icon(prefixIcon),

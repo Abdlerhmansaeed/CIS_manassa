@@ -7,12 +7,8 @@ import 'package:mansaa_app/features/profile/presentation/widgets/account_managem
 import 'package:mansaa_app/features/profile/presentation/widgets/preferences_section.dart';
 import 'package:resposive_xx/responsive/responsive_extensions.dart';
 import 'package:mansaa_app/core/extensions/theme_extension.dart';
-
 import '../widgets/profile_header.dart';
-import '../widgets/settings_section.dart';
-import '../widgets/settings_tile.dart';
 import '../widgets/logout_button.dart';
-// import 'package:mansaa_app/features/home/presentation/widgets/home_app_bar.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -62,5 +58,4 @@ class ProfileScreen extends StatelessWidget {
       ),
     );
   }
-
 }

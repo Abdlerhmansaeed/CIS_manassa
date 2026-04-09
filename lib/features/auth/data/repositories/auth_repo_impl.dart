@@ -1,5 +1,8 @@
 import 'package:injectable/injectable.dart';
+import 'package:mansaa_app/core/error_handling/error_handling.dart';
 import 'package:mansaa_app/core/network/api_result.dart';
+import 'package:mansaa_app/core/network/dio_exception_handler.dart';
+import 'package:mansaa_app/core/helpers/logger.dart';
 import 'package:mansaa_app/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:mansaa_app/features/auth/data/models/credential_response/credential_response.dart';
 import 'package:mansaa_app/features/auth/data/models/login_response/login_response.dart';
@@ -18,14 +21,19 @@ class AuthRepoImpl implements AuthRepo {
     required String password,
   }) async {
     try {
-      final result = await _remoteDataSource.login(userCode, password);
-      if (result.token != null) {
-        return ApiResult.success(result);
-      } else {
-        return ApiResult.failure(result.error ?? 'Invalid login credentials');
-      }
-    } catch (e) {
-      return ApiResult.failure(e.toString());
+      final result = await safeApiCall(
+        () => _remoteDataSource.login(userCode, password),
+      );
+
+      // Moodle token null يعني خطأ لم يُلتقط بواسطة safeApiCall
+      if (result.token != null) return ApiResult.success(result);
+
+      return ApiResult.failure(
+        const ServerFailure(AppErrorCode.unknownServerError),
+      );
+    } on AppException catch (e) {
+      Logger.error('Login failed', e, null, 'AuthRepo');
+      return ApiResult.failure(mapExceptionToFailure(e));
     }
   }
 
@@ -35,25 +43,32 @@ class AuthRepoImpl implements AuthRepo {
     required String nationalNumber,
   }) async {
     try {
-      final result = await _remoteDataSource.getCredentials(
-        studentId: studentId,
-        nationalNumber: nationalNumber,
+      final result = await safeApiCall(
+        () => _remoteDataSource.getCredentials(
+          studentId: studentId,
+          nationalNumber: nationalNumber,
+        ),
       );
       return ApiResult.success(result);
     } on FormatException catch (e) {
-      return ApiResult.failure(e.message);
-    } catch (e) {
-      return ApiResult.failure(e.toString());
+      Logger.error('Credential parse error', e, null, 'AuthRepo');
+      return ApiResult.failure(const ParseFailure(AppErrorCode.parseError));
+    } on AppException catch (e) {
+      Logger.error('Get credentials failed', e, null, 'AuthRepo');
+      return ApiResult.failure(mapExceptionToFailure(e));
     }
   }
 
   @override
   Future<ApiResult<UserSiteInfoResponse>> getUserSiteInfo() async {
     try {
-      final result = await _remoteDataSource.getUserSiteInfo();
+      final result = await safeApiCall(
+        () => _remoteDataSource.getUserSiteInfo(),
+      );
       return ApiResult.success(result);
-    } catch (e) {
-      return ApiResult.failure(e.toString());
+    } on AppException catch (e) {
+      Logger.error('Get site info failed', e, null, 'AuthRepo');
+      return ApiResult.failure(mapExceptionToFailure(e));
     }
   }
 }
