@@ -44,12 +44,19 @@ class AppManager extends Cubit<AppManagerState> {
   }
 
   Future<void> _getUserThemeMode() async {
-    final themeMode = await _storageClient.getData(key: AppKeys.themeMode);
-    if (themeMode != null) {
-      final userSavedThemeMode = themeMode == 'dark' ? ThemeMode.dark : ThemeMode.light;
-      emit(state.copyWith(themeMode: userSavedThemeMode));
+    final themeModeStr = await _storageClient.getData(key: AppKeys.themeMode);
+    if (themeModeStr != null) {
+      try {
+        final userSavedThemeMode = ThemeMode.values.firstWhere(
+          (e) => e.name == themeModeStr,
+          orElse: () => ThemeMode.system,
+        );
+        emit(state.copyWith(themeMode: userSavedThemeMode));
+      } catch (_) {
+        emit(state.copyWith(themeMode: ThemeMode.system));
+      }
     } else {
-      emit(state.copyWith(themeMode: ThemeMode.light));
+      emit(state.copyWith(themeMode: ThemeMode.system));
     }
   }
 }

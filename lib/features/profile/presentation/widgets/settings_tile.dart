@@ -29,10 +29,9 @@ class SettingsTile extends StatelessWidget {
       child: Material(
         color: context.colors.surfaceContainerLowest,
         borderRadius: BorderRadius.circular(14.r),
-        elevation: 0,
+        clipBehavior: Clip.antiAlias,
         child: InkWell(
           onTap: onTap,
-          borderRadius: BorderRadius.circular(14.r),
           child: Padding(
             padding: EdgeInsets.all(16.w),
             child: Row(
@@ -45,7 +44,9 @@ class SettingsTile extends StatelessWidget {
                         width: 40.w,
                         height: 40.w,
                         decoration: BoxDecoration(
-                          color: iconBackgroundColor ?? context.colors.primaryContainer.withOpacity(0.1),
+                          color:
+                              iconBackgroundColor ??
+                              context.colors.primaryContainer.withOpacity(0.1),
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
@@ -75,10 +76,11 @@ class SettingsTile extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: 10.sp,
                                   fontWeight: FontWeight.w500,
-                                  color: context.colors.onSurfaceVariant.withOpacity(0.7),
+                                  color: context.colors.onSurfaceVariant
+                                      .withOpacity(0.7),
                                 ),
                               ),
-                            ]
+                            ],
                           ],
                         ),
                       ),

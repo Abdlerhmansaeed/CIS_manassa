@@ -54,6 +54,7 @@ class UserSession {
   Future<void> clearSession() async {
     _token = null;
     _userId = null;
+    _userName = null;
 
     await Future.wait([
       _storageClient.deleteSecureData(key: AppKeys.token),
