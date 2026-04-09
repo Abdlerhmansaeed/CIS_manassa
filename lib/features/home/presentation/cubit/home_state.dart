@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:mansaa_app/core/error_handling/failures/failure.dart';
 import 'package:mansaa_app/core/helpers/app_states.dart';
 import 'package:mansaa_app/features/home/data/models/quizezs_response/quiz.dart';
 import 'package:mansaa_app/features/home/data/models/student_calander_events_response/student_calander_events_response.dart';
@@ -8,7 +9,7 @@ class HomeState extends Equatable {
   final AppStates studentRunningEventsState;
   final StudentCalanderEventsResponse? studentRunningEventsResponse;
   final HomeDisplayData? displayData;
-  final String? errorMessage;
+  final Failure? failure;
   final AppStates quizDetailsState;
   final Quiz? quizDetails;
 
@@ -16,7 +17,7 @@ class HomeState extends Equatable {
     this.studentRunningEventsState = AppStates.initial,
     this.studentRunningEventsResponse,
     this.displayData,
-    this.errorMessage,
+    this.failure,
     this.quizDetailsState = AppStates.initial,
     this.quizDetails,
   });
@@ -25,7 +26,7 @@ class HomeState extends Equatable {
     AppStates? studentRunningEventsState,
     StudentCalanderEventsResponse? studentRunningEventsResponse,
     HomeDisplayData? displayData,
-    String? errorMessage,
+    Failure? failure,
     AppStates? quizDetailsState,
     Quiz? quizDetails,
   }) {
@@ -35,7 +36,7 @@ class HomeState extends Equatable {
       studentRunningEventsResponse:
           studentRunningEventsResponse ?? this.studentRunningEventsResponse,
       displayData: displayData ?? this.displayData,
-      errorMessage: errorMessage ?? this.errorMessage,
+      failure: failure ?? this.failure,
       quizDetailsState: quizDetailsState ?? this.quizDetailsState,
       quizDetails: quizDetails ?? this.quizDetails,
     );
@@ -46,7 +47,7 @@ class HomeState extends Equatable {
     studentRunningEventsState,
     studentRunningEventsResponse,
     displayData,
-    errorMessage,
+    failure,
     quizDetailsState,
     quizDetails,
   ];

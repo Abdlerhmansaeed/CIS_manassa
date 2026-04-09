@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mansaa_app/core/helpers/app_states.dart';
 import 'package:mansaa_app/core/routing/app_route_names.dart';
 import 'package:mansaa_app/core/theme/app_colors.dart';
+import 'package:mansaa_app/core/widgets/failure_message_mapper.dart';
 import 'package:mansaa_app/features/my_courses/presentation/cubit/courses_cubit.dart';
 import 'package:mansaa_app/features/my_courses/presentation/cubit/courses_state.dart';
 import 'package:mansaa_app/features/my_courses/presentation/widgets/course_card.dart';
@@ -59,7 +60,9 @@ class _MyCoursesScreenState extends State<MyCoursesScreen> {
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(state.errorMessage ?? 'Could not refresh courses'),
+        content: Text(
+          state.failure?.toUserMessage(context) ?? 'Could not refresh courses',
+        ),
         behavior: SnackBarBehavior.floating,
         backgroundColor: context.colors.primary,
       ),
@@ -147,7 +150,7 @@ class _CoursesBody extends StatelessWidget {
     if (state.coursesState.isFailure && state.courses.isEmpty) {
       return SliverToBoxAdapter(
         child: CoursesErrorView(
-          message: state.errorMessage,
+          message: state.failure?.toUserMessage(context),
           onRetry: () => context.read<CoursesCubit>().loadCourses(),
         ),
       );

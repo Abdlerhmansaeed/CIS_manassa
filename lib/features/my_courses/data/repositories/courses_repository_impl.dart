@@ -1,6 +1,8 @@
 import 'package:injectable/injectable.dart';
+import 'package:mansaa_app/core/error_handling/error_handling.dart';
 import 'package:mansaa_app/core/helpers/logger.dart';
 import 'package:mansaa_app/core/network/api_result.dart';
+import 'package:mansaa_app/core/network/dio_exception_handler.dart';
 import 'package:mansaa_app/features/my_courses/data/datasources/courses_local_data_source.dart';
 import 'package:mansaa_app/features/my_courses/data/datasources/courses_remote_data_source.dart';
 import 'package:mansaa_app/features/my_courses/data/models/student_courese_response/student_courese_response.dart';
@@ -23,7 +25,6 @@ class CoursesRepositoryImpl implements CoursesRepository {
   Future<ApiResult<List<StudentCourseResponse>>> getEnrolledCourses({
     bool forceRefresh = false,
   }) async {
-    // Return valid cache when no forced refresh is requested
     if (!forceRefresh && await _localDataSource.isCacheValid()) {
       final cached = await _localDataSourceNow.getCachedCourses();
       if (cached != null) {
@@ -32,20 +33,20 @@ class CoursesRepositoryImpl implements CoursesRepository {
       }
     }
 
-    // Fetch from API
     try {
-      final courses = await _remoteDataSource.getEnrolledCourses();
+      final courses = await safeApiCall(
+        () => _remoteDataSource.getEnrolledCourses(),
+      );
       await _localDataSourceNow.cacheCourses(courses);
       return ApiResult.success(courses);
-    } catch (e) {
-      Logger.error('Failed to fetch courses from API: $e');
+    } on AppException catch (e) {
+      Logger.error('Failed to fetch courses from API', e, null, 'CoursesRepo');
       return _fallbackToCache(e);
     }
   }
 
-  /// Returns stale cache on API failure, or a failure result if no cache.
   Future<ApiResult<List<StudentCourseResponse>>> _fallbackToCache(
-    Object error,
+    AppException error,
   ) async {
     final stale = await _localDataSource.getCachedCourses();
     if (stale != null && stale.isNotEmpty) {
@@ -54,17 +55,19 @@ class CoursesRepositoryImpl implements CoursesRepository {
       );
       return ApiResult.success(stale);
     }
-    return ApiResult.failure(error.toString());
+    return ApiResult.failure(mapExceptionToFailure(error));
   }
 
   @override
   Future<ApiResult<List<SectionModel>>> getCourseContents(int courseId) async {
     try {
-      final contents = await _remoteDataSource.getCourseContents(courseId);
+      final contents = await safeApiCall(
+        () => _remoteDataSource.getCourseContents(courseId),
+      );
       return ApiResult.success(contents);
-    } catch (e) {
-      Logger.error('Failed to fetch course contents from API: $e');
-      return ApiResult.failure(e.toString());
+    } on AppException catch (e) {
+      Logger.error('Failed to fetch course contents', e, null, 'CoursesRepo');
+      return ApiResult.failure(mapExceptionToFailure(e));
     }
   }
 }

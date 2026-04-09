@@ -33,11 +33,11 @@ class HomeCubit extends Cubit<HomeState> {
           ),
         );
       },
-      onFailure: (error) {
+      onFailure: (failure) {
         emit(
           state.copyWith(
             studentRunningEventsState: AppStates.failure,
-            errorMessage: error,
+            failure: failure,
           ),
         );
       },
@@ -79,11 +79,11 @@ class HomeCubit extends Cubit<HomeState> {
           ),
         );
       },
-      onFailure: (error) {
+      onFailure: (failure) {
         emit(
           state.copyWith(
             quizDetailsState: AppStates.failure,
-            errorMessage: error,
+            failure: failure,
           ),
         );
       },

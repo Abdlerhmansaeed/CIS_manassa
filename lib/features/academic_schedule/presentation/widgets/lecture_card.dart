@@ -105,9 +105,8 @@ class LectureCard extends StatelessWidget {
                           vertical: 4,
                         ),
                         decoration: BoxDecoration(
-                          color: context.colors.surfaceContainerHighest.withOpacity(
-                            0.5,
-                          ),
+                          color: context.colors.surfaceContainerHighest
+                              .withOpacity(0.5),
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: Text(
@@ -203,7 +202,6 @@ class LectureCard extends StatelessWidget {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: AppColors.onSurfaceVariant,
             ),
           ),
         ),

@@ -15,13 +15,8 @@ class AppManager extends Cubit<AppManagerState> {
   final UserSession _userSession;
 
   Future<void> initUserSession() async {
-    // These functions return Future<void>
-    await Future.wait([
-      _getUserThemeMode(),
-      _userSession.init(),
-    ]);
+    await Future.wait([_getUserThemeMode(), _userSession.init()]);
 
-    // These functions return Future<String?>
     final loginData = await Future.wait([
       _storageClient.getData(key: AppKeys.rememberMe),
       _storageClient.getSecureData(key: AppKeys.userCode),
@@ -44,12 +39,17 @@ class AppManager extends Cubit<AppManagerState> {
   }
 
   Future<void> _getUserThemeMode() async {
-    final themeMode = await _storageClient.getData(key: AppKeys.themeMode);
-    if (themeMode != null) {
-      final userSavedThemeMode = themeMode == 'dark' ? ThemeMode.dark : ThemeMode.light;
-      emit(state.copyWith(themeMode: userSavedThemeMode));
-    } else {
-      emit(state.copyWith(themeMode: ThemeMode.light));
+    final themeModeStr = await _storageClient.getData(key: AppKeys.themeMode);
+    if (themeModeStr != null) {
+      try {
+        final userSavedThemeMode = ThemeMode.values.firstWhere(
+          (e) => e.name == themeModeStr,
+          orElse: () => ThemeMode.system,
+        );
+        emit(state.copyWith(themeMode: userSavedThemeMode));
+      } catch (_) {
+        emit(state.copyWith(themeMode: ThemeMode.system));
+      }
     }
   }
 }
