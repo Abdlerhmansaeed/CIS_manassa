@@ -83,6 +83,13 @@ class AppTheme {
       useMaterial3: true,
       fontFamily: 'Plus Jakarta Sans',
       scaffoldBackgroundColor: AppColors.darkSurfaceContainerLow,
+
+      pageTransitionsTheme: const PageTransitionsTheme(
+        builders: {
+          TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+        },
+      ),
       colorScheme: const ColorScheme.dark(
         primary: AppColors.darkPrimary,
         primaryContainer: AppColors.darkPrimaryContainer,
@@ -148,7 +155,11 @@ class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
-          textStyle: const TextStyle(fontFamily: 'Plus Jakarta Sans', fontSize: 16, fontWeight: FontWeight.bold),
+          textStyle: const TextStyle(
+            fontFamily: 'Plus Jakarta Sans',
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(

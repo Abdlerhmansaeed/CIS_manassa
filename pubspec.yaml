@@ -57,6 +57,7 @@ dependencies:
   hive_ce:
   hive_ce_flutter: 
   shimmer: ^3.0.0
+  google_fonts: ^8.0.2
 
 dev_dependencies:
   flutter_test:
