@@ -1,50 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:mansaa_app/core/error_handling/enums/app_error_code.dart';
 import 'package:mansaa_app/core/error_handling/failures/failure.dart';
+import 'package:mansaa_app/core/extensions/localization_extension.dart';
 
 /// الطبقة الوحيدة في التطبيق المسؤولة عن ترجمة [Failure] إلى رسالة مقروءة.
-/// عند إضافة الـ Localization: غيّر هذا الملف فقط.
+/// تستخدم الآن AppLocalizations عبر context.l10n لدعم اللغتين العربية والإنجليزية.
 extension FailureMessageMapper on Failure {
   String toUserMessage(BuildContext context) {
+    final l10n = context.l10n;
+    
     return switch (code) {
       // ─── Network ─────────────────────────────────────────────────
-      AppErrorCode.noInternet =>
-        'No internet connection. Please check your network.',
-      AppErrorCode.connectionTimeout =>
-        'Connection timed out. Please try again.',
-      AppErrorCode.receiveTimeout =>
-        'Server took too long to respond. Please try again.',
-      AppErrorCode.unauthorized =>
-        'Your session has expired. Please log in again.',
-      AppErrorCode.forbidden =>
-        'You do not have permission to access this resource.',
-      AppErrorCode.internalServerError =>
-        'The server is temporarily unavailable. Please try again later.',
-      AppErrorCode.unknownNetwork =>
-        'A network error occurred. Please try again.',
+      AppErrorCode.noInternet => l10n.noInternet,
+      AppErrorCode.connectionTimeout => l10n.connectionTimeout,
+      AppErrorCode.receiveTimeout => l10n.receiveTimeout,
+      AppErrorCode.unauthorized => l10n.unauthorized,
+      AppErrorCode.forbidden => l10n.forbidden,
+      AppErrorCode.internalServerError => l10n.internalServerError,
+      AppErrorCode.unknownNetwork => l10n.unknownNetwork,
 
       // ─── Server (Moodle / CIS) ───────────────────────────────────
-      AppErrorCode.invalidLogin =>
-        'Invalid credentials. Please check your Student ID and password.',
-      AppErrorCode.invalidToken =>
-        'Your session is invalid. Please log in again.',
-      AppErrorCode.serviceNotAvailable =>
-        'This service is currently unavailable.',
-      AppErrorCode.unknownServerError =>
-        'An unexpected server error occurred. Please try again.',
+      AppErrorCode.invalidLogin => l10n.invalidLogin,
+      AppErrorCode.invalidToken => l10n.invalidToken,
+      AppErrorCode.serviceNotAvailable => l10n.serviceNotAvailable,
+      AppErrorCode.unknownServerError => l10n.unknownServerError,
 
       // ─── Cache ───────────────────────────────────────────────────
-      AppErrorCode.cacheReadError =>
-        'Could not load saved data. Please try again.',
-      AppErrorCode.cacheWriteError =>
-        'Could not save data locally. Please try again.',
+      AppErrorCode.cacheReadError => l10n.cacheReadError,
+      AppErrorCode.cacheWriteError => l10n.cacheWriteError,
+
+
+      AppErrorCode.invalidCredentialsForUserGetAccess => l10n.getAccessWrongInfoError,
 
       // ─── Parse ───────────────────────────────────────────────────
-      AppErrorCode.parseError =>
-        'Received an unexpected response from the server.',
+      AppErrorCode.parseError => l10n.parseError,
 
       // ─── Fallback ────────────────────────────────────────────────
-      _ => 'Something went wrong. Please try again.',
+      _ => l10n.somethingWentWrong,
     };
   }
 }

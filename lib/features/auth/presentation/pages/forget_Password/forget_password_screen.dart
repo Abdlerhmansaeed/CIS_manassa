@@ -6,6 +6,7 @@ import 'package:mansaa_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:mansaa_app/features/auth/presentation/widgets/forget_password/blob_header.dart';
 import 'package:mansaa_app/features/auth/presentation/widgets/forget_password/forget_password_from.dart';
 import 'package:mansaa_app/core/extensions/theme_extension.dart';
+import 'package:mansaa_app/core/extensions/localization_extension.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({super.key});
@@ -31,7 +32,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       create: (_) => getIt<AuthCubit>(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Get Access'),
+          title: Text(context.l10n.getAccess),
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
@@ -60,7 +61,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 const ForgetPasswordBlobHeader(),
                 const SizedBox(height: 40),
                 Text(
-                  'Retrieve Your Credentials',
+                  context.l10n.retrieveCredentials,
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -69,7 +70,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  'Enter your details below to receive your Student ID and Password.',
+                  context.l10n.retrieveCredentialsDescription,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16,

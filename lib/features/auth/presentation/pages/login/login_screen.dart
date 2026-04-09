@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mansaa_app/core/helpers/app_states.dart';
+import 'package:mansaa_app/core/helpers/logger.dart';
 import 'package:mansaa_app/core/routing/app_route_names.dart';
 import 'package:mansaa_app/core/widgets/animated_dialogs.dart';
 import 'package:mansaa_app/core/widgets/failure_message_mapper.dart';
@@ -9,6 +10,7 @@ import 'package:mansaa_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:mansaa_app/features/auth/presentation/cubit/auth_state.dart';
 import 'package:mansaa_app/features/auth/presentation/widgets/login/login_form.dart';
 import 'package:mansaa_app/core/extensions/theme_extension.dart';
+import 'package:mansaa_app/core/extensions/localization_extension.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -47,10 +49,14 @@ class _LoginScreenState extends State<LoginScreen> {
         },
         listener: (context, state) {
           if (state.loginState == AppStates.success) {
-            context.showSuccessDialog(title: 'Login Success');
+            context.showSuccessDialog(title: context.l10n.loginSuccess);
           } else if (state.loginState == AppStates.failure) {
-            final message = state.failure?.toUserMessage(context)
-                ?? 'Something went wrong. Please try again.';
+            final message =
+                state.failure?.toUserMessage(context) ??
+                context.l10n.somethingWentWrong;
+            // Logger.info(state.failure.toString());
+
+            // Logger.error(message);
             context.showFailureDialog(title: message);
           }
         },
@@ -89,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 24),
                   Text(
-                    'CIS Student Hub',
+                    context.l10n.cisStudentHub,
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.w800,
@@ -99,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Your academic life, simplified.',
+                    context.l10n.appDescription,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
@@ -144,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           const SizedBox(width: 8),
                           Text(
-                            'Remember Me',
+                            context.l10n.rememberMe,
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
@@ -158,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           context.pushNamed(AppRouteNames.getPasswordsScreen);
                         },
                         child: Text(
-                          'Forgot Password? Get Access',
+                          context.l10n.forgotPassword,
                           style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
@@ -180,10 +186,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               if (_studentIdController.text.trim().isEmpty ||
                                   _passwordController.text.isEmpty) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text(
-                                      'Please enter Student ID and Password',
-                                    ),
+                                  SnackBar(
+                                    content: Text(context.l10n.loginPrompt),
                                   ),
                                 );
                                 return;
@@ -199,12 +203,12 @@ class _LoginScreenState extends State<LoginScreen> {
                               width: 20,
                               child: CircularProgressIndicator(strokeWidth: 2),
                             )
-                          : const Row(
+                          : Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('Sign In'),
-                                SizedBox(width: 8),
-                                Icon(Icons.arrow_forward),
+                                Text(context.l10n.signIn),
+                                const SizedBox(width: 8),
+                                const Icon(Icons.arrow_forward),
                               ],
                             ),
                     ),
@@ -213,11 +217,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      _footerLink('Privacy Policy'),
+                      _footerLink(context.l10n.privacyPolicy),
                       const SizedBox(width: 24),
-                      _footerLink('Terms of Service'),
+                      _footerLink(context.l10n.termsOfService),
                       const SizedBox(width: 24),
-                      _footerLink('Help Desk'),
+                      _footerLink(context.l10n.helpDesk),
                     ],
                   ),
                 ],

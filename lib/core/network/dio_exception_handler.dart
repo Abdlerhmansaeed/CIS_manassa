@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:mansaa_app/core/error_handling/exceptions/app_exception.dart';
 import 'package:mansaa_app/core/error_handling/exceptions/network_exception.dart';
 import 'package:mansaa_app/core/error_handling/exceptions/server_exception.dart';
 import 'package:mansaa_app/core/error_handling/models/server_error_response.dart';
@@ -19,6 +20,7 @@ Future<T> safeApiCall<T>(Future<T> Function() call) async {
     Logger.error('SocketException — no internet', e, st, 'DioHandler');
     throw NoInternetException(e.message);
   } catch (e, st) {
+    if (e is AppException || e is FormatException) rethrow;
     Logger.error('Unexpected error in safeApiCall', e, st, 'DioHandler');
     throw UnknownNetworkException(e.toString());
   }
@@ -53,8 +55,8 @@ NetworkException _handleBadResponse(DioException e) {
   final statusCode = e.response?.statusCode;
 
   return switch (statusCode) {
-    401 => UnauthorizedException('HTTP 401 — Unauthorized'),
-    403 => ForbiddenException('HTTP 403 — Forbidden'),
+    401 => const UnauthorizedException('HTTP 401 — Unauthorized'),
+    403 => const ForbiddenException('HTTP 403 — Forbidden'),
     final int code when code >= 500 => InternalServerErrorException(
         'HTTP $code — Internal server error',
       ),

@@ -4,6 +4,7 @@ import 'package:mansaa_app/core/theme/app_colors.dart';
 import 'package:mansaa_app/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:mansaa_app/features/auth/presentation/cubit/auth_state.dart';
 import 'package:mansaa_app/core/extensions/theme_extension.dart';
+import 'package:mansaa_app/core/extensions/localization_extension.dart';
 
 class ForgetPasswordStepIndicator extends StatelessWidget {
   final AuthCubit authCubit;
@@ -23,7 +24,7 @@ class ForgetPasswordStepIndicator extends StatelessWidget {
           children: [
             _buildStepItem(
               stepNumber: "1",
-              label: "Student Code",
+              label: context.l10n.studentCode,
               isActive: state.getAccessForCredentialsStep >= 1,
             ),
             AnimatedCrossFade(
@@ -46,7 +47,7 @@ class ForgetPasswordStepIndicator extends StatelessWidget {
             ),
             _buildStepItem(
               stepNumber: "2",
-              label: "National ID",
+              label: context.l10n.nationalId,
               isActive: state.getAccessForCredentialsStep >= 2,
             ),
           ],

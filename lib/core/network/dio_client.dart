@@ -8,6 +8,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 // import 'package:mansaa_app/core/network/interceptors/logging_interceptor.dart';
 
 import 'package:mansaa_app/core/network/interceptors/auth_interceptor.dart';
+import 'package:mansaa_app/core/network/interceptors/moodle_error_interceptor.dart';
 
 @module
 abstract class DioClient {
@@ -21,7 +22,8 @@ abstract class DioClient {
 
   @lazySingleton
   Dio provideDioClient(
-    AuthInterceptor authInterceptor, {
+    AuthInterceptor authInterceptor,
+    MoodleErrorInterceptor moodleErrorInterceptor, {
     @Named('moodle_baseUrl') required String baseUrl,
   }) {
     final dio = Dio(
@@ -33,6 +35,7 @@ abstract class DioClient {
     );
 
     dio.interceptors.add(authInterceptor);
+    dio.interceptors.add(moodleErrorInterceptor);
 
     if (kDebugMode) {
       dio.interceptors.add(

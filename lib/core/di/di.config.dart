@@ -87,6 +87,7 @@ import '../network/api_client.dart' as _i557;
 import '../network/cis_api_client.dart' as _i858;
 import '../network/dio_client.dart' as _i667;
 import '../network/interceptors/auth_interceptor.dart' as _i745;
+import '../network/interceptors/moodle_error_interceptor.dart' as _i103;
 import '../network/session/user_session.dart' as _i120;
 import 'local_storage_module.dart' as _i712;
 
@@ -104,6 +105,9 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.factory<_i405.NotificationsCubit>(() => _i405.NotificationsCubit());
+    gh.singleton<_i103.MoodleErrorInterceptor>(
+      () => _i103.MoodleErrorInterceptor(),
+    );
     gh.lazySingleton<_i558.FlutterSecureStorage>(
       () => localStorageModule.secureStorage,
     );
@@ -148,6 +152,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i361.Dio>(
       () => dioClient.provideDioClient(
         gh<_i745.AuthInterceptor>(),
+        gh<_i103.MoodleErrorInterceptor>(),
         baseUrl: gh<String>(instanceName: 'moodle_baseUrl'),
       ),
     );

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mansaa_app/core/routing/app_route_names.dart';
 import 'package:mansaa_app/features/auth/data/models/credential_response/credential_response.dart';
 import 'package:mansaa_app/core/extensions/theme_extension.dart';
+import 'package:mansaa_app/core/extensions/localization_extension.dart';
 
 class CredentialsRetrievedScreen extends StatefulWidget {
   final CredentialResponse credentials;
@@ -24,7 +25,7 @@ class _CredentialsRetrievedScreenState
     return Scaffold(
       backgroundColor: context.colors.surfaceContainer,
       appBar: AppBar(
-        title: const Text('Credentials'),
+        title: Text(context.l10n.credentials),
         backgroundColor: Colors.transparent,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: context.colors.primaryContainer),
@@ -69,7 +70,7 @@ class _CredentialsRetrievedScreenState
         ),
         const SizedBox(height: 24),
         Text(
-          'Credentials Retrieved! 🎉',
+          context.l10n.credentialsRetrieved,
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.w800,
@@ -91,7 +92,7 @@ class _CredentialsRetrievedScreenState
         ],
         const SizedBox(height: 12),
         Text(
-          'Save these details and log in to get started.',
+          context.l10n.credentialsRetrievedDescription,
           style: TextStyle(color: context.colors.onSurfaceVariant, fontSize: 14),
           textAlign: TextAlign.center,
         ),
@@ -117,7 +118,7 @@ class _CredentialsRetrievedScreenState
       child: Column(
         children: [
           _buildCredentialRow(
-            label: 'STUDENT ID',
+            label: context.l10n.studentId,
             value: creds.studentId,
             onCopy: () => _copyToClipboard(context, creds.studentId),
           ),
@@ -126,7 +127,7 @@ class _CredentialsRetrievedScreenState
             child: Divider(color: context.colors.surfaceContainerHighest, height: 1),
           ),
           _buildCredentialRow(
-            label: 'USERNAME (EMAIL)',
+            label: context.l10n.usernameEmail,
             value: creds.username,
             onCopy: () => _copyToClipboard(context, creds.username),
           ),
@@ -135,7 +136,7 @@ class _CredentialsRetrievedScreenState
             child: Divider(color: context.colors.surfaceContainerHighest, height: 1),
           ),
           _buildCredentialRow(
-            label: 'PASSWORD',
+            label: context.l10n.password,
             value: _obscurePassword ? '••••••••' : creds.password,
             onCopy: () => _copyToClipboard(context, creds.password),
             isPassword: true,
@@ -227,7 +228,7 @@ class _CredentialsRetrievedScreenState
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Go to Login',
+                  context.l10n.goToLogin,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -251,7 +252,7 @@ class _CredentialsRetrievedScreenState
             size: 20,
           ),
           label: Text(
-            'Go back',
+            context.l10n.goBack,
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -265,11 +266,11 @@ class _CredentialsRetrievedScreenState
   }
 
   Widget _buildFooter() {
-    return const Padding(
-      padding: EdgeInsets.only(bottom: 16.0),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16.0),
       child: Text(
-        'ACADEMIC PORTAL SECURE ACCESS',
-        style: TextStyle(
+        context.l10n.secureAccessFooter,
+        style: const TextStyle(
           fontSize: 10,
           fontWeight: FontWeight.bold,
           letterSpacing: 2.0,
@@ -283,9 +284,9 @@ class _CredentialsRetrievedScreenState
   void _copyToClipboard(BuildContext context, String text) {
     Clipboard.setData(ClipboardData(text: text));
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Copied to clipboard'),
-        duration: Duration(seconds: 1),
+      SnackBar(
+        content: Text(context.l10n.copiedToClipboard),
+        duration: const Duration(seconds: 1),
       ),
     );
   }

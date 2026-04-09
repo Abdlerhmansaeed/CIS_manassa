@@ -25,7 +25,8 @@ class AuthRepoImpl implements AuthRepo {
         () => _remoteDataSource.login(userCode, password),
       );
 
-      // Moodle token null يعني خطأ لم يُلتقط بواسطة safeApiCall
+      // If we reach here, MoodleErrorInterceptor didn't find an errorbody.
+      // We check for token presence just in case.
       if (result.token != null) return ApiResult.success(result);
 
       return ApiResult.failure(
@@ -51,10 +52,23 @@ class AuthRepoImpl implements AuthRepo {
       );
       return ApiResult.success(result);
     } on FormatException catch (e) {
+      if (e.message == 'invalid_credentials') {
+        Logger.info("Get credentials failed Because invalid credentials");
+        return ApiResult.failure(
+          const ServerFailure(AppErrorCode.invalidCredentialsForUserGetAccess),
+        );
+      }
       Logger.error('Credential parse error', e, null, 'AuthRepo');
       return ApiResult.failure(const ParseFailure(AppErrorCode.parseError));
     } on AppException catch (e) {
+      if (e.technicalMessage == 'invalid_credentials') {
+        Logger.error("Get credentials failed Because invalid credentials");
+        return ApiResult.failure(
+          const ServerFailure(AppErrorCode.invalidCredentialsForUserGetAccess),
+        );
+      }
       Logger.error('Get credentials failed', e, null, 'AuthRepo');
+      // Logger.info(e.toString());
       return ApiResult.failure(mapExceptionToFailure(e));
     }
   }

@@ -16,7 +16,7 @@ enum AppErrorCode {
   invalidToken,
   serviceNotAvailable,
   unknownServerError,
-
+  invalidCredentialsForUserGetAccess,
   // ─── Cache (Hive / SharedPreferences) ──────────────────
   cacheReadError,
   cacheWriteError,

@@ -5,9 +5,9 @@ import 'package:mansaa_app/core/manager/app_manager.dart';
 import 'package:mansaa_app/core/helpers/app_bloc_observer.dart';
 import 'package:mansaa_app/core/routing/app_router.dart';
 import 'package:mansaa_app/core/theme/app_theme.dart';
+import 'package:mansaa_app/l10n/app_localizations.dart';
 import 'package:resposive_xx/responsive/responsive.dart';
 import 'package:resposive_xx/responsive/responsive_extensions.dart';
-
 import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:mansaa_app/features/my_courses/data/models/student_courese_response/student_courese_response.dart';
 
@@ -38,6 +38,9 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         routerConfig: AppRouter.router,
         themeMode: context.watch<AppManager>().state.themeMode,
+        
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
       ),
     );
   }
