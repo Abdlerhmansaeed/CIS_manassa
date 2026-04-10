@@ -78,6 +78,7 @@ import '../../features/my_courses/presentation/cubit/courses_cubit.dart'
     as _i355;
 import '../../features/notifications/presentation/cubit/notifications_cubit.dart'
     as _i405;
+import '../languages/languages_manager.dart' as _i416;
 import '../local_storage/hive_client.dart' as _i969;
 import '../local_storage/hive_client_impl.dart' as _i1049;
 import '../local_storage/local_storage_client.dart' as _i401;
@@ -89,6 +90,7 @@ import '../network/dio_client.dart' as _i667;
 import '../network/interceptors/auth_interceptor.dart' as _i745;
 import '../network/interceptors/moodle_error_interceptor.dart' as _i103;
 import '../network/session/user_session.dart' as _i120;
+import '../theme/theme_manager.dart' as _i121;
 import 'local_storage_module.dart' as _i712;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -122,8 +124,14 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i853.CoursesLocalDataSourceImpl(gh<_i401.LocalStorageClient>()),
       instanceName: 'oldCoursesLocalDataSource',
     );
+    gh.singleton<_i416.LanguagesManager>(
+      () => _i416.LanguagesManager(gh<_i401.LocalStorageClient>()),
+    );
     gh.singleton<_i120.UserSession>(
       () => _i120.UserSession(gh<_i401.LocalStorageClient>()),
+    );
+    gh.singleton<_i121.ThemeManager>(
+      () => _i121.ThemeManager(gh<_i401.LocalStorageClient>()),
     );
     gh.singleton<String>(
       () => dioClient.moodleBaseUrl,

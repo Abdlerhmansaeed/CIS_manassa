@@ -7,6 +7,7 @@ import 'package:mansaa_app/features/profile/presentation/widgets/account_managem
 import 'package:mansaa_app/features/profile/presentation/widgets/preferences_section.dart';
 import 'package:resposive_xx/responsive/responsive_extensions.dart';
 import 'package:mansaa_app/core/extensions/theme_extension.dart';
+import 'package:mansaa_app/core/extensions/localization_extension.dart';
 import '../widgets/profile_header.dart';
 import '../widgets/logout_button.dart';
 
@@ -23,12 +24,12 @@ class ProfileScreen extends StatelessWidget {
           SliverToBoxAdapter(
             child: Column(
               children: [
-                const ProfileHeader(
+                ProfileHeader(
                   name: "Ahmed Mohamed",
                   studentId: "20210234",
                   imageUrl:
                       "https://lh3.googleusercontent.com/aida-public/AB6AXuDDZdyF29Le1dmoSr8u__h967KF11LhJL3rgQA6cpWLqIrfRrrZljV5JpBsvGYrc1HcuuQ3zNysSY1R3TqBlEcrd-p3m4PdpWVQM32HlsNWozrdS8igArwahgjMkuLIhoNonAtmF7TxQjiCQvW7PXiyPg1ih-Al9WermXBxDe1djuZWbhwVmInUyxtGgkzXIQnLi1xnqNH3sjKrXhA2FIxKyiWQi43penDID-XToMLoFt7dso2tGHrWex7IaD9VPy2mQNBh0f4Xp_8q",
-                  badgeLevel: "الفرقة الثالثة · CIS",
+                  badgeLevel: context.l10n.thirdYearCis,
                 ),
                 SizedBox(height: 32.h),
                 Padding(
@@ -42,6 +43,7 @@ class ProfileScreen extends StatelessWidget {
                       LogoutButton(
                         onTap: () {
                           getIt<UserSession>().clearSession().then((value) {
+                            Future.delayed(const Duration(milliseconds: 500));
                             if (context.mounted) {
                               context.pushReplacementNamed(AppRouteNames.login);
                             }

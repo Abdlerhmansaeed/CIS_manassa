@@ -172,4 +172,54 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get copiedToClipboard => 'تم النسخ إلى الحافظة';
+
+  @override
+  String get profile => 'الملف الشخصي';
+
+  @override
+  String get preferences => 'التفضيلات';
+
+  @override
+  String get language => 'اللغة';
+
+  @override
+  String get theme => 'المظهر';
+
+  @override
+  String get lightMode => 'فاتح ☀️';
+
+  @override
+  String get darkMode => 'داكن 🌙';
+
+  @override
+  String get systemMode => 'تلقائي';
+
+  @override
+  String get notifications => 'الإشعارات';
+
+  @override
+  String get notificationsDescription => 'تذكير المهام والكويزات';
+
+  @override
+  String get account => 'الحساب';
+
+  @override
+  String get academicData => 'البيانات الأكاديمية';
+
+  @override
+  String get aboutApp => 'عن التطبيق';
+
+  @override
+  String appVersion(String version) {
+    return 'الإصدار $version';
+  }
+
+  @override
+  String get helpSupport => 'المساعدة والدعم';
+
+  @override
+  String get logout => 'تسجيل الخروج';
+
+  @override
+  String get thirdYearCis => 'الفرقة الثالثة · CIS';
 }

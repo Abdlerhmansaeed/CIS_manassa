@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:resposive_xx/responsive/responsive_extensions.dart';
 import 'package:mansaa_app/core/extensions/theme_extension.dart';
+import 'package:mansaa_app/core/extensions/localization_extension.dart';
 
 class LogoutButton extends StatelessWidget {
   const LogoutButton({
@@ -34,7 +35,7 @@ class LogoutButton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "تسجيل الخروج",
+                  context.l10n.logout,
                   style: TextStyle(
                     color: context.colors.primaryContainer,
                     fontWeight: FontWeight.w800,

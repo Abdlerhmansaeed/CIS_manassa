@@ -409,6 +409,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Copied to clipboard'**
   String get copiedToClipboard;
+
+  /// No description provided for @profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profile;
+
+  /// No description provided for @preferences.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferences'**
+  String get preferences;
+
+  /// No description provided for @language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
+
+  /// No description provided for @theme.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get theme;
+
+  /// No description provided for @lightMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Light ☀️'**
+  String get lightMode;
+
+  /// No description provided for @darkMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark 🌙'**
+  String get darkMode;
+
+  /// No description provided for @systemMode.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get systemMode;
+
+  /// No description provided for @notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
+  /// No description provided for @notificationsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Tasks and quizzes reminders'**
+  String get notificationsDescription;
+
+  /// No description provided for @account.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get account;
+
+  /// No description provided for @academicData.
+  ///
+  /// In en, this message translates to:
+  /// **'Academic Data'**
+  String get academicData;
+
+  /// No description provided for @aboutApp.
+  ///
+  /// In en, this message translates to:
+  /// **'About App'**
+  String get aboutApp;
+
+  /// No description provided for @appVersion.
+  ///
+  /// In en, this message translates to:
+  /// **'Version {version}'**
+  String appVersion(String version);
+
+  /// No description provided for @helpSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Help & Support'**
+  String get helpSupport;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
+
+  /// No description provided for @thirdYearCis.
+  ///
+  /// In en, this message translates to:
+  /// **'Third Year · CIS'**
+  String get thirdYearCis;
 }
 
 class _AppLocalizationsDelegate

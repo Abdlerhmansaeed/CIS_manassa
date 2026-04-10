@@ -51,5 +51,28 @@
   "goToLogin": "الذهاب لتسجيل الدخول",
   "goBack": "الرجوع",
   "secureAccessFooter": "ACADEMIC PORTAL SECURE ACCESS",
-  "copiedToClipboard": "تم النسخ إلى الحافظة"
+  "copiedToClipboard": "تم النسخ إلى الحافظة",
+  "profile": "الملف الشخصي",
+  "preferences": "التفضيلات",
+  "language": "اللغة",
+  "theme": "المظهر",
+  "lightMode": "فاتح ☀️",
+  "darkMode": "داكن 🌙",
+  "systemMode": "تلقائي",
+  "notifications": "الإشعارات",
+  "notificationsDescription": "تذكير المهام والكويزات",
+  "account": "الحساب",
+  "academicData": "البيانات الأكاديمية",
+  "aboutApp": "عن التطبيق",
+  "appVersion": "الإصدار {version}",
+  "@appVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "helpSupport": "المساعدة والدعم",
+  "logout": "تسجيل الخروج",
+  "thirdYearCis": "الفرقة الثالثة · CIS"
 }

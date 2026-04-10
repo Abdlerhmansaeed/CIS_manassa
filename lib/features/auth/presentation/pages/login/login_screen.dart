@@ -47,17 +47,19 @@ class _LoginScreenState extends State<LoginScreen> {
         listenWhen: (previous, current) {
           return previous.loginState != current.loginState;
         },
-        listener: (context, state) {
-          if (state.loginState == AppStates.success) {
-            context.showSuccessDialog(title: context.l10n.loginSuccess);
-          } else if (state.loginState == AppStates.failure) {
+        listener: (context, state) async {
+          if (state.loginState.isSuccess) {
+            await context.showSuccessNotification(
+              title: context.l10n.loginSuccess,
+              onAnimationComplete: () {
+                context.goNamed(AppRouteNames.home);
+              },
+            );
+          } else if (state.loginState.isFailure) {
             final message =
                 state.failure?.toUserMessage(context) ??
                 context.l10n.somethingWentWrong;
-            // Logger.info(state.failure.toString());
-
-            // Logger.error(message);
-            context.showFailureDialog(title: message);
+            context.showFailureDialog(title: "", message: message);
           }
         },
         builder: (context, state) {

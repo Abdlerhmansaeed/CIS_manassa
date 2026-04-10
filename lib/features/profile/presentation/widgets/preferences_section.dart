@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mansaa_app/core/di/di.dart';
 import 'package:mansaa_app/core/extensions/theme_extension.dart';
-import 'package:mansaa_app/core/manager/app_manager.dart';
-import 'package:mansaa_app/core/manager/app_manager_state.dart';
+import 'package:mansaa_app/core/languages/languages_manager.dart';
+import 'package:mansaa_app/core/theme/theme_manager.dart';
+import 'package:mansaa_app/core/extensions/localization_extension.dart';
 import 'package:mansaa_app/features/profile/presentation/widgets/segmented_control.dart';
 import 'package:mansaa_app/features/profile/presentation/widgets/settings_section.dart';
 import 'package:mansaa_app/features/profile/presentation/widgets/settings_tile.dart';
@@ -13,28 +15,32 @@ class PreferencesSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SettingsSection(
-      title: "التفضيلات",
+      title: context.l10n.preferences,
       children: [
         SettingsTile(
           icon: Icons.language,
-          title: "اللغة",
+          title: context.l10n.language,
           trailing: SegmentedControl(
-            options: const ["العربية", "English"],
-            selectedIndex: 0,
+            options: context.read<LanguagesManager>().provideLanguages(),
+            selectedIndex:
+                context.read<LanguagesManager>().state.language == "ar" ? 0 : 1,
             onChanged: (index) {
-              // TODO: Implement language change
+              getIt<LanguagesManager>().changeLanguage(
+                index == 0 ? "ar" : "en",
+              );
             },
           ),
           onTap: () {},
         ),
         SettingsTile(
           icon: Icons.light_mode,
-          title: "المظهر",
-          trailing: BlocBuilder<AppManager, AppManagerState>(
+          title: context.l10n.theme,
+          trailing: BlocBuilder<ThemeManager, ThemeState>(
+            bloc: context.read<ThemeManager>(),
+            buildWhen: (previous, current) {
+              return previous.themeMode != current.themeMode;
+            },
             builder: (context, state) {
-              // Mapping UI index to ThemeMode
-              // UI Index: 0 -> Light, 1 -> Dark, 2 -> System
-              // ThemeMode: light -> 1, dark -> 2, system -> 0
               int uiSelectedIndex;
               switch (state.themeMode) {
                 case ThemeMode.light:
@@ -48,7 +54,11 @@ class PreferencesSection extends StatelessWidget {
               }
 
               return SegmentedControl(
-                options: const ["فاتح ☀️", "داكن 🌙", "تلقائي"],
+                options: [
+                  context.l10n.lightMode,
+                  context.l10n.darkMode,
+                  context.l10n.systemMode
+                ],
                 selectedIndex: uiSelectedIndex,
                 isCompact: true,
                 onChanged: (index) {
@@ -63,7 +73,7 @@ class PreferencesSection extends StatelessWidget {
                     default:
                       newMode = ThemeMode.system;
                   }
-                  context.read<AppManager>().changeTheme(newMode);
+                  context.read<ThemeManager>().changeTheme(newMode);
                 },
               );
             },
@@ -72,8 +82,8 @@ class PreferencesSection extends StatelessWidget {
         ),
         SettingsTile(
           icon: Icons.notifications,
-          title: "الإشعارات",
-          subtitle: "تذكير المهام والكويزات",
+          title: context.l10n.notifications,
+          subtitle: context.l10n.notificationsDescription,
           trailing: Switch(
             value: true,
             activeColor: context.colors.onPrimary,

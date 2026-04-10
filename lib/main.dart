@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mansaa_app/core/di/di.dart';
+import 'package:mansaa_app/core/languages/languages_manager.dart';
 import 'package:mansaa_app/core/manager/app_manager.dart';
 import 'package:mansaa_app/core/helpers/app_bloc_observer.dart';
 import 'package:mansaa_app/core/routing/app_router.dart';
 import 'package:mansaa_app/core/theme/app_theme.dart';
+import 'package:mansaa_app/core/theme/theme_manager.dart';
 import 'package:mansaa_app/l10n/app_localizations.dart';
 import 'package:resposive_xx/responsive/responsive.dart';
 import 'package:resposive_xx/responsive/responsive_extensions.dart';
@@ -18,8 +20,14 @@ Future<void> main() async {
   await configureDependencies();
   Bloc.observer = AppBlocObserver();
   runApp(
-    BlocProvider(
-      create: (context) => getIt<AppManager>()..initUserSession(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<AppManager>()..initUserSession(),
+        ),
+        BlocProvider(create: (context) => getIt<LanguagesManager>()),
+        BlocProvider(create: (context) => getIt<ThemeManager>()),
+      ],
       child: const MyApp(),
     ),
   );
@@ -31,16 +39,30 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveWrapper(
-      child: MaterialApp.router(
-        title: "Cis Manssaa",
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        debugShowCheckedModeBanner: false,
-        routerConfig: AppRouter.router,
-        themeMode: context.watch<AppManager>().state.themeMode,
-        
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
+      child: BlocBuilder<LanguagesManager, LanguagesState>(
+        buildWhen: (previous, current) {
+          return previous.language != current.language;
+        },
+        builder: (context, languageState) {
+          return BlocBuilder<ThemeManager, ThemeState>(
+            buildWhen: (previous, current) {
+              return previous.themeMode != current.themeMode;
+            },
+            builder: (context, themeState) {
+              return MaterialApp.router(
+                title: "Cis Manssaa",
+                theme: AppTheme.lightTheme,
+                darkTheme: AppTheme.darkTheme,
+                debugShowCheckedModeBanner: false,
+                routerConfig: AppRouter.router,
+                themeMode: themeState.themeMode,
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                supportedLocales: AppLocalizations.supportedLocales,
+                locale: Locale(languageState.language),
+              );
+            },
+          );
+        },
       ),
     );
   }

@@ -171,4 +171,54 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get copiedToClipboard => 'Copied to clipboard';
+
+  @override
+  String get profile => 'Profile';
+
+  @override
+  String get preferences => 'Preferences';
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get theme => 'Appearance';
+
+  @override
+  String get lightMode => 'Light ☀️';
+
+  @override
+  String get darkMode => 'Dark 🌙';
+
+  @override
+  String get systemMode => 'System';
+
+  @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get notificationsDescription => 'Tasks and quizzes reminders';
+
+  @override
+  String get account => 'Account';
+
+  @override
+  String get academicData => 'Academic Data';
+
+  @override
+  String get aboutApp => 'About App';
+
+  @override
+  String appVersion(String version) {
+    return 'Version $version';
+  }
+
+  @override
+  String get helpSupport => 'Help & Support';
+
+  @override
+  String get logout => 'Logout';
+
+  @override
+  String get thirdYearCis => 'Third Year · CIS';
 }

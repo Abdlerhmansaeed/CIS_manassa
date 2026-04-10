@@ -51,5 +51,28 @@
   "goToLogin": "Go to Login",
   "goBack": "Go back",
   "secureAccessFooter": "ACADEMIC PORTAL SECURE ACCESS",
-  "copiedToClipboard": "Copied to clipboard"
+  "copiedToClipboard": "Copied to clipboard",
+  "profile": "Profile",
+  "preferences": "Preferences",
+  "language": "Language",
+  "theme": "Appearance",
+  "lightMode": "Light ☀️",
+  "darkMode": "Dark 🌙",
+  "systemMode": "System",
+  "notifications": "Notifications",
+  "notificationsDescription": "Tasks and quizzes reminders",
+  "account": "Account",
+  "academicData": "Academic Data",
+  "aboutApp": "About App",
+  "appVersion": "Version {version}",
+  "@appVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "helpSupport": "Help & Support",
+  "logout": "Logout",
+  "thirdYearCis": "Third Year · CIS"
 }
